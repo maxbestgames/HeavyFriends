@@ -38,6 +38,7 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 				if (keyPressed[KeyEvent.VK_W] && !tempObject.isJumping()) {
 					tempObject.setJumping(true);
+
 					tempObject.setVelY( -15 );
 					keyDown[0] = true;
 				}
@@ -48,6 +49,9 @@ public class KeyInput extends KeyAdapter{
 				if (keyPressed[KeyEvent.VK_D]) {
 					tempObject.setVelX( 5 );
 					keyDown[2] = true;
+
+					//tempObject.setVelY( -10 );
+
 				}
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
 
