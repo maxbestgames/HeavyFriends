@@ -20,7 +20,7 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 				if (key==KeyEvent.VK_W && !tempObject.isJumping()) {
 					tempObject.setJumping(true);
-					tempObject.setVelY( -15 );
+					tempObject.setVelY( -10 );
 				}
 				if (key==KeyEvent.VK_A) tempObject.setVelX( -5 );
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
