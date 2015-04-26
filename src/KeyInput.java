@@ -1,6 +1,10 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+<<<<<<< HEAD
 //cockgsdg
+=======
+
+>>>>>>> origin/master
 public class KeyInput extends KeyAdapter{
 	private Handler handler;
 	
