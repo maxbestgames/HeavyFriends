@@ -21,10 +21,6 @@ public abstract class GameObject {
 	public void setX(float newX) {
 		x = newX;
 	}
-	/**
-	 * Gets the position of the top left corner of the GameObject in the Horizontal (x) plane
-	 * @return x
-	 */
 	public float getX() {
 		return x;
 	}

@@ -51,9 +51,48 @@ public class Player extends TickingGameObject{
 				
 				
 				
-				//next block collision here here
+				//next level block collision here here
 			}
 			
+			
+			
+			
+			
+			
+			
+			/* new collision code, doesnt work either
+			if (tempObject.getId() == ID.Player2 && this.getId() == ID.Player) { // this is me, player 2 is tempObject
+				Player player2 = (Player) tempObject;
+				
+				if ( getBoundsLeft().intersects( player2.getBounds() ) ) { // player 2 is on the left of player 1
+					this.setVelX(Math.abs( this.getVelX() ) );
+					player2.setVelX(Math.abs( player2.getVelX() *-1));
+					
+					this.setX( (float) (player2.getX()+player2.getBounds().getWidth()+2) );
+				}
+				else if ( getBoundsRight().intersects( player2.getBounds() ) ) { // player 2 is on the right of player 1
+					this.setVelX(Math.abs( this.getVelX() *-1 ) );
+					player2.setVelX(Math.abs( player2.getVelX()));
+					
+					player2.setX( (float) (this.getX()+this.getBounds().getWidth()+2) );
+				}
+				else if ( getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
+					this.setVelY(Math.abs( this.getVelY() ) );
+					player2.setVelY(Math.abs( player2.getVelY() *-1));
+					
+					player2.setY( (float) (this.getY()-this.getBounds().getHeight()-2) );
+				}
+				else if ( getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is under player 1
+					this.setVelY(Math.abs( this.getVelY() *-1) );
+					player2.setVelY(Math.abs( player2.getVelY() ) );
+					
+					this.setY( (float) (player2.getY()-player2.getBounds().getHeight()-2) );
+				}
+			}
+			
+			*/
+			
+			/* old collision code
 			if ( (tempObject.getId() == ID.Player && this.getId() != ID.Player) 
 					|| tempObject.getId() == ID.Player2 && this.getId() != ID.Player2) { // other players
 				
@@ -67,7 +106,7 @@ public class Player extends TickingGameObject{
 					//setY(tempObject.getY());
 					setVelY(getVelY()*-1);
 				}
-			}
+			} */
 		}
 	}
 	

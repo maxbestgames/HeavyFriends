@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ public class Game extends Canvas implements Runnable {
 	private Random r;
 	private HUD hud;
 	private Spawner spawner;
+	KeyInput keyInput;
 	
 	public static void main(String[] args) {
 		
@@ -25,6 +27,30 @@ public class Game extends Canvas implements Runnable {
 		
 		
 		new Game();
+	}
+	
+	public Game() {
+		
+		handler = new Handler();
+		
+		keyInput = new KeyInput(handler);
+		this.addKeyListener(keyInput);
+		
+		new Window(WIDTH, HEIGHT,"Test game", this);
+		hud = new HUD();
+		spawner = new Spawner(handler, hud);
+		
+		
+		r = new Random();
+		
+		for(int i = 0; i<10; i++){
+			//handler.addObject(new BasicEnemy(r.nextInt(250), r.nextInt(250), ID.BasicEnemy, handler));
+
+		}
+		handler.createLevel();
+		handler.addObject(new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2, handler));
+		handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
+		
 	}
 	
 	public void run(){
@@ -62,6 +88,9 @@ public class Game extends Canvas implements Runnable {
 		
 		handler.tick();
 		hud.tick();
+		
+		keyInput.update();
+		
 	}
 	
 	private void render(){
@@ -106,6 +135,7 @@ public class Game extends Canvas implements Runnable {
 		thread.start();
 		running = true;
 	}
+	
 	public synchronized void stop(){
 		try{
 			thread.join();
@@ -114,26 +144,6 @@ public class Game extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	public Game() {
-		handler = new Handler();
-		this.addKeyListener(new KeyInput(handler));
-		new Window(WIDTH, HEIGHT,"Test game", this);
-		hud = new HUD();
-		spawner = new Spawner(handler, hud);
-		
-		r = new Random();
-		
-		for(int i = 0; i<10; i++){
-			//handler.addObject(new BasicEnemy(r.nextInt(250), r.nextInt(250), ID.BasicEnemy, handler));
-
-		}
-		handler.createLevel();
-		handler.addObject(new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2, handler));
-		handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
-		
-		
-
-
-	}
+	
 
 }

@@ -1,0 +1,34 @@
+Game
+Window
+GameObject
+ BoundaryBlock
+ 
+TickingGameObject
+ Player
+ Enemy
+ Projectile
+ 
+ID
+ 
+Level
+ Handlers (per level)
+  if() in tick to check if paused
+
+HUD - Enum?
+	hide - show none?
+	show
+ (Thing we actually draw)
+
+KeyInput
+
+Spawner
+
+Effect(s)
+
+Asset
+ Sound
+ Sprite
+ Image
+  Background
+  
+Camera
