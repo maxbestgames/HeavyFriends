@@ -1,6 +1,5 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.LinkedList;
 
 public class KeyInput extends KeyAdapter{
 	
@@ -49,9 +48,6 @@ public class KeyInput extends KeyAdapter{
 				if (keyPressed[KeyEvent.VK_D]) {
 					tempObject.setVelX( 5 );
 					keyDown[2] = true;
-
-					//tempObject.setVelY( -10 );
-
 				}
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
 
@@ -74,7 +70,6 @@ public class KeyInput extends KeyAdapter{
 					keyDown[5] = true;
 				}
 				//if(key==KeyEvent.VK_DOWN) tempObject.setVelY( 5 );
-
 			}
 		}
 
