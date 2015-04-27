@@ -118,7 +118,7 @@ public class KeyInput extends KeyAdapter{
 					//tempObject.setVelX( 0 );
 					keyDown[5] = false;
 				}
-				//if(key==KeyEvent.VK_DOWN) tempObject.setVelY( 0 );
+				
 				if(!keyDown[4] && !keyDown[5]) tempPlayer.setVelX(0);
 
 			}

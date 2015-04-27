@@ -33,8 +33,8 @@ public class Player extends TickingGameObject{
 		if(falling || jumping) {
 			velY += gravity;
 		}
-		//x = Game.clamp(x, 0, Window.visibleScreenX-playerWidth);
-		//y = Game.clamp(y, 0, Window.vaisibleScreenY-playerHeight);
+		velX = Game.clamp(velX, -20, 20);
+		velY = Game.clamp(velY, -20, 20);
 		
 		collision();
 	}
@@ -44,15 +44,15 @@ public class Player extends TickingGameObject{
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
 			
 			if (getBoundsLeft().intersects(tempObject.getBounds())) {
-				velX = 0;
-				x = tempObject.getX() + Block.getBlockSize() + 2;
-				y-=5;
+				velX = 0.4f;
+				x = tempObject.getX() + Block.getBlockSize();
+				y-=1;
 				System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 			}
 			if (getBoundsRight().intersects(tempObject.getBounds())) {
-				velX = 0;
-				x = tempObject.getX() - playerWidth - 2;
-				y-=5;
+				velX = -0.4f;
+				x = tempObject.getX() - playerWidth;
+				y-=1;
 				System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 			}
 			if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
@@ -119,19 +119,19 @@ public class Player extends TickingGameObject{
 	}
 
 	public Rectangle getBoundsLeft() {
-		return new Rectangle((int) x, (int) y+10, 2, playerHeight-20);
+		return new Rectangle((int) x, (int) y + playerHeight/2-3, 2, 6);
 	}
 	
 	public Rectangle getBoundsRight() {
-		return new Rectangle((int) x + playerWidth-2, (int) y+10, 2, playerHeight-20);
+		return new Rectangle((int) x + playerWidth-2, (int) y+playerHeight/2-3, 2, 6);
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) x+5, (int) y, playerWidth-10, 2);
+		return new Rectangle((int) x + playerWidth/2-3, (int) y, 6, 2);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) x+5, (int) y + playerHeight-2, playerWidth-10, 2);
+		return new Rectangle((int) x + playerWidth/2-3, (int) y + playerHeight-2, 6, 2);
 	}
 	
 	public Rectangle getBounds() {
