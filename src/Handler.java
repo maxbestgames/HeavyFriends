@@ -57,7 +57,7 @@ public class Handler {
 		}
 		
 		for(int i = 0; i < Game.WIDTH+Block.blockSize; i += Block.blockSize) {
-			addObject(new Block(i, (int)(Game.HEIGHT-0.5*Game.HEIGHT), ID.Block, this));
+			addObject(new Block(i, (int)(Game.HEIGHT-0.6*Game.HEIGHT), ID.Block, this));
 		}
 			
 	}

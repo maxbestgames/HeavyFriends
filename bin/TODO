@@ -12,6 +12,7 @@ ID
  
 Level
  Handlers (per level)
+ World handler ticks scene handler
   if() in tick to check if paused
 
 HUD - Enum?

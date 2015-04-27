@@ -93,8 +93,6 @@ public class KeyInput extends KeyAdapter{
 					keyDown[2] = false;
 				}
 
-				//vertical movement
-				if(!keyDown[0]) tempObject.setVelY(0);
 				if(!keyDown[1] && !keyDown[2]) tempObject.setVelX(0);
 
 			}
@@ -114,9 +112,6 @@ public class KeyInput extends KeyAdapter{
 					keyDown[5] = false;
 				}
 				//if(key==KeyEvent.VK_DOWN) tempObject.setVelY( 0 );
-
-				//vertical movement
-				if(!keyDown[3]) tempObject.setVelY(0);
 				if(!keyDown[4] && !keyDown[5]) tempObject.setVelX(0);
 
 			}

@@ -4,31 +4,54 @@ import java.util.Random;
 
 
 public class HUD {
-	public static int HEALTH = 100;
+	
+	public static int[] HEALTH;
+	private final int MAX_PLAYERS = 4;
 	Random r = new Random();
+	Handler handler;
+	
+	public HUD(Handler handler) {
+		this.handler = handler;
+		
+		HEALTH = new int[MAX_PLAYERS];
+		
+		for (int i = 0; i<MAX_PLAYERS; i++) {
+			HEALTH[i] = 100;
+		}
+	}
 	
 	public void tick() {
-		if (HEALTH <=0) {
-			HEALTH = 0;
-		} else if (HEALTH > 100) {
-			HEALTH = 100;
+		
+		for (int i=0; i < Game.getNumPlayers(); i++) {
+			Game.clamp(HEALTH[i], 0, 100);
+			
 		}
 	}
+	
 	public void render(Graphics g) {
-		if(HEALTH==0){
-			g.setColor(Color.BLACK);
-			g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
-		}else{
-			g.setColor(Color.GRAY);
-			g.fillRect(15, 15, 204, 13);
-			g.setColor(Color.WHITE);
-			g.drawRect(15, 15, 204, 13);
-			if (HEALTH >50) g.setColor(Color.GREEN);
-			else if (HEALTH >30) g.setColor(Color.YELLOW);
-			else if (HEALTH > 15) g.setColor(Color.ORANGE);
-			else g.setColor(Color.RED);
-			g.fillRect(17, 17, HEALTH *2 , 10);
+		
+		for (int i=0; i < Game.getNumPlayers(); i++) {
+			if (HEALTH[i] == 0) {
+				g.setColor(Color.BLACK);
+				g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
+			}
 		}
+		
+		drawPlayerHUD(g, 0, 15, 15); //player hud
+		if (Game.getNumPlayers()>1) //player2 hud
+			drawPlayerHUD(g, 1, (Window.visibleScreenX-204-15), 15);
+		
 	}
-
+	
+	public void drawPlayerHUD(Graphics g, int playerNum, int x, int y) {
+		g.setColor(Color.GRAY);
+		g.fillRect(x, y, 204, 13);
+		g.setColor(Color.WHITE);
+		g.drawRect(x, y, 204, 13);
+		if (HEALTH[playerNum] >50) g.setColor(Color.GREEN);
+		else if (HEALTH[playerNum] >30) g.setColor(Color.YELLOW);
+		else if (HEALTH[playerNum] > 15) g.setColor(Color.ORANGE);
+		else g.setColor(Color.RED);
+		g.fillRect(x+2, y+2, HEALTH[playerNum] *2 , 10);
+	}
 }

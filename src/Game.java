@@ -11,13 +11,14 @@ import java.util.Random;
 public class Game extends Canvas implements Runnable {
 	
 	static int WIDTH, HEIGHT;
+	private static int NUM_PLAYERS;
 	private Thread thread;
 	private boolean running = false;
 	private Handler handler;
 	private Random r;
 	private HUD hud;
 	private Spawner spawner;
-	KeyInput keyInput;
+	private KeyInput keyInput;
 	
 	public static void main(String[] args) {
 		
@@ -25,6 +26,7 @@ public class Game extends Canvas implements Runnable {
 		WIDTH = gd.getDisplayMode().getWidth();
 		HEIGHT = gd.getDisplayMode().getHeight();
 		
+		NUM_PLAYERS = 0;
 		
 		new Game();
 	}
@@ -37,19 +39,17 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(keyInput);
 		
 		new Window(WIDTH, HEIGHT,"Test game", this);
-		hud = new HUD();
+		hud = new HUD(handler);
 		spawner = new Spawner(handler, hud);
-		
 		
 		r = new Random();
 		
-		for(int i = 0; i<10; i++){
-			//handler.addObject(new BasicEnemy(r.nextInt(250), r.nextInt(250), ID.BasicEnemy, handler));
-
-		}
 		handler.createLevel();
-		handler.addObject(new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2, handler));
+		
 		handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
+		NUM_PLAYERS++;
+		handler.addObject(new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2, handler));
+		NUM_PLAYERS++;
 		
 	}
 	
@@ -128,6 +128,10 @@ public class Game extends Canvas implements Runnable {
 			return var = max;
 		else 
 			return var;
+	}
+	
+	public static int getNumPlayers() {
+		return NUM_PLAYERS;
 	}
 	
 	public synchronized void start(){
