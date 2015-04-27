@@ -53,17 +53,11 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(keyInput);
 		
 		//TODO make spawners work
-		//handler.addPlayer( new Player(WIDTH/2, 100, ID.Player ) );
-		//handler.addPlayer(new Player(WIDTH/2, HEIGHT/2, ID.Player, ));
-		NUM_PLAYERS++;
-		//handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );
-		//NUM_PLAYERS++;
-		
+
 		current = LevelID.TestRealm;
-		//TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
 		
 		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png"));
-		
+		NUM_PLAYERS++;
 		
 		new Window(WIDTH, HEIGHT,"Test game", this);
 		hud = new HUD(handler);

@@ -23,7 +23,6 @@ public class Window extends Canvas {
 		//frame.setAlwaysOnTop(true);
 		
 		game.start();
-		
 	}
 
 	public static int getVisibleScreenX() {
