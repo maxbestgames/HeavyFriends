@@ -10,8 +10,9 @@ import java.awt.image.BufferStrategy;
 import java.util.Random;
 
 import core.enums.ID;
+import core.enums.LevelID;
 import core.gameobjects.Player;
-import core.handlers.Handler;
+import core.handlers.WorldHandler;
 import core.levels.Spawner;
 
 
@@ -21,11 +22,12 @@ public class Game extends Canvas implements Runnable {
 	private static int NUM_PLAYERS;
 	private Thread thread;
 	private boolean running = false;
-	private Handler handler;
+	private WorldHandler handler;
 	private Random r;
 	private HUD hud;
-	private Spawner spawner;
+	//private Spawner spawner;
 	private KeyInput keyInput;
+	private static LevelID current;
 	
 	public static void main(String[] args) {
 		
@@ -40,7 +42,7 @@ public class Game extends Canvas implements Runnable {
 	
 	public Game() {
 		
-		handler = new Handler();
+		handler = new WorldHandler();
 		
 		keyInput = new KeyInput(handler);
 		this.addKeyListener(keyInput);
@@ -155,6 +157,10 @@ public class Game extends Canvas implements Runnable {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static LevelID getCurrentLevel() {
+		return current;
 	}
 	
 

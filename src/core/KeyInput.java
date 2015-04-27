@@ -3,18 +3,19 @@ package core;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import core.handlers.Handler;
+import core.handlers.WorldHandler;
 import core.gameobjects.GameObject;
+import core.gameobjects.Player;
 import core.enums.ID;
 
 public class KeyInput extends KeyAdapter{
 	
-	private Handler handler;
+	private WorldHandler handler;
 	private boolean[] keyPressed;
 	private boolean[] keyDown;
 	
 	
-	public KeyInput(Handler handler){
+	public KeyInput(WorldHandler handler){
 		this.handler = handler;
 		
 		keyPressed = new boolean[200];
@@ -36,56 +37,56 @@ public class KeyInput extends KeyAdapter{
 	}
 	
 	public void update() {
-		
-		for(int i = 0; i < handler.getSize();i++){
-			GameObject tempObject = handler.getObject(i);
-			if (tempObject.getId()==ID.Player) {
-				// player keys
-				if (keyPressed[KeyEvent.VK_W] && !tempObject.isJumping()) {
-					tempObject.setJumping(true);
+		Player tempPlayer;
+		GameObject tempObject;
 
-					tempObject.setVelY( -15 );
+		for (int i = 0; i < handler.getNumPlayers(); i++) {
+			tempPlayer = handler.getPlayers().getPlayer(i); 
+			
+			// player controls
+			if (tempPlayer.getId()==ID.Player) {
+				// player keys
+				if (keyPressed[KeyEvent.VK_W] && !tempPlayer.isJumping()) {
+					tempPlayer.setJumping(true);
+
+					tempPlayer.setVelY( -15 );
 					keyDown[0] = true;
 				}
 				if (keyPressed[KeyEvent.VK_A]) {
-					tempObject.setVelX( -5 );
+					tempPlayer.setVelX( -5 );
 					keyDown[1] = true;
 				}
 				if (keyPressed[KeyEvent.VK_D]) {
-					tempObject.setVelX( 5 );
+					tempPlayer.setVelX( 5 );
 					keyDown[2] = true;
 				}
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
 
 
 			}
-			if(tempObject.getId()==ID.Player2){
+			if(tempPlayer.getId()==ID.Player2){
 				// player2 keys
-				if (keyPressed[KeyEvent.VK_UP] && !tempObject.isJumping()) {
-					tempObject.setJumping(true);
-					tempObject.setVelY( -15 );
+				if (keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
+					tempPlayer.setJumping(true);
+					tempPlayer.setVelY( -15 );
 					keyDown[3] = true;
 				}
 
 				if(keyPressed[KeyEvent.VK_LEFT]) {
-					tempObject.setVelX( -5 );
+					tempPlayer.setVelX( -5 );
 					keyDown[4] = true;
 				}
 				if(keyPressed[KeyEvent.VK_RIGHT]) {
-					tempObject.setVelX( 5 );
+					tempPlayer.setVelX( 5 );
 					keyDown[5] = true;
 				}
 				//if(key==KeyEvent.VK_DOWN) tempObject.setVelY( 5 );
 			}
-		}
 
-
-		// release code
-		for(int i = 0; i < handler.getSize();i++){
-			GameObject tempObject = handler.getObject(i);
-			if (tempObject.getId()==ID.Player) {
+			// key release code
+			if (tempPlayer.getId()==ID.Player) {
 				// player keys
-				if (!keyPressed[KeyEvent.VK_W] && !tempObject.isJumping()) {
+				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[0] = false;
 				}
@@ -99,12 +100,12 @@ public class KeyInput extends KeyAdapter{
 					keyDown[2] = false;
 				}
 
-				if(!keyDown[1] && !keyDown[2]) tempObject.setVelX(0);
+				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);
 
 			}
-			if(tempObject.getId()==ID.Player2){
+			if(tempPlayer.getId()==ID.Player2){
 				// player2 keys
-				if(!keyPressed[KeyEvent.VK_UP] && !tempObject.isJumping()) {
+				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[3] = false;
 				}
@@ -118,8 +119,13 @@ public class KeyInput extends KeyAdapter{
 					keyDown[5] = false;
 				}
 				//if(key==KeyEvent.VK_DOWN) tempObject.setVelY( 0 );
-				if(!keyDown[4] && !keyDown[5]) tempObject.setVelX(0);
+				if(!keyDown[4] && !keyDown[5]) tempPlayer.setVelX(0);
 
+			}
+			for (int j = 0; j < handler.getLevel( Game.getCurrentLevel() ).getNumObjects(); j++) {
+				tempObject = handler.getLevel( Game.getCurrentLevel() ).getObjects().getObject(j);
+
+				
 			}
 		}
 	}

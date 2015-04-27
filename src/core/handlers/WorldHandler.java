@@ -1,33 +1,56 @@
 package core.handlers;
 
+import core.enums.LevelID;
 import core.gameobjects.Player;
 import core.levels.LevelSpawner;
 
 public class WorldHandler {
 	
-	Handler players = new Handler();
-	Handler levels = new Handler();
+	PlayerHandler players = new PlayerHandler();
+	LevelHandler levels = new LevelHandler();
 	
 	public void addPlayer(Player p) {
-		players.addObject(p);
+		players.addPlayer(p);
 	}
 	
 	public void removePlayer(Player p) {
-		players.removeObject(p);
+		players.removePlayer(p);
 	}
 	
 	public void addLevel(LevelSpawner level) {
 		levels.addObject(level);
 	}
 	
-	public void removeLevel() {
-		
+	public void removeLevel(LevelSpawner level) {
+		levels.removeObject(level);
+	}
+
+	public PlayerHandler getPlayers() {
+		return players;
+	}
+
+	public LevelHandler getLevels() {
+		return levels;
 	}
 	
-	public void tickLevel() {
-		
+	public LevelSpawner getLevel(LevelID lId) {
+		LevelSpawner tempLevel;
+		for (int i=0; i < levels.getNumLevels(); i++) {
+			tempLevel = levels.getLevel(i);
+			if (tempLevel.getId() == lId) {
+				return tempLevel;
+			}
+		}
+		return null;
 	}
 	
+	public int getNumPlayers() {
+		return players.getSize();
+	}
+	
+	public int getNumLevels() {
+		return levels.getNumLevels();
+	}
 	
 	
 	// players and our level handlers will be in this list.
