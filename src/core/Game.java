@@ -6,16 +6,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import core.enums.ID;
 import core.enums.LevelID;
-import core.gameobjects.Player;
 import core.handlers.WorldHandler;
-import core.levels.Spawner;
 import core.levels.TestRealm;
 
 
@@ -32,6 +28,7 @@ public class Game extends Canvas implements Runnable {
 	//private Spawner spawner;
 	private KeyInput keyInput;
 	private static LevelID current;
+	private static int fps;
 	
 	public static void main(String[] args) {
 		
@@ -53,16 +50,10 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(keyInput);
 		
 		//TODO make spawners work
-		//handler.addPlayer( new Player(WIDTH/2, 100, ID.Player ) );
-		//handler.addPlayer(new Player(WIDTH/2, HEIGHT/2, ID.Player, ));
-		NUM_PLAYERS++;
-		//handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );
-		//NUM_PLAYERS++;
 		
 		current = LevelID.TestRealm;
-		TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
-		
 		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png"));
+		NUM_PLAYERS++;
 		
 		
 		new Window(WIDTH, HEIGHT,"Test game", this);
@@ -70,7 +61,8 @@ public class Game extends Canvas implements Runnable {
 		
 	}
 	
-	public void run(){
+	public void run() {
+		
 		this.requestFocus();
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 40.0;
@@ -93,12 +85,11 @@ public class Game extends Canvas implements Runnable {
 			frames++;
 			if(System.currentTimeMillis()-timer>1000){
 				timer+=1000;
-				//System.out.println("fps-" + frames);
+				fps = frames;
 				frames = 0;
 			}
 		}
 		stop();
-		
 	}
 	
 	private void tick(){
@@ -111,7 +102,7 @@ public class Game extends Canvas implements Runnable {
 		
 	}
 	
-	private void render(){
+	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null){
 			this.createBufferStrategy(3);
@@ -179,5 +170,7 @@ public class Game extends Canvas implements Runnable {
 		return handler;
 	}
 	
-
+	public static int getFPS() {
+		return fps;
+	}
 }

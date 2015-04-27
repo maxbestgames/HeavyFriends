@@ -26,7 +26,7 @@ public class LevelLoader {
 		int w = image.getWidth();
 		int h = image.getHeight();
 
-		System.out.println("width, height" + w + ", " + h);
+		System.out.println("Loaded Map of Dimension [" + w + ", " + h + "]");
 
 		for(int i = 0; i<w; i++){
 			for( int j = 0; j<h; j++){

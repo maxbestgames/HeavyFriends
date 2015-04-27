@@ -7,8 +7,6 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import core.Game;
-import core.Window;
-import core.handlers.ObjectHandler;
 import core.enums.ID;
 
 
@@ -46,26 +44,24 @@ public class Player extends TickingGameObject{
 			if (getBoundsLeft().intersects(tempObject.getBounds())) {
 				velX = 0.4f;
 				x = tempObject.getX() + Block.getBlockSize();
-				y-=1;
-				System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+				//System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 			}
 			if (getBoundsRight().intersects(tempObject.getBounds())) {
 				velX = -0.4f;
 				x = tempObject.getX() - playerWidth;
-				y-=1;
-				System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+				//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 			}
 			if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
 				velY = 0;
 				y = tempObject.getY() + Block.getBlockSize() + 2;
-				System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+				//System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 			}
 			if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 				velY = 0;
-				y = tempObject.getY() - playerHeight;
+				y = tempObject.getY() - playerHeight+1;
 				jumping = false;
 				falling = false;
-				System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+				//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 			} else {
 				falling = true;
 			}

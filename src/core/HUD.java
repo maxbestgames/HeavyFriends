@@ -57,5 +57,7 @@ public class HUD {
 		else if (HEALTH[playerNum] > 15) g.setColor(Color.ORANGE);
 		else g.setColor(Color.RED);
 		g.fillRect(x+2, y+2, HEALTH[playerNum] *2 , 10);
+		g.setColor(Color.WHITE);
+		g.drawString(""+Game.getFPS(), Window.visibleScreenX-30, 15);
 	}
 }

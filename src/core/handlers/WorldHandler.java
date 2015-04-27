@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import core.Game;
 import core.enums.LevelID;
-import core.gameobjects.GameObject;
 import core.gameobjects.Player;
 import core.levels.LevelSpawner;
 
@@ -23,10 +22,6 @@ public class WorldHandler {
 	
 	public void addLevel(LevelSpawner level) {
 		levels.addObject(level);
-	}
-	
-	public void createLevel(LevelSpawner level) {
-		// TODO levels.
 	}
 	
 	public void removeLevel(LevelSpawner level) {

@@ -3,8 +3,6 @@ package core.handlers;
 import java.util.LinkedList;
 
 import core.enums.LevelID;
-import core.gameobjects.GameObject;
-import core.gameobjects.TickingGameObject;
 import core.levels.LevelSpawner;
 
 public class LevelHandler {
