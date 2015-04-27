@@ -8,6 +8,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import core.enums.ID;
@@ -52,13 +53,13 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(keyInput);
 		
 		//TODO make spawners work
-		handler.addPlayer( new Player(WIDTH/2, HEIGHT/2, ID.Player ) );
+		handler.addPlayer( new Player(WIDTH/2, 100, ID.Player ) );
 		//handler.addPlayer(new Player(WIDTH/2, HEIGHT/2, ID.Player, ));
 		NUM_PLAYERS++;
-		handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );
-		NUM_PLAYERS++;
+		//handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );
+		//NUM_PLAYERS++;
 		
-		TestRealm level1 = new TestRealm(LevelID.TestRealm);
+		TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
 		current = LevelID.TestRealm;
 		handler.addLevel(level1);
 		
@@ -172,6 +173,8 @@ public class Game extends Canvas implements Runnable {
 	public static LevelID getCurrentLevel() {
 		return current;
 	}
+	
+	
 	
 
 }

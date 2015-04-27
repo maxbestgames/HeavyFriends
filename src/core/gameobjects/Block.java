@@ -10,7 +10,6 @@ import core.enums.ID;
 
 public class Block extends GameObject{
 	
-	private ObjectHandler handler;
 	protected static int blockSize = 32;
 	
 	public Block(int x, int y, ID id, ObjectHandler handler) {
