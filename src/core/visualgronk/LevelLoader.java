@@ -2,8 +2,10 @@ package core.visualgronk;
 
 import java.awt.image.BufferedImage;
 
+import core.Game;
 import core.enums.ID;
 import core.gameobjects.Block;
+import core.gameobjects.Player;
 import core.handlers.ObjectHandler;
 
 public class LevelLoader {
@@ -32,6 +34,7 @@ public class LevelLoader {
 				int blue = (pixel) & 0xff;
 
 				if(red == 255 && green == 255 & blue == 255) handler.addObject(new Block(i*32, j*32, ID.Block, handler));
+				if(red == 0 && green == 38 & blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, ID.Player));
 
 			}
 		}

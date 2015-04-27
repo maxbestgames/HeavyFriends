@@ -53,7 +53,7 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(keyInput);
 		
 		//TODO make spawners work
-		handler.addPlayer( new Player(WIDTH/2, 100, ID.Player ) );
+		//handler.addPlayer( new Player(WIDTH/2, 100, ID.Player ) );
 		//handler.addPlayer(new Player(WIDTH/2, HEIGHT/2, ID.Player, ));
 		NUM_PLAYERS++;
 		//handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );

@@ -15,8 +15,8 @@ import core.enums.ID;
 public class Player extends TickingGameObject{
 	Random r = new Random();
 	
-	private int playerWidth = 32;
-	private int playerHeight = 64;
+	private int playerWidth = 48;
+	private int playerHeight = 96;
 	private float gravity = 0.9f;
 	
 	private boolean drawHitBoxes = true;
@@ -45,13 +45,13 @@ public class Player extends TickingGameObject{
 			
 			if(tempObject.getId()==ID.Block){ // environment Blocks
 				
-				/*if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				if (getBoundsLeft().intersects(tempObject.getBounds())) {
 					velX = 0;
 					x = tempObject.getX() + Block.getBlockSize() + 2;
 				} else if (getBoundsRight().intersects(tempObject.getBounds())) {
 					velX = 0;
 					x = tempObject.getX() - playerWidth - 2;
-				}*/
+				}
 				if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
 					velY = 0;
 					y = tempObject.getY() + Block.getBlockSize() + 2;
