@@ -45,13 +45,13 @@ public class Player extends TickingGameObject{
 			
 			if(tempObject.getId()==ID.Block){ // environment Blocks
 				
-				if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				/*if (getBoundsLeft().intersects(tempObject.getBounds())) {
 					velX = 0;
 					x = tempObject.getX() + Block.getBlockSize() + 2;
 				} else if (getBoundsRight().intersects(tempObject.getBounds())) {
 					velX = 0;
 					x = tempObject.getX() - playerWidth - 2;
-				}
+				}*/
 				if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
 					velY = 0;
 					y = tempObject.getY() + Block.getBlockSize() + 2;
@@ -126,11 +126,11 @@ public class Player extends TickingGameObject{
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) x, (int) y, playerWidth, playerHeight/2);
+		return new Rectangle((int) x+5, (int) y, playerWidth-10, playerHeight/2);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) x, (int) y + playerHeight/2, playerWidth, playerHeight/2);
+		return new Rectangle((int) x+5, (int) y + playerHeight/2, playerWidth-10, playerHeight/2);
 	}
 	
 	public Rectangle getBounds() {
