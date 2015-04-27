@@ -1,4 +1,7 @@
+package core;
+
 import core.Game;
+import core.gameobjects.GameObject;
 
 
 public class Camera {
@@ -14,7 +17,7 @@ public class Camera {
 	}
 	
 	public void setX(float x) {
-		this.x = x
+		this.x = x;
 	}
 	
 	public void setY(float y) {

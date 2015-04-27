@@ -3,6 +3,7 @@ package core;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyListener;
@@ -24,6 +25,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 	private WorldHandler handler;
+	private Camera cam;
 	private Random r;
 	private HUD hud;
 	//private Spawner spawner;
@@ -44,6 +46,7 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 		
 		handler = new WorldHandler();
+		cam = new Camera(0, 0);
 		
 		keyInput = new KeyInput(handler);
 		this.addKeyListener(keyInput);
@@ -99,6 +102,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick(){
 		
 		handler.tick();
+		cam.tick(handler.getPlayers().getPlayer(ID.Player));
 		hud.tick();
 		
 		keyInput.update();
@@ -113,10 +117,14 @@ public class Game extends Canvas implements Runnable {
 		}
 		Graphics g = bs.getDrawGraphics();
 		
+		Graphics2D g2d =(Graphics2D) g;
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0,0, WIDTH, HEIGHT);
 		
+		g2d.translate(cam.getX(), cam.getY());
 		handler.render(g);
+		g2d.translate(-cam.getX(), -cam.getY());
 		hud.render(g);
 
 		g.dispose();
