@@ -24,8 +24,8 @@ public class LevelLoader {
 
 		System.out.println("width, height" + w + ", " + h);
 
-		for(int i = 0; i<h; i++){
-			for( int j = 0; j<w; j++){
+		for(int i = 0; i<w; i++){
+			for( int j = 0; j<h; j++){
 				int pixel = image.getRGB(i, j);
 				int red = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8 ) & 0xff;
