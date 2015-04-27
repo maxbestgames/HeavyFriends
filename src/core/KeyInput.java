@@ -1,5 +1,11 @@
+package core;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import core.handlers.Handler;
+import core.gameobjects.GameObject;
+import core.enums.ID;
 
 public class KeyInput extends KeyAdapter{
 	

@@ -1,8 +1,15 @@
+package core.gameobjects;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Random;
+
+import core.Game;
+import core.Window;
+import core.handlers.Handler;
+import core.enums.ID;
 
 
 public class Player extends TickingGameObject{

@@ -1,8 +1,14 @@
+package core.oldcode;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+
+import core.enums.ID;
+import core.gameobjects.GameObject;
+import core.handlers.Handler;
 
 
 public class EffectTrail extends GameObject {

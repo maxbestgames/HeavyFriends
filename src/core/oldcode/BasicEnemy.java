@@ -1,7 +1,14 @@
+package core.oldcode;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
+
+import core.Window;
+import core.enums.ID;
+import core.gameobjects.GameObject;
+import core.handlers.Handler;
 
 
 public class BasicEnemy extends GameObject {
@@ -21,10 +28,10 @@ public class BasicEnemy extends GameObject {
 	public void tick() {
 		x+=velX;
 		y+=velY;
-		if(y<=0||y>=Game.HEIGHT-35) {
+		if(y<=0||y>=Window.getVisibleScreenY()) {
 			velY *= -1;
 		}
-		if(x<=0||x>=Game.WIDTH-15) {
+		if(x<=0||x>=Window.getVisibleScreenX()) {
 			velX *= -1;
 		}
 		//handler.addObject( new EffectTrail(x, y, ID.EffectTrail, Color.RED, 16, 16, handler, 0.01f) );

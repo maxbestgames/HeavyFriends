@@ -1,5 +1,6 @@
+package core;
+
 import java.awt.Canvas;
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
@@ -23,5 +24,21 @@ public class Window extends Canvas {
 		
 		game.start();
 		
+	}
+
+	public static int getVisibleScreenX() {
+		return visibleScreenX;
+	}
+
+	public static void setVisibleScreenX(int visibleScreenX) {
+		Window.visibleScreenX = visibleScreenX;
+	}
+
+	public static int getVisibleScreenY() {
+		return visibleScreenY;
+	}
+
+	public static void setVisibleScreenY(int visibleScreenY) {
+		Window.visibleScreenY = visibleScreenY;
 	}
 }

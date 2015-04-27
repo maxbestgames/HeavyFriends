@@ -1,8 +1,12 @@
+package core.levels;
+
+import core.handlers.Handler;
+import core.HUD;
 
 public class Spawner {
 	
-	private Handler handler;
-	private HUD hud;
+	protected Handler handler;
+	protected HUD hud;
 	
 	public Spawner(Handler handler, HUD hud){
 		this.handler = handler;
@@ -12,6 +16,4 @@ public class Spawner {
 	public void tick(){
 		
 	}
-	
-
 }

@@ -1,5 +1,12 @@
+package core.handlers;
+
 import java.awt.Graphics;
 import java.util.LinkedList;
+
+import core.gameobjects.GameObject;
+import core.gameobjects.TickingGameObject;
+import core.gameobjects.Player;
+import core.enums.ID;
 
 
 public class Handler {
@@ -49,17 +56,6 @@ public class Handler {
 			}
 		}
 		return null;
-	}
-	
-	public void createLevel() {
-		for(int i = 0; i < Game.WIDTH+Block.blockSize; i += Block.blockSize) {
-			addObject(new Block(i, (int)(Game.HEIGHT-0.2*Game.HEIGHT), ID.Block, this));
-		}
-		
-		for(int i = 0; i < Game.WIDTH+Block.blockSize; i += Block.blockSize) {
-			addObject(new Block(i, (int)(Game.HEIGHT-0.6*Game.HEIGHT), ID.Block, this));
-		}
-			
 	}
 	
 }

@@ -1,6 +1,10 @@
+package core;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+
+import core.handlers.Handler;
 
 
 public class HUD {

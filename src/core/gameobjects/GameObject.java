@@ -1,5 +1,9 @@
+package core.gameobjects;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import core.enums.ID;
 
 
 public abstract class GameObject {

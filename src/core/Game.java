@@ -1,3 +1,5 @@
+package core;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,6 +8,11 @@ import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
+
+import core.enums.ID;
+import core.gameobjects.Player;
+import core.handlers.Handler;
+import core.levels.Spawner;
 
 
 public class Game extends Canvas implements Runnable {
@@ -44,7 +51,8 @@ public class Game extends Canvas implements Runnable {
 		
 		r = new Random();
 		
-		handler.createLevel();
+		//TODO make spawners work
+		//handler.createLevel();
 		
 		handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
 		NUM_PLAYERS++;

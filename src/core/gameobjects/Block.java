@@ -1,6 +1,11 @@
+package core.gameobjects;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import core.handlers.Handler;
+import core.enums.ID;
 
 
 public class Block extends GameObject{

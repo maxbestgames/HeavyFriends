@@ -1,3 +1,6 @@
+package core.gameobjects;
+
+import core.enums.ID;;
 
 public abstract class TickingGameObject extends GameObject{
 
