@@ -11,11 +11,8 @@ import core.enums.ID;
 
 public class Handler {
 
-	LinkedList<Object> object;
+	LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
-	public Handler() {
-		object = new LinkedList<Object>();
-	}
 	
 	public void tick(){
 		for(int i = 0; i<object.size(); i++){
@@ -27,15 +24,23 @@ public class Handler {
 		}
 	}
 	
-	public void render(Graphics g) {
+	public void render(Graphics g){
 		for(int i = 0; i<object.size(); i++){
-			GameObject tempObject =(GameObject) object.get(i);
+			GameObject tempObject =object.get(i);
 			tempObject.render(g);
 		}
 	}
 	
+	public void addObject(GameObject gObject){
+		object.add(gObject);
+	}
+	
+	public void removeObject(GameObject object){
+		this.object.remove(object);
+	}
+	
 	public GameObject getObject(int i) {
-		return (GameObject) object.get(i);
+		return object.get(i);
 	}
 	
 	public int getSize() {
