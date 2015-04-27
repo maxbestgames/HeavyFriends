@@ -33,8 +33,8 @@ public class Player extends TickingGameObject{
 		if(falling || jumping) {
 			velY += gravity;
 		}
-		x = Game.clamp(x, 0, Window.visibleScreenX-playerWidth);
-		y = Game.clamp(y, 0, Window.visibleScreenY-playerHeight);
+		//x = Game.clamp(x, 0, Window.visibleScreenX-playerWidth);
+		//y = Game.clamp(y, 0, Window.visibleScreenY-playerHeight);
 		
 		collision();
 	}
