@@ -47,7 +47,11 @@ public class Handler {
 		return object.size();
 	}
 	
-	public Player getPlayer() {
+	
+	/**
+	 * @deprecated
+	 */
+	public Player getPlayer() {	
 		GameObject tempObject;
 		for (int i = 0; i<getSize(); i++) {
 			tempObject = getObject(i);
