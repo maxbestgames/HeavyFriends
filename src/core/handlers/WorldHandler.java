@@ -1,23 +1,30 @@
 package core.handlers;
 
-public class WorldHandler extends Handler {
+import core.gameobjects.Player;
+import core.levels.LevelSpawner;
+
+public class WorldHandler {
 	
-	Handler players;
-	Handler levels;
+	Handler players = new Handler();
+	Handler levels = new Handler();
 	
-	public void addPlayer() {
-		
+	public void addPlayer(Player p) {
+		players.addObject(p);
 	}
 	
-	public void removePlayer() {
-		
+	public void removePlayer(Player p) {
+		players.removeObject(p);
 	}
 	
-	public void addLevel() {
-		
+	public void addLevel(LevelSpawner level) {
+		levels.addObject(level);
 	}
 	
 	public void removeLevel() {
+		
+	}
+	
+	public void tickLevel() {
 		
 	}
 	
