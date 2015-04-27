@@ -40,8 +40,8 @@ public class Player extends TickingGameObject{
 	}
 	
 	private void collision(){
-		for(int i=0; i<handler.getSize(); i++){
-			GameObject tempObject = handler.getObject(i);
+		for(int i=0; i< Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getSize(); i++){
+			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
 			
 			if(tempObject.getId()==ID.Block){ // environment Blocks
 				

@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
 	private static int NUM_PLAYERS;
 	private Thread thread;
 	private boolean running = false;
-	private WorldHandler handler;
+	private static WorldHandler handler;
 	private Camera cam;
 	private Random r;
 	private HUD hud;
@@ -174,7 +174,9 @@ public class Game extends Canvas implements Runnable {
 		return current;
 	}
 	
-	
+	public static WorldHandler getWorldHandler() {
+		return handler;
+	}
 	
 
 }
