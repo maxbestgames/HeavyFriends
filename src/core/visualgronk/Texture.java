@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Texture {
 	
-	SpriteSheet ss;
+	SpriteSheet ss,bs,ps;
 	private BufferedImage block_sheet = null;
 	private BufferedImage player_sheet = null;
 	
