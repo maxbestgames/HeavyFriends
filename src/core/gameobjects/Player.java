@@ -71,7 +71,6 @@ public class Player extends TickingGameObject{
 			}
 				
 				//next level block collision here here
-			}
 			
 			if (tempObject instanceof Player && this.getId() != tempObject.getId()) { // this is me, player 2 is tempObject
 				
