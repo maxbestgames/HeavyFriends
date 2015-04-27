@@ -43,30 +43,32 @@ public class Player extends TickingGameObject{
 		for(int i=0; i< Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getSize(); i++){
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
 			
-			if(tempObject.getId()==ID.Block){ // environment Blocks
-				
-				if (getBoundsLeft().intersects(tempObject.getBounds())) {
-					velX = 0;
-					x = tempObject.getX() + Block.getBlockSize() + 2;
-				} else if (getBoundsRight().intersects(tempObject.getBounds())) {
-					velX = 0;
-					x = tempObject.getX() - playerWidth - 2;
-				}
-				if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
-					velY = 0;
-					y = tempObject.getY() + Block.getBlockSize() + 2;
-				}
-				if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
-					velY = 0;
-					y = tempObject.getY() - playerHeight;
-					jumping = false;
-					falling = false;
-				} else {
-					falling = true;
-				}
-				
-				
-				
+			if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				velX = 0;
+				x = tempObject.getX() + Block.getBlockSize() + 2;
+				y-=5;
+				System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+			}
+			if (getBoundsRight().intersects(tempObject.getBounds())) {
+				velX = 0;
+				x = tempObject.getX() - playerWidth - 2;
+				y-=5;
+				System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+			}
+			if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
+				velY = 0;
+				y = tempObject.getY() + Block.getBlockSize() + 2;
+				System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+			}
+			if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
+				velY = 0;
+				y = tempObject.getY() - playerHeight;
+				jumping = false;
+				falling = false;
+				System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+			} else {
+				falling = true;
+			}
 				
 				//next level block collision here here
 			}
