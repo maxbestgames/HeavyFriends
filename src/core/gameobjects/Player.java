@@ -15,8 +15,8 @@ import core.enums.ID;
 public class Player extends TickingGameObject{
 	Random r = new Random();
 	
-	private int playerWidth = 48;
-	private int playerHeight = 96;
+	private int playerWidth = 32;
+	private int playerHeight = 64;
 	private float gravity = 0.9f;
 	
 	private boolean drawHitBoxes = true;
@@ -127,11 +127,11 @@ public class Player extends TickingGameObject{
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) x+5, (int) y, playerWidth-10, playerHeight/2);
+		return new Rectangle((int) x+5, (int) y, playerWidth-10, 2);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) x+5, (int) y + playerHeight/2, playerWidth-10, playerHeight/2);
+		return new Rectangle((int) x+5, (int) y + playerHeight-2, playerWidth-10, 2);
 	}
 	
 	public Rectangle getBounds() {

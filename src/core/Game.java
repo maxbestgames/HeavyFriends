@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable {
 		//NUM_PLAYERS++;
 		
 		current = LevelID.TestRealm;
-		TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
+		//TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
 		
 		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png"));
 		
@@ -73,7 +73,7 @@ public class Game extends Canvas implements Runnable {
 	public void run(){
 		this.requestFocus();
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 40.0;
+		double amountOfTicks = 60.0;
 		double timePerTick = 1000000000/amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
