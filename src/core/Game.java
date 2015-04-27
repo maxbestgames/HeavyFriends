@@ -59,9 +59,10 @@ public class Game extends Canvas implements Runnable {
 		//handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );
 		//NUM_PLAYERS++;
 		
-		TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
 		current = LevelID.TestRealm;
-		handler.addLevel(level1);
+		TestRealm level1 = new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png");
+		
+		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png"));
 		
 		
 		new Window(WIDTH, HEIGHT,"Test game", this);
