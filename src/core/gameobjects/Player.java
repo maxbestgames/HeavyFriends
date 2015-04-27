@@ -45,25 +45,34 @@ public class Player extends TickingGameObject{
 			
 			if(tempObject.getId()==ID.Block){ // environment Blocks
 				
-				/*if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				if (getBoundsLeft().intersects(tempObject.getBounds())) {
 					velX = 0;
 					x = tempObject.getX() + Block.getBlockSize() + 2;
-				} else if (getBoundsRight().intersects(tempObject.getBounds())) {
+					y-=5;
+					System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+				}
+				if (getBoundsRight().intersects(tempObject.getBounds())) {
 					velX = 0;
 					x = tempObject.getX() - playerWidth - 2;
-				}*/
+					y-=5;
+					System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
+				}
 				if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
 					velY = 0;
 					y = tempObject.getY() + Block.getBlockSize() + 2;
+					System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}
 				if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 					velY = 0;
 					y = tempObject.getY() - playerHeight;
 					jumping = false;
 					falling = false;
+					System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				} else {
 					falling = true;
 				}
+				
+				
 				
 				
 				
@@ -126,11 +135,11 @@ public class Player extends TickingGameObject{
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) x+5, (int) y, playerWidth-10, playerHeight/2);
+		return new Rectangle((int) x+5, (int) y, playerWidth-10, 2);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) x+5, (int) y + playerHeight/2, playerWidth-10, playerHeight/2);
+		return new Rectangle((int) x+5, (int) y + playerHeight-2, playerWidth-10, 2);
 	}
 	
 	public Rectangle getBounds() {
