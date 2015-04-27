@@ -33,4 +33,8 @@ public class PlayerHandler {
 	public Player getPlayer(int i) {
 		return (Player) playerList.getObject(i);
 	}
+	
+	public ObjectHandler getObjectHandler() {
+		return playerList;
+	}
 }

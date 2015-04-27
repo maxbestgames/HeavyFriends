@@ -8,13 +8,12 @@ import java.util.Random;
 
 import core.Game;
 import core.Window;
-import core.handlers.Handler;
+import core.handlers.ObjectHandler;
 import core.enums.ID;
 
 
 public class Player extends TickingGameObject{
 	Random r = new Random();
-	private Handler handler;
 	
 	private int playerWidth = 32;
 	private int playerHeight = 64;
@@ -22,9 +21,8 @@ public class Player extends TickingGameObject{
 	
 	private boolean drawHitBoxes = false;
 	
-	public Player(int x, int y, ID id, Handler handler) {
+	public Player(int x, int y, ID id) {
 		super(x, y, id);
-		this.handler = handler;
 		falling = true;
 	}
 

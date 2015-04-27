@@ -14,11 +14,12 @@ import core.enums.LevelID;
 import core.gameobjects.Player;
 import core.handlers.WorldHandler;
 import core.levels.Spawner;
+import core.levels.TestRealm;
 
 
 public class Game extends Canvas implements Runnable {
 	
-	static int WIDTH, HEIGHT;
+	public static int WIDTH, HEIGHT;
 	private static int NUM_PLAYERS;
 	private Thread thread;
 	private boolean running = false;
@@ -47,19 +48,20 @@ public class Game extends Canvas implements Runnable {
 		keyInput = new KeyInput(handler);
 		this.addKeyListener(keyInput);
 		
+		//TODO make spawners work
+		handler.addPlayer( new Player(WIDTH/2, HEIGHT/2, ID.Player ) );
+		//handler.addPlayer(new Player(WIDTH/2, HEIGHT/2, ID.Player, ));
+		NUM_PLAYERS++;
+		handler.addPlayer( new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2 ) );
+		NUM_PLAYERS++;
+		
+		TestRealm level1 = new TestRealm(LevelID.TestRealm);
+		current = LevelID.TestRealm;
+		handler.addLevel(level1);
+		
+		
 		new Window(WIDTH, HEIGHT,"Test game", this);
 		hud = new HUD(handler);
-		spawner = new Spawner(handler, hud);
-		
-		r = new Random();
-		
-		//TODO make spawners work
-		//handler.createLevel();
-		
-		handler.addObject(new Player(WIDTH/2, HEIGHT/2, ID.Player, handler));
-		NUM_PLAYERS++;
-		handler.addObject(new Player(WIDTH/2+50, HEIGHT/2+46, ID.Player2, handler));
-		NUM_PLAYERS++;
 		
 	}
 	

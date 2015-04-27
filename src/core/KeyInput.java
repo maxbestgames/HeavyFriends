@@ -103,7 +103,7 @@ public class KeyInput extends KeyAdapter{
 				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);
 
 			}
-			if(tempPlayer.getId()==ID.Player2){
+			if (tempPlayer.getId()==ID.Player2){
 				// player2 keys
 				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
 					//tempObject.setVelY( 0 );
@@ -122,11 +122,13 @@ public class KeyInput extends KeyAdapter{
 				if(!keyDown[4] && !keyDown[5]) tempPlayer.setVelX(0);
 
 			}
-			for (int j = 0; j < handler.getLevel( Game.getCurrentLevel() ).getNumObjects(); j++) {
+			
+			//object controls - not in use yet
+			/*for (int j = 0; j < handler.getLevel( Game.getCurrentLevel() ).getNumObjects(); j++) {
 				tempObject = handler.getLevel( Game.getCurrentLevel() ).getObjects().getObject(j);
 
 				
-			}
+			}*/
 		}
 	}
 }

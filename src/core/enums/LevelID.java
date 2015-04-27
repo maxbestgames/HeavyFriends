@@ -1,5 +1,6 @@
 package core.enums;
 
 public enum LevelID {
-	TestRealm();
+	TestRealm(),
+	Other();
 }

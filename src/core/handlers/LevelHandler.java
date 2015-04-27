@@ -19,20 +19,27 @@ public class LevelHandler {
 		levelList.remove(l);
 	}
 	
-	//TODO
-	public void doSomething(){
-		for(int i = 0; i<levelList.size(); i++){
-			LevelSpawner tempLevel = (LevelSpawner) levelList.get(i);
-			//The thing!
-		}
-	}
-	
 	public int getNumLevels() {
 		return levelList.size();
 	}
 	
 	public LevelSpawner getLevel(int index) {
 		return levelList.get(index);
+	}
+	
+	public LevelSpawner getLevel(LevelID lId) {
+		LevelSpawner tempLevel;
+		for(int i = 0; i<levelList.size(); i++){
+			tempLevel = (LevelSpawner) levelList.get(i);
+			if (tempLevel.getId() == lId) {
+				return tempLevel;
+			}
+		}
+		return null;
+	}
+	
+	public void addLevel(LevelID lId) {
+		//levelList.add(new LevelSpawner())
 	}
 
 }

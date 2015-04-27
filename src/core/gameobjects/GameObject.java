@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import core.enums.ID;
+import core.handlers.ObjectHandler;
 
 
 public abstract class GameObject {
@@ -12,13 +13,22 @@ public abstract class GameObject {
 	protected float velX,velY;
 	protected boolean falling;
 	protected boolean jumping;
+	protected ObjectHandler handler;
 	
-	public GameObject(float x,float y,ID id){
+	public GameObject(float x, float y, ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
-		
+		handler = new ObjectHandler();
 	}
+	
+	public GameObject(float x, float y, ID id, ObjectHandler handler) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		this.handler = handler;
+	}
+	
 	public abstract void render(Graphics g);
 	public abstract Rectangle getBounds();
 	

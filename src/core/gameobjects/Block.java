@@ -4,18 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import core.handlers.Handler;
+import core.handlers.ObjectHandler;
 import core.enums.ID;
 
 
 public class Block extends GameObject{
 	
-	private Handler handler;
+	private ObjectHandler handler;
 	protected static int blockSize = 32;
 	
-	public Block(int x, int y, ID id, Handler handler) {
-		super(x, y, id);
-		this.handler = handler;
+	public Block(int x, int y, ID id, ObjectHandler handler) {
+		super(x, y, id, handler);
 	}
 
 	public void render(Graphics g) {

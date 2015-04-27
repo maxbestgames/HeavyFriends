@@ -4,17 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-import core.handlers.Handler;
+import core.handlers.WorldHandler;
 
 
 public class HUD {
 	
 	public static int[] HEALTH;
-	private final int MAX_PLAYERS = 4;
+	private final int MAX_PLAYERS = 2;
 	Random r = new Random();
-	Handler handler;
+	WorldHandler handler;
 	
-	public HUD(Handler handler) {
+	public HUD(WorldHandler handler) {
 		this.handler = handler;
 		
 		HEALTH = new int[MAX_PLAYERS];
@@ -26,7 +26,7 @@ public class HUD {
 	
 	public void tick() {
 		
-		for (int i=0; i < Game.getNumPlayers(); i++) {
+		for (int i=0; i < handler.getNumPlayers() && i < MAX_PLAYERS; i++) {
 			Game.clamp(HEALTH[i], 0, 100);
 			
 		}
@@ -34,7 +34,7 @@ public class HUD {
 	
 	public void render(Graphics g) {
 		
-		for (int i=0; i < Game.getNumPlayers(); i++) {
+		for (int i=0; i < handler.getNumPlayers() && i< MAX_PLAYERS; i++) {
 			if (HEALTH[i] == 0) {
 				g.setColor(Color.BLACK);
 				g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
@@ -42,7 +42,7 @@ public class HUD {
 		}
 		
 		drawPlayerHUD(g, 0, 15, 15); //player hud
-		if (Game.getNumPlayers()>1) //player2 hud
+		if (handler.getNumPlayers()>1) //player2 hud
 			drawPlayerHUD(g, 1, (Window.visibleScreenX-204-15), 15);
 		
 	}

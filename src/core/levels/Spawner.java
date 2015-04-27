@@ -1,19 +1,19 @@
 package core.levels;
 
-import core.handlers.Handler;
+import core.handlers.WorldHandler;
 import core.HUD;
 
 public class Spawner {
 	
-	protected Handler handler;
+	protected WorldHandler handler;
 	protected HUD hud;
 	
-	public Spawner(Handler handler, HUD hud){
+	public Spawner(WorldHandler handler, HUD hud){
 		this.handler = handler;
 		this.hud = hud;
 	}
 	
-	public void tick(){
+	public void tick() {
 		
 	}
 }

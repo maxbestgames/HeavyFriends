@@ -1,6 +1,10 @@
 package core.handlers;
 
+import java.awt.Graphics;
+
+import core.Game;
 import core.enums.LevelID;
+import core.gameobjects.GameObject;
 import core.gameobjects.Player;
 import core.levels.LevelSpawner;
 
@@ -19,6 +23,10 @@ public class WorldHandler {
 	
 	public void addLevel(LevelSpawner level) {
 		levels.addObject(level);
+	}
+	
+	public void createLevel(LevelSpawner level) {
+		// TODO levels.
 	}
 	
 	public void removeLevel(LevelSpawner level) {
@@ -50,6 +58,20 @@ public class WorldHandler {
 	
 	public int getNumLevels() {
 		return levels.getNumLevels();
+	}
+	
+	public void tick() {
+		levels.getLevel( Game.getCurrentLevel() ).getObjHandler().tick();
+		for (int i = 0; i < players.getSize(); i++) {
+			players.getPlayer(i).tick();
+		}
+	}
+	
+	public void render(Graphics g) {
+		levels.getLevel( Game.getCurrentLevel() ).getObjHandler().render(g);
+		for (int i = 0; i < players.getSize(); i++) {
+			players.getPlayer(i).render(g);
+		}
 	}
 	
 	

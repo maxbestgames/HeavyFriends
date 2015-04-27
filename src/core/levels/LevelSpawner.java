@@ -4,28 +4,25 @@ import core.HUD;
 import core.enums.LevelID;
 import core.handlers.LevelHandler;
 import core.handlers.ObjectHandler;
+import core.handlers.WorldHandler;
 
 public abstract class LevelSpawner {
 
-	ObjectHandler handler;
-	HUD hud;
 	LevelID lId;
+	ObjectHandler handler;
 	
-	public LevelSpawner(ObjectHandler handler, HUD hud, LevelID lId) {
-		this.handler = handler;
-		this.hud = hud;
+	public LevelSpawner(LevelID lId) {
 		this.lId = lId;
+		handler = new ObjectHandler();
 	}
-	
-	public abstract void createLevel();
-	public abstract ObjectHandler getObjects();
 	
 	public LevelID getId() {
 		return lId;
 	}
 	
-	public int getNumObjects() {
-		return handler.getSize();
+	public ObjectHandler getObjHandler() {
+		return handler;
 	}
 	
+	public abstract void createLevel();
 }
