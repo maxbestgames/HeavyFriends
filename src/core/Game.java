@@ -59,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 		NUM_PLAYERS++;
 		
 		
-		new Window(WIDTH, HEIGHT,"Heavy Friends", this);
+		new Window(WIDTH, HEIGHT,"Test game", this);
 		hud = new HUD(handler);
 		
 	}
@@ -106,7 +106,6 @@ public class Game extends Canvas implements Runnable {
 		hud.tick();
 		
 		keyInput.update();
-		handler.getPlayers().getPlayer(ID.Player).doPlayerCollision();
 		
 	}
 	

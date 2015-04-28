@@ -17,7 +17,7 @@ public class Texture {
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try{
-			block_sheet = loader.loadImage(path);
+			block_sheet = loader.loadImage("assets/texture/blakcl.png");
 			//player_sheet = loader.loadImage("/file location");
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -22,11 +22,9 @@ public class Block extends GameObject{
 	private BlockType type;
 
 	
-	public Block(int x, int y, ID id, BlockType type) {
-		super(x, y, id);
+	public Block(int x, int y, ID id, BlockType type, String texPath) {
+		super(x, y, id,texPath);
 		this.type = type;
-		tex = new Texture("assets/texture/blakcl.png");
-		tex.getTextures(0, 0, 32, 32);
 	}
 
 	public void render(Graphics g) {
@@ -34,7 +32,7 @@ public class Block extends GameObject{
 			g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 			g.fillRect((int) x, (int) y, blockSize, blockSize);
 		} else {
-			g.setColor(Color.WHITE);
+			g.setColor(Color.BLUE);
 			g.drawRect((int) x, (int) y, blockSize, blockSize);
 		}
 		if(drawTexture && type == BlockType.Dirt) {
