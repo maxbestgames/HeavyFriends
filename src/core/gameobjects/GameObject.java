@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import core.enums.ID;
 import core.handlers.ObjectHandler;
+import core.visualgronk.Texture;
 
 
 public abstract class GameObject {
@@ -14,6 +15,7 @@ public abstract class GameObject {
 	protected boolean falling;
 	protected boolean jumping;
 	protected ObjectHandler handler;
+	protected Texture tex;
 	
 	public GameObject(float x, float y, ID id) {
 		this.x = x;
@@ -22,11 +24,27 @@ public abstract class GameObject {
 		handler = new ObjectHandler();
 	}
 	
+	public GameObject(float x, float y, ID id, String texPath) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		handler = new ObjectHandler();
+		tex = new Texture(texPath);
+	}
+	
 	public GameObject(float x, float y, ID id, ObjectHandler handler) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
 		this.handler = handler;
+	}
+	
+	public GameObject(float x, float y, ID id, ObjectHandler handler, String texPath) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		this.handler = handler;
+		tex = new Texture(texPath);
 	}
 	
 	public abstract void render(Graphics g);

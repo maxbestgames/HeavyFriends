@@ -62,7 +62,6 @@ public class KeyInput extends KeyAdapter{
 				}
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
 
-
 			}
 			if(tempPlayer.getId()==ID.Player2){
 				// player2 keys

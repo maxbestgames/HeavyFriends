@@ -8,6 +8,8 @@ import java.util.Random;
 
 import core.Game;
 import core.enums.ID;
+import core.visualgronk.LevelLoader;
+import core.visualgronk.Texture;
 
 
 public class Player extends TickingGameObject{
@@ -18,6 +20,8 @@ public class Player extends TickingGameObject{
 	private float gravity = 0.9f;
 	
 	private boolean drawHitBoxes = true;
+	
+	Texture tex = LevelLoader.getInstance();
 	
 	public Player(int x, int y, ID id) {
 		super(x, y, id);

@@ -27,6 +27,7 @@ public class HUD {
 	public void tick() {
 		
 		for (int i=0; i < handler.getNumPlayers() && i < MAX_PLAYERS; i++) {
+
 			Game.clamp(HEALTH[i], 0, 100);
 			
 		}
