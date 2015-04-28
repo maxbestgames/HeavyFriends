@@ -69,6 +69,10 @@ public class WorldHandler {
 		}
 	}
 	
+	public ObjectHandler getCurrentLevelObjectHandler() {
+		return levels.getLevel( Game.getCurrentLevel() ).getObjHandler();
+	}
+	
 	
 	// players and our level handlers will be in this list.
 	// level handlers will tick their objects themselves if that level is the current level

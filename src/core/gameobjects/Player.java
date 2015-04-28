@@ -7,7 +7,9 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import core.Game;
+import core.enums.BlockType;
 import core.enums.ID;
+import core.enums.PlayerState;
 import core.visualgronk.LevelLoader;
 import core.visualgronk.Texture;
 
@@ -19,30 +21,41 @@ public class Player extends TickingGameObject{
 	private int playerHeight = 64;
 	private float gravity = 0.9f;
 	
-	private boolean drawHitBoxes = true;
+	Texture tex;
 	
-	Texture tex = LevelLoader.getInstance();
+	private PlayerState currentPlayerState;
+	
+	private boolean drawHitBoxes = true;
+	private boolean drawTextures = false;
+	
+	
 	
 	public Player(int x, int y, ID id) {
 		super(x, y, id);
-		falling = true;
+		currentPlayerState = PlayerState.Falling;
+		tex = new Texture("assets/spritemaps/coolguy.png");
+		tex.getTextures(0, 0, 32, 32);
 	}
 
 	public void tick() {
 		x += velX;
 		y += velY;
 		
-		if(falling || jumping) {
+		System.out.println(currentPlayerState.toString());
+		
+		//if(currentPlayerState == PlayerState.Falling || currentPlayerState == PlayerState.Jumping) {
 			velY += gravity;
-		}
+		//}
+		
 		velX = Game.clamp(velX, -20, 20);
 		velY = Game.clamp(velY, -20, 20);
 		
-		collision();
 	}
 	
-	private void collision(){
-		for(int i=0; i< Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getSize(); i++){
+	public void doPlayerCollision() {
+		boolean intersectBottom = false;
+		
+		for(int i=0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++){
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
 			
 			
@@ -66,17 +79,16 @@ public class Player extends TickingGameObject{
 				}
 				if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 					velY = 0;
-					y = tempObject.getY() - playerHeight+1;
-					jumping = false;
-					falling = false;
+					y = tempObject.getY() - playerHeight;
+					setState(PlayerState.Standing);
+					intersectBottom = true;
 					//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
-				} else {
-					falling = true;
-				}
+				} 
+				
 
 				//next level block collision here here
 
-				if (tempObject instanceof Player && this.getId() != tempObject.getId()) { // this is me, player 2 is tempObject
+				if (this.getId() != tempObject.getId() && tempObject instanceof Player) { // this is me, player 2 is tempObject
 
 					Player player2 = (Player) tempObject;
 
@@ -88,12 +100,20 @@ public class Player extends TickingGameObject{
 					}
 					if ( getBoundsBottom().intersects( player2.getBounds() ) ) { // player 2 is under player 1
 						this.setY( (float) (player2.getY()-player2.getBounds().getHeight()-2) );
-						this.setJumping(false);
+						setState(PlayerState.Standing);
 					}
 					if ( getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
-						this.setJumping(true);
+						setState(PlayerState.Jumping);
 					}
 				}
+			}
+		}
+		
+		if ( !intersectBottom )  {
+			if (velY > 0) {
+				setState(PlayerState.Falling);
+			} else if (velY < 0) {
+				setState(PlayerState.Jumping);
 			}
 		}
 	}
@@ -113,6 +133,11 @@ public class Player extends TickingGameObject{
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.RED);
+		
+		if(drawTextures) {
+			g.drawImage(tex.block[0], (int) x, (int) y, null);
+			
+		}
 		
 		if (drawHitBoxes) {
 			g2d.draw(getBoundsTop());
@@ -142,5 +167,30 @@ public class Player extends TickingGameObject{
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, playerWidth, playerHeight);
 	}
+	
+	public PlayerState getState() {
+		return currentPlayerState;
+	}
+	
+	public void setState(PlayerState state) {
+		currentPlayerState = state;
+	}
+	
+	public boolean isJumping() {
+		return (currentPlayerState == PlayerState.Jumping);
+	}
+	
+	public boolean isFalling() {
+		return (currentPlayerState == PlayerState.Falling);
+	}
+	
+	public boolean isJumpAllowed() {
+
+		if (currentPlayerState == PlayerState.Jumping) return false;
+		if (currentPlayerState == PlayerState.Falling) return false;
+		
+		return true;
+	}
+	
 
 }
