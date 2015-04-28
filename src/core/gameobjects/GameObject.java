@@ -30,21 +30,7 @@ public abstract class GameObject {
 		this.id = id;
 		handler = new ObjectHandler();
 		tex = new Texture(texPath);
-	}
-	
-	public GameObject(float x, float y, ID id, ObjectHandler handler) {
-		this.x = x;
-		this.y = y;
-		this.id = id;
-		this.handler = handler;
-	}
-	
-	public GameObject(float x, float y, ID id, ObjectHandler handler, String texPath) {
-		this.x = x;
-		this.y = y;
-		this.id = id;
-		this.handler = handler;
-		tex = new Texture(texPath);
+		tex.getTextures(0, 0, 32, 32);
 	}
 	
 	public abstract void render(Graphics g);

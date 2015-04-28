@@ -22,10 +22,9 @@ public class Block extends GameObject{
 	private BlockType type;
 
 	
-	public Block(int x, int y, ID id, ObjectHandler handler, BlockType type, String texPath) {
-		super(x, y, id, handler, texPath);
+	public Block(int x, int y, ID id, BlockType type, String texPath) {
+		super(x, y, id,texPath);
 		this.type = type;
-		tex.getTextures(0, 0, 32, 32);
 	}
 
 	public void render(Graphics g) {
