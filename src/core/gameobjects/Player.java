@@ -8,6 +8,7 @@ import java.util.Random;
 
 import core.Game;
 import core.enums.ID;
+import core.enums.PlayerState;
 import core.visualgronk.LevelLoader;
 import core.visualgronk.Texture;
 
@@ -19,22 +20,26 @@ public class Player extends TickingGameObject{
 	private int playerHeight = 64;
 	private float gravity = 0.9f;
 	
+	private PlayerState currentPlayerState;
+	
 	private boolean drawHitBoxes = true;
 	
-	Texture tex = LevelLoader.getInstance();
+	
+	//Texture tex = LevelLoader.getInstance();
 	
 	public Player(int x, int y, ID id) {
 		super(x, y, id);
-		falling = true;
+		currentPlayerState = PlayerState.Falling;
 	}
 
 	public void tick() {
 		x += velX;
 		y += velY;
 		
-		if(falling || jumping) {
+		if(currentPlayerState == PlayerState.Falling || currentPlayerState == PlayerState.Jumping) {
 			velY += gravity;
 		}
+		
 		velX = Game.clamp(velX, -20, 20);
 		velY = Game.clamp(velY, -20, 20);
 		
@@ -67,11 +72,10 @@ public class Player extends TickingGameObject{
 				if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 					velY = 0;
 					y = tempObject.getY() - playerHeight+1;
-					jumping = false;
-					falling = false;
+					setPlayerState(PlayerState.Standing);
 					//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				} else {
-					falling = true;
+					setPlayerState(PlayerState.Falling);
 				}
 
 				//next level block collision here here
@@ -88,10 +92,10 @@ public class Player extends TickingGameObject{
 					}
 					if ( getBoundsBottom().intersects( player2.getBounds() ) ) { // player 2 is under player 1
 						this.setY( (float) (player2.getY()-player2.getBounds().getHeight()-2) );
-						this.setJumping(false);
+						setPlayerState(PlayerState.Standing);
 					}
 					if ( getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
-						this.setJumping(true);
+						setPlayerState(PlayerState.Jumping);
 					}
 				}
 			}
@@ -142,5 +146,22 @@ public class Player extends TickingGameObject{
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, playerWidth, playerHeight);
 	}
+	
+	public PlayerState getPlayerState() {
+		return currentPlayerState;
+	}
+	
+	public void setPlayerState(PlayerState state) {
+		currentPlayerState = state;
+	}
+	
+	public boolean isJumping() {
+		return (currentPlayerState == PlayerState.Jumping);
+	}
+	
+	public boolean isFalling() {
+		return (currentPlayerState == PlayerState.Falling);
+	}
+	
 
 }

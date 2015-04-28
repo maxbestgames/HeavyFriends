@@ -12,8 +12,6 @@ public abstract class GameObject {
 	protected float x,y; //pos on screen
 	protected ID id;
 	protected float velX,velY;
-	protected boolean falling;
-	protected boolean jumping;
 	protected ObjectHandler handler;
 	protected Texture tex;
 	
@@ -76,22 +74,6 @@ public abstract class GameObject {
 		this.velY = velY;
 	}
 
-	public boolean isFalling() {
-		return falling;
-	}
-
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-
-	public boolean isJumping() {
-		return jumping;
-	}
-
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
-	}
-
 	public ObjectHandler getHandler() {
 		return handler;
 	}
@@ -99,7 +81,6 @@ public abstract class GameObject {
 	public void setHandler(ObjectHandler handler) {
 		this.handler = handler;
 	}
-	
 	
 	
 }
