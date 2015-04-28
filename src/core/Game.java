@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable {
 	private KeyInput keyInput;
 	private static LevelID current;
 	private static int fps;
+	private static int tps;
 	
 	public static void main(String[] args) {
 		
@@ -43,6 +44,8 @@ public class Game extends Canvas implements Runnable {
 	
 	public Game() {
 		
+		r = new Random();
+		
 		handler = new WorldHandler();
 		cam = new Camera(0, 0);
 		
@@ -52,7 +55,7 @@ public class Game extends Canvas implements Runnable {
 		//TODO make spawners work
 		
 		current = LevelID.TestRealm;
-		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets\\maps\\testMap.png"));
+		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets/maps/testMap.png"));
 		NUM_PLAYERS++;
 		
 		
@@ -65,11 +68,12 @@ public class Game extends Canvas implements Runnable {
 		
 		this.requestFocus();
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 40.0;
+		double amountOfTicks = 60.0;
 		double timePerTick = 1000000000/amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
+		int ticks = 0;
 		
 		while(running){
 			long now = System.nanoTime();
@@ -77,6 +81,7 @@ public class Game extends Canvas implements Runnable {
 			lastTime = now;
 			while(delta>=1){
 				tick();
+				ticks++;
 				delta--;
 			}
 			if(running){
@@ -86,7 +91,9 @@ public class Game extends Canvas implements Runnable {
 			if(System.currentTimeMillis()-timer>1000){
 				timer+=1000;
 				fps = frames;
+				tps = ticks;
 				frames = 0;
+				ticks = 0;
 			}
 		}
 		stop();
@@ -113,6 +120,7 @@ public class Game extends Canvas implements Runnable {
 		Graphics2D g2d =(Graphics2D) g;
 		
 		g.setColor(Color.BLACK);
+		//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 		g.fillRect(0,0, WIDTH, HEIGHT);
 		
 		g2d.translate(cam.getX(), cam.getY());
@@ -172,5 +180,9 @@ public class Game extends Canvas implements Runnable {
 	
 	public static int getFPS() {
 		return fps;
+	}
+	
+	public static int getTPS() {
+		return tps;
 	}
 }
