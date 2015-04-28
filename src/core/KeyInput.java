@@ -137,7 +137,5 @@ public class KeyInput extends KeyAdapter{
 				
 			}*/
 		}
-		if (keyDown[0]) System.out.println("true");
-		else System.out.println("false");
 	}
 }

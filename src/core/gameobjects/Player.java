@@ -41,7 +41,7 @@ public class Player extends TickingGameObject{
 		x += velX;
 		y += velY;
 		
-		System.out.println(currentPlayerState.toString());
+		//System.out.println(currentPlayerState.toString());
 		
 		//if(currentPlayerState == PlayerState.Falling || currentPlayerState == PlayerState.Jumping) {
 			velY += gravity;

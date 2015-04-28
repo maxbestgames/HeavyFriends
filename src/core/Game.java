@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 	private HUD hud;
 	//private Spawner spawner;
 	private KeyInput keyInput;
-	private static LevelID current;
+	private static LevelID currentLevel;
 	private static int fps;
 	private static int tps;
 	
@@ -54,7 +54,7 @@ public class Game extends Canvas implements Runnable {
 		
 		//TODO make spawners work
 		
-		current = LevelID.TestRealm;
+		currentLevel = LevelID.TestRealm;
 		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets/maps/testMap.png"));
 		NUM_PLAYERS++;
 		
@@ -127,6 +127,7 @@ public class Game extends Canvas implements Runnable {
 		g2d.translate(cam.getX(), cam.getY());
 		handler.render(g);
 		g2d.translate(-cam.getX(), -cam.getY());
+		
 		hud.render(g);
 
 		g.dispose();
@@ -172,7 +173,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static LevelID getCurrentLevel() {
-		return current;
+		return currentLevel;
 	}
 	
 	public static WorldHandler getWorldHandler() {

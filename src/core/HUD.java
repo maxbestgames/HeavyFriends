@@ -44,7 +44,7 @@ public class HUD {
 		
 		drawPlayerHUD(g, 0, 15, 15); //player hud
 		if (handler.getNumPlayers()>1) //player2 hud
-			drawPlayerHUD(g, 1, (Window.visibleScreenX-204-15), 15);
+			drawPlayerHUD(g, 1, (Window.getVisibleScreenX()-204-15), 15);
 		
 	}
 	
@@ -59,7 +59,7 @@ public class HUD {
 		else g.setColor(Color.RED);
 		g.fillRect(x+2, y+2, HEALTH[playerNum] *2 , 10);
 		g.setColor(Color.WHITE);
-		g.drawString(""+Game.getFPS(), Window.visibleScreenX-30, 15);
-		g.drawString("" + Game.getTPS(), Window.visibleScreenX-30, 30);
+		g.drawString(""+Game.getFPS(), Window.getVisibleScreenX()-30, 15);
+		g.drawString("" + Game.getTPS(), Window.getVisibleScreenX()-30, 30);
 	}
 }

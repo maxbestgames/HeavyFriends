@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class Window extends Canvas {
 	
-	public static int visibleScreenX,visibleScreenY;
+	private static int visibleScreenX,visibleScreenY;
 	
 	public Window(int width, int height, String title, Game game) {
 		JFrame frame = new JFrame(title);
