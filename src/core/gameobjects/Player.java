@@ -99,7 +99,7 @@ public class Player extends TickingGameObject{
 		
 		if(id==ID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
-			g.setColor(Color.BLUE);
+			g.setColor(Color.GREEN);
 			g.fillRect((int) x, (int) y, playerWidth, playerHeight);
 		}
 		else if(id==ID.Player2){
