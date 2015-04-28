@@ -22,15 +22,6 @@ public abstract class GameObject {
 		handler = new ObjectHandler();
 	}
 	
-	public GameObject(float x, float y, ID id, String texPath) {
-		this.x = x;
-		this.y = y;
-		this.id = id;
-		handler = new ObjectHandler();
-		tex = new Texture(texPath);
-		tex.getTextures(0, 0, 32, 32);
-	}
-	
 	public abstract void render(Graphics g);
 	public abstract Rectangle getBounds();
 
@@ -81,6 +72,7 @@ public abstract class GameObject {
 	public void setHandler(ObjectHandler handler) {
 		this.handler = handler;
 	}
+	
 	
 	
 }

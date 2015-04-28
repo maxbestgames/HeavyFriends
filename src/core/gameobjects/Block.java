@@ -17,14 +17,16 @@ public class Block extends GameObject{
 	protected static int blockSize = 32;
 	Random r = new Random();
 	boolean drawBounds = true;
-	boolean drawTexture = false;
+	boolean drawTexture = true;
 	
 	private BlockType type;
 
 	
-	public Block(int x, int y, ID id, BlockType type, String texPath) {
-		super(x, y, id,texPath);
+	public Block(int x, int y, ID id, BlockType type) {
+		super(x, y, id);
 		this.type = type;
+		tex = new Texture("assets/texture/blakcl.png");
+		tex.getTextures(0, 0, 32, 32);
 	}
 
 	public void render(Graphics g) {
@@ -32,7 +34,7 @@ public class Block extends GameObject{
 			g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 			g.fillRect((int) x, (int) y, blockSize, blockSize);
 		} else {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.WHITE);
 			g.drawRect((int) x, (int) y, blockSize, blockSize);
 		}
 		if(drawTexture && type == BlockType.Dirt) {

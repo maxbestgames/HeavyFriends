@@ -20,7 +20,7 @@ public class Window extends Canvas {
 		visibleScreenX = (int) frame.getContentPane().getWidth();
 		visibleScreenY = (int) frame.getContentPane().getHeight();
 		
-		//frame.setAlwaysOnTop(true);
+		frame.setAlwaysOnTop(true);
 		
 		game.start();
 	}

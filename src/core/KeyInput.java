@@ -3,6 +3,7 @@ package core;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import core.handlers.ObjectHandler;
 import core.handlers.WorldHandler;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
@@ -49,8 +50,7 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 				
 				//basic movement
-				if (keyPressed[KeyEvent.VK_W] && tempPlayer.isJumpAllowed() ) {
-					tempPlayer.setPlayerState(PlayerState.Jumping);
+				if (keyPressed[KeyEvent.VK_W] && tempPlayer.getState() == PlayerState.Standing ) {
 
 					tempPlayer.setVelY( -15 );
 					keyDown[0] = true;
@@ -65,16 +65,16 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				if (keyPressed[KeyEvent.VK_S]) {
-					tempPlayer.setVelX( -5 );
-				}
+				//if (keyPressed[KeyEvent.VK_S]) {
+					//tempPlayer.setVelX( -5 );
+				//}
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
 
 			}
 			if(tempPlayer.getId()==ID.Player2){
 				// player2 keys
-				if (keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
-					tempPlayer.setPlayerState(PlayerState.Jumping);
+				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.isJumpAllowed()) {
+					tempPlayer.setState(PlayerState.Jumping);
 					tempPlayer.setVelY( -15 );
 					keyDown[3] = true;
 				}
@@ -137,5 +137,7 @@ public class KeyInput extends KeyAdapter{
 				
 			}*/
 		}
+		if (keyDown[0]) System.out.println("true");
+		else System.out.println("false");
 	}
 }
