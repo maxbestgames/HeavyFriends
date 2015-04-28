@@ -75,7 +75,8 @@ public class Player extends TickingGameObject{
 					setPlayerState(PlayerState.Standing);
 					//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				} else {
-					setPlayerState(PlayerState.Falling);
+					//TODO assess whether jumping or falling
+					//setPlayerState(PlayerState.Falling);
 				}
 
 				//next level block collision here here
@@ -161,6 +162,14 @@ public class Player extends TickingGameObject{
 	
 	public boolean isFalling() {
 		return (currentPlayerState == PlayerState.Falling);
+	}
+	
+	public boolean isJumpAllowed() {
+		boolean allowed = true;
+		if (currentPlayerState == PlayerState.Jumping) allowed = false;
+		if (currentPlayerState == PlayerState.Falling) allowed = false;
+		
+		return allowed;
 	}
 	
 

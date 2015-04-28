@@ -49,7 +49,7 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 				
 				//basic movement
-				if (keyPressed[KeyEvent.VK_W] && !tempPlayer.isJumping()) {
+				if (keyPressed[KeyEvent.VK_W] && tempPlayer.isJumpAllowed() ) {
 					tempPlayer.setPlayerState(PlayerState.Jumping);
 
 					tempPlayer.setVelY( -15 );

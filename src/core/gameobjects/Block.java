@@ -17,7 +17,7 @@ public class Block extends GameObject{
 	protected static int blockSize = 32;
 	Random r = new Random();
 	boolean drawBounds = true;
-	boolean drawTexture = true;
+	boolean drawTexture = false;
 	
 	private BlockType type;
 

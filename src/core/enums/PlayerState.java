@@ -2,9 +2,16 @@ package core.enums;
 
 public enum PlayerState {
 	Standing(),
-	Prone(),
+	StandShelling(),
+	Proning(),
+	ProneShelling(),
+	ProneFalling(),
+	ProneJumping(),
 	Crouching(),
+	CrouchShelling(),
+	CrouchFalling(),
+	CrouchJumping(),
 	Jumping(),
-	Falling();
-
+	Falling(),
+	Dead();
 }
