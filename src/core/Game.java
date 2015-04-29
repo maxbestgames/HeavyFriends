@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
+import java.io.File;
 import java.util.Random;
 
 import core.enums.ID;
@@ -55,7 +56,8 @@ public class Game extends Canvas implements Runnable {
 		//TODO make spawners work
 		
 		currentLevel = LevelID.TestRealm;
-		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets/maps/testMap.png"));
+		String levelFilePath = "assets"+File.separator+"maps"+File.separator+"testMap.png";
+		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
 		
 		
