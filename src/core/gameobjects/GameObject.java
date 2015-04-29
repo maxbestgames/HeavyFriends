@@ -14,6 +14,7 @@ public abstract class GameObject {
 	protected float velX,velY;
 	protected ObjectHandler handler;
 	protected Texture tex;
+	protected int width,height;
 	
 	public GameObject(float x, float y, ID id) {
 		this.x = x;
@@ -64,13 +65,29 @@ public abstract class GameObject {
 	public void setVelY(float velY) {
 		this.velY = velY;
 	}
-
+	
 	public ObjectHandler getHandler() {
 		return handler;
 	}
 
 	public void setHandler(ObjectHandler handler) {
 		this.handler = handler;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	
 	

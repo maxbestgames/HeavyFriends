@@ -17,8 +17,6 @@ import core.visualgronk.Texture;
 public class Player extends TickingGameObject{
 	Random r = new Random();
 	
-	private int playerWidth = 32;
-	private int playerHeight = 64;
 	private float gravity = 0.9f;
 	
 	Texture tex;
@@ -35,6 +33,9 @@ public class Player extends TickingGameObject{
 		currentPlayerState = PlayerState.Falling;
 		tex = new Texture("assets/spritemaps/coolguy.png");
 		tex.getTextures(0, 0, 32, 32);
+		
+		width = 32;
+		height = 64;
 	}
 
 	public void tick() {
@@ -59,8 +60,8 @@ public class Player extends TickingGameObject{
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
 			
 			
-			if (Math.abs(tempObject.getX() - getX()) < (playerWidth * getVelX() + 200) || 
-					Math.abs(tempObject.getY() - getY()) < (playerHeight * getVelY() + 200) ) { // are the blocks close to the player?
+			if (Math.abs(tempObject.getX() - getX()) < (width * getVelX() + 200) || 
+					Math.abs(tempObject.getY() - getY()) < (height * getVelY() + 200) ) { // are the blocks close to the player?
 				
 				if (getBoundsLeft().intersects(tempObject.getBounds())) {
 					velX = 0.4f;
@@ -69,7 +70,7 @@ public class Player extends TickingGameObject{
 				}
 				if (getBoundsRight().intersects(tempObject.getBounds())) {
 					velX = -0.4f;
-					x = tempObject.getX() - playerWidth;
+					x = tempObject.getX() - width;
 					//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}
 				if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
@@ -79,7 +80,7 @@ public class Player extends TickingGameObject{
 				}
 				if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 					velY = 0;
-					y = tempObject.getY() - playerHeight;
+					y = tempObject.getY() - height;
 					setState(PlayerState.Standing);
 					intersectBottom = true;
 					//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
@@ -124,11 +125,11 @@ public class Player extends TickingGameObject{
 		if(id==ID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			g.setColor(Color.GREEN);
-			g.fillRect((int) x, (int) y, playerWidth, playerHeight);
+			g.fillRect((int) x, (int) y, width, height);
 		}
 		else if(id==ID.Player2){
 			g.setColor(Color.YELLOW);
-			g.fillRect((int) x, (int) y, playerWidth, playerHeight);
+			g.fillRect((int) x, (int) y, width, height);
 		}
 		
 		Graphics2D g2d = (Graphics2D) g;
@@ -149,23 +150,23 @@ public class Player extends TickingGameObject{
 	}
 
 	public Rectangle getBoundsLeft() {
-		return new Rectangle((int) x, (int) y + playerHeight/2-3, 2, 6);
+		return new Rectangle((int) x, (int) y + height/2-3, 2, 6);
 	}
 	
 	public Rectangle getBoundsRight() {
-		return new Rectangle((int) x + playerWidth-2, (int) y+playerHeight/2-3, 2, 6);
+		return new Rectangle((int) x + width-2, (int) y+height/2-3, 2, 6);
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) x + playerWidth/2-3, (int) y, 6, 2);
+		return new Rectangle((int) x + width/2-3, (int) y, 6, 2);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) x + playerWidth/2-3, (int) y + playerHeight-2, 6, 2);
+		return new Rectangle((int) x + width/2-3, (int) y + height-2, 6, 2);
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int) y, playerWidth, playerHeight);
+		return new Rectangle((int) x, (int) y, width, height);
 	}
 	
 	public PlayerState getState() {
@@ -175,6 +176,9 @@ public class Player extends TickingGameObject{
 	public void setState(PlayerState state) {
 		currentPlayerState = state;
 	}
+	/*
+	 * returns players state
+	 */
 	
 	public boolean isJumping() {
 		return (currentPlayerState == PlayerState.Jumping);
@@ -184,13 +188,132 @@ public class Player extends TickingGameObject{
 		return (currentPlayerState == PlayerState.Falling);
 	}
 	
-	public boolean isJumpAllowed() {
-
-		if (currentPlayerState == PlayerState.Jumping) return false;
-		if (currentPlayerState == PlayerState.Falling) return false;
-		
-		return true;
+	public boolean isStanding() {
+		return (currentPlayerState == PlayerState.Standing);
 	}
+	
+	public boolean isProning() {
+		return (currentPlayerState == PlayerState.Proning);
+	}
+	
+	public boolean isCrouching() {
+		return (currentPlayerState == PlayerState.Crouching);
+	}
+	
+	public boolean isProneFalling() {
+		return (currentPlayerState == PlayerState.ProneFalling);
+	}
+	
+	public boolean isCrouchFalling() {
+		return (currentPlayerState == PlayerState.CrouchFalling);
+	}
+	
+	public boolean isProneJumping() { 
+		return (currentPlayerState == PlayerState.ProneJumping);
+	}
+	
+	public boolean isCrouchJumping() {
+		return (currentPlayerState == PlayerState.CrouchJumping);
+	}
+	
+	public boolean isProneShelling() {
+		return (currentPlayerState == PlayerState.ProneShelling);
+	}
+	
+	public boolean isCrouchShelling() {
+		return (currentPlayerState == PlayerState.CrouchShelling);
+	}
+	
+	public boolean isStandShelling() {
+		 return (currentPlayerState == PlayerState.StandShelling);
+	}
+
+	public boolean isJumpingAllowed() {
+
+		if (currentPlayerState == PlayerState.Standing) return true;
+		if (currentPlayerState == PlayerState.CrouchJumping) return true;
+		if (currentPlayerState == PlayerState.ProneJumping) return true;
+		return false;
+	}
+	/*
+	 * is state allowed
+	 */
+	public boolean isStandingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Falling) return true;
+		if (currentPlayerState == PlayerState.Crouching) return true;
+		if (currentPlayerState == PlayerState.Proning) return true;
+		if (currentPlayerState == PlayerState.StandShelling) return true;
+		if (currentPlayerState == PlayerState.Jumping) return true;
+		return false;
+		
+	}
+	
+	public boolean isFallingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Jumping) return true;
+		if (currentPlayerState == PlayerState.Standing) return true;
+		if (currentPlayerState == PlayerState.ProneFalling) return true;
+		if (currentPlayerState == PlayerState.CrouchFalling) return true;
+		return false;
+		
+	}
+	
+	public boolean isCrouchingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Standing) return true;
+		if (currentPlayerState == PlayerState.CrouchFalling) return true;
+		if (currentPlayerState == PlayerState.Proning) return true;
+		if (currentPlayerState == PlayerState.CrouchShelling) return true;
+		if (currentPlayerState == PlayerState.CrouchJumping) return true;
+		return false;
+
+	}
+	
+	public boolean isProningAllowed() {
+		
+		if (currentPlayerState == PlayerState.Standing) return true;
+		if (currentPlayerState == PlayerState.ProneFalling) return true;
+		if (currentPlayerState == PlayerState.ProneShelling) return true;
+		if (currentPlayerState == PlayerState.Crouching) return true;
+		return false;
+
+	}
+	
+	public boolean isProneFallingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Falling) return true;
+		if (currentPlayerState == PlayerState.CrouchFalling) return true;
+		return false;
+				
+	}
+	
+	public boolean isCrouchFallingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Falling) return true;
+		if (currentPlayerState == PlayerState.ProneFalling) return true;
+		return false;
+	}
+	
+	public boolean isProneJumpingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Jumping) return true;
+		if (currentPlayerState == PlayerState.CrouchJumping) return true;
+		return false;
+		
+	}
+	
+	public boolean isCrouchJumpingAllowed() {
+		
+		if (currentPlayerState == PlayerState.Jumping) return true;
+		if (currentPlayerState == PlayerState.ProneJumping) return true;
+		return false;
+		
+	}
+
+	//public boolean isProneAllowed() {
+		
+	//}
 	
 
 }

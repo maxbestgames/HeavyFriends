@@ -65,15 +65,14 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				//if (keyPressed[KeyEvent.VK_S]) {
-					//tempPlayer.setVelX( -5 );
-				//}
-				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
+				if (keyPressed[KeyEvent.VK_S]) {
+					tempPlayer.setWidth(64);
+					//tempPlayer.set
 
 			}
 			if(tempPlayer.getId()==ID.Player2){
 				// player2 keys
-				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.isJumpAllowed()) {
+				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.isJumpingAllowed()) {
 					tempPlayer.setState(PlayerState.Jumping);
 					tempPlayer.setVelY( -15 );
 					keyDown[3] = true;
@@ -139,3 +138,5 @@ public class KeyInput extends KeyAdapter{
 		}
 	}
 }
+}
+
