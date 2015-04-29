@@ -1,7 +1,9 @@
 package core.gameobjects;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.File;
 import java.util.Random;
@@ -32,6 +34,7 @@ public class Block extends GameObject{
 	}
 
 	public void render(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
 		if (!drawBounds) {
 			g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 			g.fillRect((int) x, (int) y, blockSize, blockSize);
@@ -40,7 +43,12 @@ public class Block extends GameObject{
 			g.drawRect((int) x, (int) y, blockSize, blockSize);
 		}
 		if(drawTexture && type == BlockType.Dirt) {
-			g.drawImage(tex.block[0], (int) x, (int) y, null);
+			
+			g2d.setColor(new Color(0, 0, 0, 0));
+			g2d.setComposite(AlphaComposite.Src);
+			g2d.drawImage(tex.block[0], (int) x, (int) y, null);
+			//g2d.setComposite(AlphaComposite.Src);
+			g2d.setColor(Color.WHITE);
 			
 		}
 		

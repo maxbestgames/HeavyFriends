@@ -51,6 +51,7 @@ public class Game extends Canvas implements Runnable {
 		cam = new Camera(0, 0);
 		
 		keyInput = new KeyInput(handler);
+	
 		this.addKeyListener(keyInput);
 		
 		//TODO make spawners work

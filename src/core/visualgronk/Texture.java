@@ -26,10 +26,16 @@ public class Texture {
 		bs = new SpriteSheet(block_sheet);
 		//ps = new SpriteSheet(player_sheet);
 		
+		fixAlpha();
+		
 	}
 	
 	public void getTextures(int row, int col, int width, int height) {
 		block[0] = bs.grabImage(row, col, width, height);
+	}
+	
+	public void fixAlpha() {
+		
 	}
 
 }
