@@ -1,8 +1,11 @@
 package core;
 
-public class Prone (int width, int height) {
-	int tempStore = 0;
-	height = tempStore;
+public class Prone {
+	
+	public Prone(int width, int height) {
+	int tempStore = height;
+	//height = tempS
+	}
 	
 }
 

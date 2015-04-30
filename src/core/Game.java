@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable {
 		String levelFilePath = "assets"+File.separator+"maps"+File.separator+"testMap.png";
 		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
-		
+		cam.setCamCenter(handler.getPlayers().getPlayer(ID.Player));
 		
 		new Window(WIDTH, HEIGHT,"Heavy Friends", this);
 		hud = new HUD(handler);
@@ -105,7 +105,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick(){
 		
 		handler.tick();
-		cam.tick(handler.getPlayers().getPlayer(ID.Player));
+		cam.tick();
 		hud.tick();
 		
 		keyInput.update();

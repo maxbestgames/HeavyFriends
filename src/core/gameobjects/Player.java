@@ -10,6 +10,8 @@ import core.Game;
 import core.enums.BlockType;
 import core.enums.ID;
 import core.enums.PlayerState;
+import core.handlers.PlayerBoundsHandler;
+import core.handlers.PlayerMovementHandler;
 import core.visualgronk.LevelLoader;
 import core.visualgronk.Texture;
 
@@ -23,6 +25,9 @@ public class Player extends TickingGameObject{
 	
 	private PlayerState currentPlayerState;
 	
+	private PlayerBoundsHandler boundBox;
+	private PlayerMovementHandler movement;
+	
 	private boolean drawHitBoxes = true;
 	private boolean drawTextures = false;
 	
@@ -33,6 +38,9 @@ public class Player extends TickingGameObject{
 		currentPlayerState = PlayerState.Falling;
 		tex = new Texture("assets/spritemaps/coolguy.png");
 		tex.getTextures(0, 0, 32, 32);
+		
+		boundBox = new PlayerBoundsHandler(this);
+		movement = new PlayerMovementHandler(this);
 		
 		width = 32;
 		height = 64;
@@ -63,22 +71,22 @@ public class Player extends TickingGameObject{
 			if (Math.abs(tempObject.getX() - getX()) < (width * getVelX() + 200) || 
 					Math.abs(tempObject.getY() - getY()) < (height * getVelY() + 200) ) { // are the blocks close to the player?
 				
-				if (getBoundsLeft().intersects(tempObject.getBounds())) {
+				if (boundBox.getBoundsLeft().intersects(tempObject.getBounds())) {
 					velX = 0.4f;
 					x = tempObject.getX() + Block.getBlockSize();
 					//System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}
-				if (getBoundsRight().intersects(tempObject.getBounds())) {
+				if (boundBox.getBoundsRight().intersects(tempObject.getBounds())) {
 					velX = -0.4f;
 					x = tempObject.getX() - width;
 					//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}
-				if(getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
+				if(boundBox.getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
 					velY = 0;
 					y = tempObject.getY() + Block.getBlockSize() + 2;
 					//System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}
-				if(getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
+				if(boundBox.getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 					velY = 0;
 					y = tempObject.getY() - height;
 					setState(PlayerState.Standing);
@@ -93,17 +101,17 @@ public class Player extends TickingGameObject{
 
 					Player player2 = (Player) tempObject;
 
-					if ( getBoundsLeft().intersects( player2.getBoundsRight() ) ) { // player 2 is on the left of player 1
+					if ( boundBox.getBoundsLeft().intersects( player2.boundBox.getBoundsRight() ) ) { // player 2 is on the left of player 1
 						this.setX( (float) (player2.getX()+player2.getBounds().getWidth()+2) );
 					}
-					else if ( getBoundsRight().intersects( player2.getBoundsLeft() ) ) { // player 2 is on the right of player 1
+					else if ( boundBox.getBoundsRight().intersects( player2.boundBox.getBoundsLeft() ) ) { // player 2 is on the right of player 1
 						this.setX( (float) (player2.getX() - player2.getBounds().getWidth() - 2 ));
 					}
-					if ( getBoundsBottom().intersects( player2.getBounds() ) ) { // player 2 is under player 1
+					if ( boundBox.getBoundsBottom().intersects( player2.getBounds() ) ) { // player 2 is under player 1
 						this.setY( (float) (player2.getY()-player2.getBounds().getHeight()-2) );
 						setState(PlayerState.Standing);
 					}
-					if ( getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
+					if ( boundBox.getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
 						setState(PlayerState.Jumping);
 					}
 				}
@@ -141,33 +149,15 @@ public class Player extends TickingGameObject{
 		}
 		
 		if (drawHitBoxes) {
-			g2d.draw(getBoundsTop());
-			g2d.draw(getBoundsBottom());
-			g2d.draw(getBoundsLeft());
-			g2d.draw(getBoundsRight());
-			g2d.draw(getBounds());
+			g2d.draw(boundBox.getBoundsTop());
+			g2d.draw(boundBox.getBoundsBottom());
+			g2d.draw(boundBox.getBoundsLeft());
+			g2d.draw(boundBox.getBoundsRight());
+			g2d.draw(boundBox.getBounds());
 		}
 	}
 
-	public Rectangle getBoundsLeft() {
-		return new Rectangle((int) x, (int) y + height/2-3, 2, 6);
-	}
 	
-	public Rectangle getBoundsRight() {
-		return new Rectangle((int) x + width-2, (int) y+height/2-3, 2, 6);
-	}
-	
-	public Rectangle getBoundsTop() {
-		return new Rectangle((int) x + width/2-3, (int) y, 6, 2);
-	}
-	
-	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) x + width/2-3, (int) y + height-2, 6, 2);
-	}
-	
-	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int) y, width, height);
-	}
 	
 	public PlayerState getState() {
 		return currentPlayerState;
@@ -179,137 +169,20 @@ public class Player extends TickingGameObject{
 	/*
 	 * returns players state
 	 */
-	
-	public boolean isJumping() {
-		return (currentPlayerState == PlayerState.Jumping);
-	}
-	
-	public boolean isFalling() {
-		return (currentPlayerState == PlayerState.Falling);
-	}
-	
-	public boolean isStanding() {
-		return (currentPlayerState == PlayerState.Standing);
-	}
-	
-	public boolean isProning() {
-		return (currentPlayerState == PlayerState.Proning);
-	}
-	
-	public boolean isCrouching() {
-		return (currentPlayerState == PlayerState.Crouching);
-	}
-	
-	public boolean isProneFalling() {
-		return (currentPlayerState == PlayerState.ProneFalling);
-	}
-	
-	public boolean isCrouchFalling() {
-		return (currentPlayerState == PlayerState.CrouchFalling);
-	}
-	
-	public boolean isProneJumping() { 
-		return (currentPlayerState == PlayerState.ProneJumping);
-	}
-	
-	public boolean isCrouchJumping() {
-		return (currentPlayerState == PlayerState.CrouchJumping);
-	}
-	
-	public boolean isProneShelling() {
-		return (currentPlayerState == PlayerState.ProneShelling);
-	}
-	
-	public boolean isCrouchShelling() {
-		return (currentPlayerState == PlayerState.CrouchShelling);
-	}
-	
-	public boolean isStandShelling() {
-		 return (currentPlayerState == PlayerState.StandShelling);
+
+	public PlayerBoundsHandler getBoundBox() {
+		return boundBox;
 	}
 
-	public boolean isJumpingAllowed() {
+	public PlayerMovementHandler getMovement() {
+		return movement;
+	}
 
-		if (currentPlayerState == PlayerState.Standing) return true;
-		if (currentPlayerState == PlayerState.CrouchJumping) return true;
-		if (currentPlayerState == PlayerState.ProneJumping) return true;
-		return false;
-	}
-	/*
-	 * is state allowed
-	 */
-	public boolean isStandingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Falling) return true;
-		if (currentPlayerState == PlayerState.Crouching) return true;
-		if (currentPlayerState == PlayerState.Proning) return true;
-		if (currentPlayerState == PlayerState.StandShelling) return true;
-		if (currentPlayerState == PlayerState.Jumping) return true;
-		return false;
-		
+	public Rectangle getBounds() {
+		return boundBox.getBounds();
 	}
 	
-	public boolean isFallingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Jumping) return true;
-		if (currentPlayerState == PlayerState.Standing) return true;
-		if (currentPlayerState == PlayerState.ProneFalling) return true;
-		if (currentPlayerState == PlayerState.CrouchFalling) return true;
-		return false;
-		
-	}
 	
-	public boolean isCrouchingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Standing) return true;
-		if (currentPlayerState == PlayerState.CrouchFalling) return true;
-		if (currentPlayerState == PlayerState.Proning) return true;
-		if (currentPlayerState == PlayerState.CrouchShelling) return true;
-		if (currentPlayerState == PlayerState.CrouchJumping) return true;
-		return false;
-
-	}
-	
-	public boolean isProningAllowed() {
-		
-		if (currentPlayerState == PlayerState.Standing) return true;
-		if (currentPlayerState == PlayerState.ProneFalling) return true;
-		if (currentPlayerState == PlayerState.ProneShelling) return true;
-		if (currentPlayerState == PlayerState.Crouching) return true;
-		return false;
-
-	}
-	
-	public boolean isProneFallingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Falling) return true;
-		if (currentPlayerState == PlayerState.CrouchFalling) return true;
-		return false;
-				
-	}
-	
-	public boolean isCrouchFallingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Falling) return true;
-		if (currentPlayerState == PlayerState.ProneFalling) return true;
-		return false;
-	}
-	
-	public boolean isProneJumpingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Jumping) return true;
-		if (currentPlayerState == PlayerState.CrouchJumping) return true;
-		return false;
-		
-	}
-	
-	public boolean isCrouchJumpingAllowed() {
-		
-		if (currentPlayerState == PlayerState.Jumping) return true;
-		if (currentPlayerState == PlayerState.ProneJumping) return true;
-		return false;
-		
-	}
 
 	//public boolean isProneAllowed() {
 		

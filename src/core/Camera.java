@@ -11,18 +11,20 @@ public class Camera {
 	private int delay, ticks;
 	private float difX, difY;
 	
+	GameObject camCenter;
+	
 	private float desiredX, desiredY;
 	
 	public Camera(float x, float y) {
 		this.x = x;
 		this.y = y;
-		maxVel = 25;
+		maxVel = 30;
 		delay = 2;
-		vel = 0.01f;
+		vel = 0.015f;
 		
 	}
 	
-	public void tick(GameObject player) {
+	public void tick() {
 		
 		/*if ( ticks < delay) {
 			ticks++;
@@ -32,8 +34,8 @@ public class Camera {
 			velY = Math.abs(y -player.getY() + Window.getVisibleScreenY()/2);
 		}*/
 		
-		desiredX = -player.getX() +  Window.getVisibleScreenX()/2;
-		desiredY = -player.getY() +  Window.getVisibleScreenY()/2;
+		desiredX = -camCenter.getX() +  Window.getVisibleScreenX()/2;
+		desiredY = -camCenter.getY() +  Window.getVisibleScreenY()/2;
 		
 		difX = Math.abs(x - desiredX);
 		difY = Math.abs(y - desiredY);
@@ -44,19 +46,24 @@ public class Camera {
 			if (x < desiredX) velX = vel * difX; //player is to the left
 		
 		} else {
-			velX = 0;
+			if (Math.abs(velX) > vel/100 ) {
+				velX = velX/2;
+			} else 
+				velX = 0;
 		}
 		
 		if (Math.abs(y- desiredY) > Window.getVisibleScreenY() * 0.2) {
-			if (y > desiredY) velY = -vel * difY * 3;// player is to the below
-			if (y < desiredY) velY = vel * difY * 3; //player is to the left
-		
+			if (y > desiredY) velY = -vel * difY * 5;// player is  below
+			if (y < desiredY) velY = vel * difY * 3; //player is above
 		} else {
-			velY = 0;
+			if (Math.abs(velY) > vel/100) {
+				velY = velY/2;
+			} else
+				velY = 0;
 		}
 		
 		Game.clamp(velX, -maxVel, maxVel);
-		Game.clamp(velY, -maxVel, maxVel);
+		//Game.clamp(velY, -maxVel, maxVel);
 		
 		x += velX;
 		y += velY;
@@ -79,6 +86,10 @@ public class Camera {
 	
 	public float getY() {
 		return y;
+	}
+	
+	public void setCamCenter(GameObject object) {
+		camCenter = object;
 	}
 	
 }

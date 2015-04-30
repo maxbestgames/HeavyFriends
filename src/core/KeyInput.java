@@ -72,7 +72,7 @@ public class KeyInput extends KeyAdapter{
 			}
 			if(tempPlayer.getId()==ID.Player2){
 				// player2 keys
-				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.isJumpingAllowed()) {
+				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.getMovement().isJumpingAllowed()) {
 					tempPlayer.setState(PlayerState.Jumping);
 					tempPlayer.setVelY( -15 );
 					keyDown[3] = true;
@@ -92,7 +92,7 @@ public class KeyInput extends KeyAdapter{
 			// key release code
 			if (tempPlayer.getId()==ID.Player) {
 				// player keys
-				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.isJumping()) {
+				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[0] = false;
 				}
@@ -111,7 +111,7 @@ public class KeyInput extends KeyAdapter{
 			}
 			if (tempPlayer.getId()==ID.Player2){
 				// player2 keys
-				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
+				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[3] = false;
 				}
