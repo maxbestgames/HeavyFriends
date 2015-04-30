@@ -10,7 +10,7 @@ import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.util.Random;
 
-import core.enums.ID;
+import core.enums.EntityID;
 import core.enums.LevelID;
 import core.handlers.WorldHandler;
 import core.levels.TestRealm;
@@ -60,7 +60,7 @@ public class Game extends Canvas implements Runnable {
 		String levelFilePath = "assets"+File.separator+"maps"+File.separator+"testMap.png";
 		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
-		cam.setCamCenter(handler.getPlayers().getPlayer(ID.Player));
+		cam.setCamCenter(handler.getPlayers().getPlayer(EntityID.Player));
 		
 		new Window(WIDTH, HEIGHT,"Heavy Friends", this);
 		hud = new HUD(handler);
@@ -109,7 +109,7 @@ public class Game extends Canvas implements Runnable {
 		hud.tick();
 		
 		keyInput.update();
-		handler.getPlayers().getPlayer(ID.Player).doPlayerCollision();
+		handler.getPlayers().getPlayer(EntityID.Player).doPlayerCollision();
 		
 	}
 	

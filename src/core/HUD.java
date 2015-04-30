@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-import core.enums.ID;
+import core.enums.EntityID;
 import core.handlers.WorldHandler;
 
 
@@ -62,6 +62,6 @@ public class HUD {
 		g.setColor(Color.WHITE);
 		g.drawString(""+Game.getFPS(), Window.getVisibleScreenX()-30, 15);
 		g.drawString("" + Game.getTPS(), Window.getVisibleScreenX()-30, 30);
-		g.drawString(Game.getWorldHandler().getPlayers().getPlayer(ID.Player).getState().toString(), Window.getVisibleScreenX()-100, 45);
+		g.drawString(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getState().toString(), Window.getVisibleScreenX()-100, 45);
 	}
 }

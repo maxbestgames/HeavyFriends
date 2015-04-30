@@ -33,4 +33,8 @@ public class PlayerBoundsHandler {
 	public Rectangle getBounds() {
 		return new Rectangle((int) player.getX(), (int) player.getY(), player.getWidth(), player.getHeight());
 	}
+	
+	public Rectangle getFallingBox() {
+		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY() + player.getHeight(), 6, 2);
+	}
 }

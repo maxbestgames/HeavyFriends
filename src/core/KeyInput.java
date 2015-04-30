@@ -3,12 +3,11 @@ package core;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import core.handlers.ObjectHandler;
-import core.handlers.WorldHandler;
+import core.enums.EntityID;
+import core.enums.PlayerState;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
-import core.enums.ID;
-import core.enums.PlayerState;
+import core.handlers.WorldHandler;
 
 public class KeyInput extends KeyAdapter{
 	
@@ -46,7 +45,7 @@ public class KeyInput extends KeyAdapter{
 			tempPlayer = handler.getPlayers().getPlayer(i); 
 			
 			// player controls
-			if (tempPlayer.getId()==ID.Player) {
+			if (tempPlayer.getId()==EntityID.Player) {
 				// player keys
 				
 				//basic movement
@@ -69,7 +68,7 @@ public class KeyInput extends KeyAdapter{
 					tempPlayer.getMovement().goProne();
 
 			}
-			if(tempPlayer.getId()==ID.Player2){
+			if(tempPlayer.getId()==EntityID.Player2){
 				// player2 keys
 				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.getMovement().isJumpingAllowed()) {
 					tempPlayer.setState(PlayerState.Jumping);
@@ -89,7 +88,7 @@ public class KeyInput extends KeyAdapter{
 			}
 
 			// key release code
-			if (tempPlayer.getId()==ID.Player) {
+			if (tempPlayer.getId()==EntityID.Player) {
 				// player keys
 				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );
@@ -114,7 +113,7 @@ public class KeyInput extends KeyAdapter{
 				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);
 
 			}
-			if (tempPlayer.getId()==ID.Player2){
+			if (tempPlayer.getId()==EntityID.Player2){
 				// player2 keys
 				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );

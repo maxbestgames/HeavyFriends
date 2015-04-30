@@ -165,5 +165,16 @@ public class PlayerMovementHandler {
 		
 	}
 	
+	public boolean isGravityEnabled() {
+
+		if (player.getState() == PlayerState.ProneFalling) return true;
+		if (player.getState() == PlayerState.ProneJumping) return true;
+		if (player.getState() == PlayerState.CrouchFalling) return true;
+		if (player.getState() == PlayerState.CrouchJumping) return true;
+		if (player.getState() == PlayerState.Jumping) return true;
+		if (player.getState() == PlayerState.Falling) return true;
+		return false;
+	}
+	
 	
 }

@@ -8,34 +8,40 @@ public class Texture {
 	private BufferedImage block_sheet = null;
 	private BufferedImage player_sheet = null;
 	
-	public BufferedImage[] block;
+	public BufferedImage[][] sprite;
 	
-	public Texture(String path) {
-		
-		block = new BufferedImage[1];
-		block[0] = null;
+	public Texture(String path, int spriteWidth, int spriteHeight) {
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try{
 			block_sheet = loader.loadImage(path);
-			//player_sheet = loader.loadImage("/file location");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		bs = new SpriteSheet(block_sheet);
-		//ps = new SpriteSheet(player_sheet);
 		
 		fixAlpha();
 		
+		getSprites(spriteWidth, spriteHeight);
 	}
 	
-	public void getTextures(int row, int col, int width, int height) {
-		block[0] = bs.grabImage(row, col, width, height);
+	public void getSprites(int width, int height) {
+		sprite = new BufferedImage[(int) (bs.getWidth()/width)][(int) (bs.getHeight()/height)];
+		
+		for (int i = 0; i < bs.getHeight()/height; i++) { //Run down image
+			for (int j = 0; j < bs.getWidth()/width; j++ ) { //run across image
+				sprite[j][i] = bs.grabImage(j, i, width, height); //TODO test to make sure that I, J are correct way around.
+			}
+		}
 	}
 	
 	public void fixAlpha() {
 		
+	}
+	
+	public BufferedImage getSprite(int row, int col) {
+		return sprite[row][col];
 	}
 
 }

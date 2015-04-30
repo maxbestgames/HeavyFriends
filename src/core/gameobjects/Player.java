@@ -7,12 +7,10 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import core.Game;
-import core.enums.BlockType;
-import core.enums.ID;
+import core.enums.EntityID;
 import core.enums.PlayerState;
 import core.handlers.PlayerBoundsHandler;
 import core.handlers.PlayerMovementHandler;
-import core.visualgronk.LevelLoader;
 import core.visualgronk.Texture;
 
 
@@ -33,11 +31,10 @@ public class Player extends TickingGameObject{
 	
 	
 	
-	public Player(int x, int y, ID id) {
+	public Player(int x, int y, EntityID id) {
 		super(x, y, id);
 		currentPlayerState = PlayerState.Falling;
-		tex = new Texture("assets/spritemaps/coolguy.png");
-		tex.getTextures(0, 0, 32, 32);
+		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
@@ -52,9 +49,9 @@ public class Player extends TickingGameObject{
 		
 		//System.out.println(currentPlayerState.toString());
 		
-		//if(currentPlayerState == PlayerState.Falling || currentPlayerState == PlayerState.Jumping) {
+		if(movement.isGravityEnabled()) {
 			velY += gravity;
-		//}
+		}
 		
 		velX = Game.clamp(velX, -20, 20);
 		velY = Game.clamp(velY, -20, 20);
@@ -63,6 +60,7 @@ public class Player extends TickingGameObject{
 	
 	public void doPlayerCollision() {
 		boolean intersectBottom = false;
+		boolean fallingOn = true;
 		
 		for(int i=0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++){
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
@@ -92,7 +90,10 @@ public class Player extends TickingGameObject{
 					setState(PlayerState.Standing);
 					intersectBottom = true;
 					//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
-				} 
+				}
+				if (boundBox.getFallingBox().intersects(tempObject.getBounds())) {
+					fallingOn = false;
+				}
 				
 
 				//next level block collision here here
@@ -125,17 +126,20 @@ public class Player extends TickingGameObject{
 				setState(PlayerState.Jumping);
 			}
 		}
+		if (fallingOn) {
+			setState(PlayerState.Falling);
+		}
 	}
 	
 
 	public void render(Graphics g) {
 		
-		if(id==ID.Player){
+		if(id==EntityID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			g.setColor(Color.GREEN);
 			g.fillRect((int) x, (int) y, width, height);
 		}
-		else if(id==ID.Player2){
+		else if(id==EntityID.Player2){
 			g.setColor(Color.YELLOW);
 			g.fillRect((int) x, (int) y, width, height);
 		}
@@ -144,7 +148,7 @@ public class Player extends TickingGameObject{
 		g.setColor(Color.RED);
 		
 		if(drawTextures) {
-			g.drawImage(tex.block[0], (int) x, (int) y, null);
+			g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 			
 		}
 		

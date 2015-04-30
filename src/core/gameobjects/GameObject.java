@@ -3,20 +3,20 @@ package core.gameobjects;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import core.enums.ID;
+import core.enums.EntityID;
 import core.handlers.ObjectHandler;
 import core.visualgronk.Texture;
 
 
 public abstract class GameObject {
 	protected float x,y; //pos on screen
-	protected ID id;
+	protected EntityID id;
 	protected float velX,velY;
 	protected ObjectHandler handler;
 	protected Texture tex;
 	protected int width,height;
 	
-	public GameObject(float x, float y, ID id) {
+	public GameObject(float x, float y, EntityID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
@@ -42,11 +42,11 @@ public abstract class GameObject {
 		this.y = y;
 	}
 
-	public ID getId() {
+	public EntityID getId() {
 		return id;
 	}
 
-	public void setId(ID id) {
+	public void setId(EntityID id) {
 		this.id = id;
 	}
 
