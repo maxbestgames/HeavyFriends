@@ -65,9 +65,8 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				if (keyPressed[KeyEvent.VK_S]) {
-					tempPlayer.setWidth(64);
-					//tempPlayer.set
+				if (keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isProningAllowed() ) {
+					tempPlayer.getMovement().goProne();
 
 			}
 			if(tempPlayer.getId()==ID.Player2){
@@ -104,6 +103,12 @@ public class KeyInput extends KeyAdapter{
 				if (!keyPressed[KeyEvent.VK_D]) {
 					//tempObject.setVelX( 0 );
 					keyDown[2] = false;
+				}
+				
+				//prone
+				if (!keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isStandingAllowed() && tempPlayer.getState() == PlayerState.Proning) {
+					System.out.println("going to standing");
+					tempPlayer.getMovement().goStanding();
 				}
 
 				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);

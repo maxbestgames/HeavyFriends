@@ -20,7 +20,20 @@ public class PlayerMovementHandler {
 	
 	
 	public void goProne() {
+		// Dont forget bounding boxes need to change.
+		int newHeight = player.getWidth();
+		player.setWidth(player.getHeight());
+		player.setHeight(newHeight);
+		player.setState(PlayerState.Proning);
 		
+	}
+	
+	public void goStanding() {
+		int newHeight = player.getWidth();
+		player.setWidth(player.getHeight());
+		player.setHeight(newHeight);
+		player.setY(player.getY()-player.getHeight()-100);
+		player.setState(PlayerState.Standing);
 	}
 	
 	public boolean isJumping() {
