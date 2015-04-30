@@ -1,8 +1,10 @@
-package core;
+package core.display;
 
 import java.awt.Canvas;
 
 import javax.swing.JFrame;
+
+import core.Game;
 
 
 public class Window extends Canvas {

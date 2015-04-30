@@ -1,7 +1,7 @@
 package core.levels;
 
 import core.handlers.WorldHandler;
-import core.HUD;
+import core.display.HUD;
 
 public class Spawner {
 	

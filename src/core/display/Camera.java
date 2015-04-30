@@ -1,4 +1,4 @@
-package core;
+package core.display;
 
 import core.Game;
 import core.gameobjects.GameObject;
@@ -62,7 +62,7 @@ public class Camera {
 				velY = 0;
 		}
 		
-		Game.clamp(velX, -maxVel, maxVel);
+		//Game.clamp(velX, -maxVel, maxVel);
 		//Game.clamp(velY, -maxVel, maxVel);
 		
 		x += velX;

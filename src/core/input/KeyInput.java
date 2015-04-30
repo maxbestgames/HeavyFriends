@@ -1,4 +1,4 @@
-package core;
+package core.input;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -105,7 +105,8 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				if (!keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isStandingAllowed() && tempPlayer.getState() == PlayerState.Proning) {
+				if ( !keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isStandingAllowed()
+						&& !tempPlayer.getMovement().isGravityEnabled() ) {
 					System.out.println("going to standing");
 					tempPlayer.getMovement().goStanding();
 				}

@@ -29,10 +29,10 @@ public class PlayerMovementHandler {
 	}
 	
 	public void goStanding() {
+		player.setY(player.getY()-player.getHeight()-100);
 		int newHeight = player.getWidth();
 		player.setWidth(player.getHeight());
 		player.setHeight(newHeight);
-		player.setY(player.getY()-player.getHeight()-100);
 		player.setState(PlayerState.Standing);
 	}
 	

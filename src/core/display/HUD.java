@@ -1,9 +1,10 @@
-package core;
+package core.display;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import core.Game;
 import core.enums.EntityID;
 import core.handlers.WorldHandler;
 
