@@ -61,7 +61,7 @@ public class Game extends Canvas implements Runnable {
 		//TODO make spawners work
 		
 		currentLevel = LevelID.TestRealm;
-		String levelFilePath = "assets"+File.separator+"maps"+File.separator+"testMap.png";
+		String levelFilePath = "assets/maps/testMap.png";
 		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
 		cam.setCamCenter(handler.getPlayers().getPlayer(EntityID.Player));
