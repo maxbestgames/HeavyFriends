@@ -21,8 +21,6 @@ public class Player extends TickingGameObject{
 	
 	private float gravity = 0.9f;
 	
-	//Texture tex;
-	
 	private PlayerState currentPlayerState;
 	
 	private PlayerBoundsHandler boundBox;
@@ -105,9 +103,6 @@ public class Player extends TickingGameObject{
 	public void setState(PlayerState state) {
 		currentPlayerState = state;
 	}
-	/*
-	 * returns players state
-	 */
 
 	public PlayerBoundsHandler getBoundBox() {
 		return boundBox;
@@ -126,10 +121,4 @@ public class Player extends TickingGameObject{
 	}
 	
 	
-
-	//public boolean isProneAllowed() {
-		
-	//}
-	
-
 }
