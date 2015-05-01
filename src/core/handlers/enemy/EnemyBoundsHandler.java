@@ -1,4 +1,4 @@
-package core.handlers;
+package core.handlers.enemy;
 
 public class EnemyBoundsHandler {
 	
