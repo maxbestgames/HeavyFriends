@@ -35,7 +35,7 @@ public class Player extends TickingGameObject{
 	public Player(int x, int y, EntityID id) {
 		super(x, y, id);
 		currentPlayerState = PlayerState.Falling;
-		tex = new Texture("assets\\spritemaps\\coolguy.png", 32, 32);
+		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
