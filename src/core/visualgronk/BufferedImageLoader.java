@@ -14,13 +14,13 @@ public class BufferedImageLoader {
 		
 		BufferedImage image = null;
 		
-		URL urlToImage = this.getClass().getResource(path);
-		File imageFile = new File(urlToImage.getFile());
+		//URL urlToImage = this.getClass().getResource(path);
+		//File imageFile = new File(urlToImage.getFile());
 		
 		try{
-			image = ImageIO.read(imageFile);
+			image = ImageIO.read(getClass().getResource(path));
 		} catch (IOException e) {
-			System.out.println("Failed to get " + imageFile.getAbsolutePath());
+			System.out.println("Failed to get resource from "+path);
 			e.printStackTrace();
 			System.exit(0);
 		}
