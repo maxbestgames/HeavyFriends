@@ -14,7 +14,7 @@ public class LevelLoader {
 	BufferedImageLoader loader;
 	BufferedImage img;
 	
-	static Texture tex;
+	//static Texture tex;
 	
 	public LevelLoader(ObjectHandler handler, String path) {
 		loader = new BufferedImageLoader();	
@@ -42,9 +42,9 @@ public class LevelLoader {
 		}
 	}
 	
-	public static Texture getInstance() {
+	//public static Texture getInstance() {
 		
-		return tex;
+		//return tex;
 		
-	}
+	//}
 }
