@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.File;
 import java.util.Random;
 
 import core.Game;
@@ -36,7 +37,7 @@ public class Player extends TickingGameObject{
 	public Player(int x, int y, EntityID id) {
 		super(x, y, id);
 		currentPlayerState = PlayerState.Falling;
-		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
+		tex = new Texture("assets"+File.separator+"spritemaps"+File.separator+"coolguy.png", 32, 32);
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
