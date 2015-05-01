@@ -15,19 +15,19 @@ public class PlayerBoundsHandler {
 	
 	
 	public Rectangle getBoundsLeft() {
-		return new Rectangle((int) player.getX(), (int) player.getY() + player.getHeight()/2-3, 2, 6);
+		return new Rectangle((int) player.getX(), (int) player.getY() + player.getHeight()/2, 1, 1);
 	}
 	
 	public Rectangle getBoundsRight() {
-		return new Rectangle((int) player.getX() + player.getWidth()-2, (int) player.getY()+player.getHeight()/2-3, 2, 6);
+		return new Rectangle((int) player.getX() + player.getWidth() - 2, (int) player.getY()+player.getHeight()/2, 1, 1);
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY(), 6, 2);
+		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY(), 1, 1);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY() + player.getHeight()-2, 6, 2);
+		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY() + player.getHeight() - 2, 1, 1);
 	}
 	
 	public Rectangle getBounds() {
@@ -35,6 +35,6 @@ public class PlayerBoundsHandler {
 	}
 	
 	public Rectangle getFallingBox() {
-		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY() + player.getHeight(), 6, 2);
+		return new Rectangle((int) player.getX() + player.getWidth()/2-3, (int) player.getY() + player.getHeight(), 1, 1);
 	}
 }

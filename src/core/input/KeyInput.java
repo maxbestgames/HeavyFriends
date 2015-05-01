@@ -2,7 +2,7 @@ package core.input;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import core.enums.PlayerAction;
 import core.enums.EntityID;
 import core.enums.PlayerState;
 import core.gameobjects.GameObject;
@@ -49,7 +49,7 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 				
 				//basic movement
-				if (keyPressed[KeyEvent.VK_W] && tempPlayer.getState() == PlayerState.Standing ) {
+				if (keyPressed[KeyEvent.VK_SPACE] && tempPlayer.getAction() == PlayerAction.Stationary ) {
 
 					tempPlayer.setVelY( -15 );
 					keyDown[0] = true;
@@ -64,14 +64,19 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				if (keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isProningAllowed() ) {
-					tempPlayer.getMovement().goProne();
+				if (keyPressed[KeyEvent.VK_Q] && tempPlayer.getMovement().isProningAllowed() ) {
+					tempPlayer.getMovement().goProning();
+
+			}
+				 //crouch
+				if (keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isCrouchingAllowed() ) {
+					tempPlayer.getMovement().goCrouching();
 
 			}
 			if(tempPlayer.getId()==EntityID.Player2){
 				// player2 keys
 				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.getMovement().isJumpingAllowed()) {
-					tempPlayer.setState(PlayerState.Jumping);
+					tempPlayer.setAction(PlayerAction.Jumping);
 					tempPlayer.setVelY( -15 );
 					keyDown[3] = true;
 				}
@@ -90,7 +95,7 @@ public class KeyInput extends KeyAdapter{
 			// key release code
 			if (tempPlayer.getId()==EntityID.Player) {
 				// player keys
-				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.getMovement().isJumping()) {
+				if (!keyPressed[KeyEvent.VK_SPACE] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[0] = false;
 				}
@@ -105,11 +110,16 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				if ( !keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isStandingAllowed()
-						&& !tempPlayer.getMovement().isGravityEnabled() ) {
+				if ( !keyPressed[KeyEvent.VK_Q] && tempPlayer.getMovement().isProning() ) {
 					System.out.println("going to standing");
 					tempPlayer.getMovement().goStanding();
 				}
+				
+				//crouch
+				if ( !keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isCrouching() ) {
+					tempPlayer.getMovement().goStanding();
+
+			}
 
 				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);
 

@@ -9,6 +9,7 @@ import java.util.Random;
 
 import core.Game;
 import core.enums.EntityID;
+import core.enums.PlayerAction;
 import core.enums.PlayerState;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
@@ -22,6 +23,7 @@ public class Player extends TickingGameObject{
 	private float gravity = 0.9f;
 	
 	private PlayerState currentPlayerState;
+	private PlayerAction currentPlayerAction;
 	
 	private PlayerBoundsHandler boundBox;
 	private PlayerMovementHandler movement;
@@ -34,7 +36,8 @@ public class Player extends TickingGameObject{
 	
 	public Player(int x, int y, EntityID id) {
 		super(x, y, id);
-		currentPlayerState = PlayerState.Falling;
+		currentPlayerState = PlayerState.Standing;
+		currentPlayerAction = PlayerAction.Falling;
 		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
 		
 		boundBox = new PlayerBoundsHandler(this);
@@ -62,9 +65,6 @@ public class Player extends TickingGameObject{
 		
 	}
 	
-	
-	
-
 	public void render(Graphics g) {
 		
 		if(id==EntityID.Player){
@@ -103,7 +103,15 @@ public class Player extends TickingGameObject{
 	public void setState(PlayerState state) {
 		currentPlayerState = state;
 	}
-
+	
+	public PlayerAction getAction() {
+		return currentPlayerAction;
+	}
+	
+	public void setAction(PlayerAction action) {
+		currentPlayerAction = action;
+	}
+	
 	public PlayerBoundsHandler getBoundBox() {
 		return boundBox;
 	}
@@ -119,6 +127,7 @@ public class Player extends TickingGameObject{
 	public Rectangle getBounds() {
 		return boundBox.getBounds();
 	}
+
 	
 	
 }

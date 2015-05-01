@@ -64,5 +64,13 @@ public class HUD {
 		g.drawString(""+Game.getFPS(), Window.getVisibleScreenX()-30, 15);
 		g.drawString("" + Game.getTPS(), Window.getVisibleScreenX()-30, 30);
 		g.drawString(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getState().toString(), Window.getVisibleScreenX()-100, 45);
+		g.drawString(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getAction().toString(), Window.getVisibleScreenX()-100, 60);
+		g.drawString("Vel Y "+ Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getVelY(), Window.getVisibleScreenX()-100, 75);
+		g.drawString("Vel X " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getVelX(), Window.getVisibleScreenX()-100, 90);
+		g.drawString("X " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getX(), Window.getVisibleScreenX()-100, 105);
+		g.drawString("Y " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getY(), Window.getVisibleScreenX()-100, 120);
+		g.drawString("E: " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getColHandler().getNumCloseObjects()+" of "
+				+ "" +Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(), Window.getVisibleScreenX()-100, 135);
+		
 	}
 }

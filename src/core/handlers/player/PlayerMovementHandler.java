@@ -1,5 +1,6 @@
 package core.handlers.player;
 
+import core.enums.PlayerAction;
 import core.enums.PlayerState;
 import core.gameobjects.Player;
 
@@ -19,8 +20,10 @@ public class PlayerMovementHandler {
 	
 	
 	
-	public void goProne() {
+	public void goProning() {
 		// Dont forget bounding boxes need to change.
+		player.setY(player.getY() + player.getWidth());
+		player.setX(player.getX() - player.getWidth()/2);
 		int newHeight = player.getWidth();
 		player.setWidth(player.getHeight());
 		player.setHeight(newHeight);
@@ -29,19 +32,34 @@ public class PlayerMovementHandler {
 	}
 	
 	public void goStanding() {
-		player.setY(player.getY()-player.getHeight()-100);
-		int newHeight = player.getWidth();
-		player.setWidth(player.getHeight());
-		player.setHeight(newHeight);
+		if(player.getMovement().isProning() ) player.setX(player.getX() + player.getHeight()/2 );
+		player.setY(player.getY() - player.getHeight() );
+		player.setWidth(player.getHeight() );
+		player.setHeight(player.getHeight() * 2);
 		player.setState(PlayerState.Standing);
 	}
 	
+	public void goCrouching() {// TOO DO
+		if(player.getMovement().isJumping() ) {
+			player.setY(player.getY() - player.getHeight()/10 ); //crouch jumping balance check denominator not sure about 10 be careful!
+		} else {
+		player.setY(player.getY() + player.getWidth() );
+		}
+		
+		player.setHeight(player.getWidth() );
+		player.setState(PlayerState.Crouching);
+	}
+	
 	public boolean isJumping() {
-		return (player.getState() == PlayerState.Jumping);
+		return (player.getAction() == PlayerAction.Jumping);
 	}
 	
 	public boolean isFalling() {
-		return (player.getState() == PlayerState.Falling);
+		return (player.getAction() == PlayerAction.Falling);
+	}
+	
+	public boolean isStationary() {
+		return (player.getAction() == PlayerAction.Stationary);
 	}
 	
 	public boolean isStanding() {
@@ -54,22 +72,6 @@ public class PlayerMovementHandler {
 	
 	public boolean isCrouching() {
 		return (player.getState() == PlayerState.Crouching);
-	}
-	
-	public boolean isProneFalling() {
-		return (player.getState() == PlayerState.ProneFalling);
-	}
-	
-	public boolean isCrouchFalling() {
-		return (player.getState() == PlayerState.CrouchFalling);
-	}
-	
-	public boolean isProneJumping() { 
-		return (player.getState() == PlayerState.ProneJumping);
-	}
-	
-	public boolean isCrouchJumping() {
-		return (player.getState() == PlayerState.CrouchJumping);
 	}
 	
 	public boolean isProneShelling() {
@@ -86,29 +88,23 @@ public class PlayerMovementHandler {
 
 	public boolean isJumpingAllowed() {
 
-		if (player.getState() == PlayerState.Standing) return true;
-		if (player.getState() == PlayerState.CrouchJumping) return true;
-		if (player.getState() == PlayerState.ProneJumping) return true;
+		if (player.getAction() == PlayerAction.Stationary) return true;
 		return false;
 	}
 
 	public boolean isStandingAllowed() {
 		
-		if (player.getState() == PlayerState.Falling) return true;
 		if (player.getState() == PlayerState.Crouching) return true;
 		if (player.getState() == PlayerState.Proning) return true;
 		if (player.getState() == PlayerState.StandShelling) return true;
-		if (player.getState() == PlayerState.Jumping) return true;
 		return false;
 		
 	}
 	
 	public boolean isFallingAllowed() {
 		
-		if (player.getState() == PlayerState.Jumping) return true;
-		if (player.getState() == PlayerState.Standing) return true;
-		if (player.getState() == PlayerState.ProneFalling) return true;
-		if (player.getState() == PlayerState.CrouchFalling) return true;
+		if (player.getAction() == PlayerAction.Jumping) return true;
+		if (player.getAction() == PlayerAction.Stationary) return true;
 		return false;
 		
 	}
@@ -116,10 +112,7 @@ public class PlayerMovementHandler {
 	public boolean isCrouchingAllowed() {
 		
 		if (player.getState() == PlayerState.Standing) return true;
-		if (player.getState() == PlayerState.CrouchFalling) return true;
-		if (player.getState() == PlayerState.Proning) return true;
 		if (player.getState() == PlayerState.CrouchShelling) return true;
-		if (player.getState() == PlayerState.CrouchJumping) return true;
 		return false;
 
 	}
@@ -127,52 +120,15 @@ public class PlayerMovementHandler {
 	public boolean isProningAllowed() {
 		
 		if (player.getState() == PlayerState.Standing) return true;
-		if (player.getState() == PlayerState.ProneFalling) return true;
 		if (player.getState() == PlayerState.ProneShelling) return true;
-		if (player.getState() == PlayerState.Crouching) return true;
 		return false;
 
-	}
-	
-	public boolean isProneFallingAllowed() {
-		
-		if (player.getState() == PlayerState.Falling) return true;
-		if (player.getState() == PlayerState.CrouchFalling) return true;
-		return false;
-				
-	}
-	
-	public boolean isCrouchFallingAllowed() {
-		
-		if (player.getState() == PlayerState.Falling) return true;
-		if (player.getState() == PlayerState.ProneFalling) return true;
-		return false;
-	}
-	
-	public boolean isProneJumpingAllowed() {
-		
-		if (player.getState() == PlayerState.Jumping) return true;
-		if (player.getState() == PlayerState.CrouchJumping) return true;
-		return false;
-		
-	}
-	
-	public boolean isCrouchJumpingAllowed() {
-		
-		if (player.getState() == PlayerState.Jumping) return true;
-		if (player.getState() == PlayerState.ProneJumping) return true;
-		return false;
-		
 	}
 	
 	public boolean isGravityEnabled() {
 
-		if (player.getState() == PlayerState.ProneFalling) return true;
-		if (player.getState() == PlayerState.ProneJumping) return true;
-		if (player.getState() == PlayerState.CrouchFalling) return true;
-		if (player.getState() == PlayerState.CrouchJumping) return true;
-		if (player.getState() == PlayerState.Jumping) return true;
-		if (player.getState() == PlayerState.Falling) return true;
+		if (player.getAction() == PlayerAction.Jumping) return true;
+		if (player.getAction() == PlayerAction.Falling) return true;
 		return false;
 	}
 	
