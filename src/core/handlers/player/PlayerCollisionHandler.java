@@ -1,4 +1,4 @@
-package core.handlers;
+package core.handlers.player;
 
 import core.Game;
 import core.enums.PlayerState;
@@ -83,7 +83,7 @@ public class PlayerCollisionHandler {
 				player.setState(PlayerState.Jumping);
 			}
 		}
-		if (fallingOn && player.getMovement().isJumping()) {
+		if (fallingOn && !player.getMovement().isJumping()) {
 			player.setState(PlayerState.Falling);
 		}
 	}
