@@ -20,7 +20,7 @@ public class Player extends TickingGameObject{
 	
 	private float gravity = 0.9f;
 	
-	//Texture tex;
+	Texture tex;
 	
 	private PlayerState currentPlayerState;
 	
@@ -40,7 +40,6 @@ public class Player extends TickingGameObject{
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
-		col = new PlayerCollisionHandler(this);
 		
 		width = 32;
 		height = 64;

@@ -17,14 +17,14 @@ public class BufferedImageLoader {
 		URL urlToImage = this.getClass().getResource(path);
 		File imageFile = new File(urlToImage.getFile());
 		
+		System.out.println(imageFile.getAbsolutePath());
+		
 		try{
 			image = ImageIO.read(imageFile);
 		} catch (IOException e) {
-			System.out.println("Failed to get " + imageFile.getAbsolutePath());
 			e.printStackTrace();
-			System.exit(0);
 		}
-		
+		System.exit(0);
 		return image;
 	}
 

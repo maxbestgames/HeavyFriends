@@ -1,8 +1,6 @@
 package core.visualgronk;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
 
 public class Texture {
 	
@@ -14,14 +12,19 @@ public class Texture {
 	public Texture(String path, int spriteWidth, int spriteHeight) {
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
+		try{
+			block_sheet = null;
+			block_sheet = loader.loadImage(path);
+		}catch(Exception e) {
+			System.out.println("problem while loading texture at " + path);
+			e.printStackTrace();
+		}
 		
-		block_sheet = loader.loadImage(path);
-	
 		bs = new SpriteSheet(block_sheet);
 		
 		fixAlpha();
 		
-		getSprites(spriteWidth, spriteHeight);
+		//getSprites(spriteWidth, spriteHeight);
 	}
 	
 	public void getSprites(int width, int height) {

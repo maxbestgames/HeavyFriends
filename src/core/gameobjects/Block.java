@@ -26,7 +26,7 @@ public class Block extends GameObject{
 	public Block(int x, int y, EntityID id, BlockType type) {
 		super(x, y, id);
 		this.type = type;
-		String blockFileTexture = "assets"+File.separator+"texture"+File.separator+"testBlock.png";
+		String blockFileTexture = ""+File.separator+"assets"+File.separator+"texture"+File.separator+"testBlock.png";
 		tex = new Texture(blockFileTexture, 32, 32);
 	}
 
@@ -40,7 +40,13 @@ public class Block extends GameObject{
 			g.drawRect((int) x, (int) y, blockSize, blockSize);
 		}
 		if(drawTexture && type == BlockType.Dirt) {
+			
+			g2d.setColor(new Color(0, 0, 0, 0));
+			g2d.setComposite(AlphaComposite.Src);
 			g2d.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			//g2d.setComposite(AlphaComposite.Src);
+			g2d.setColor(Color.WHITE);
+			
 		}
 		
 	}
