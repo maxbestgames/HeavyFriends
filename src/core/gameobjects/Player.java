@@ -9,9 +9,9 @@ import java.util.Random;
 import core.Game;
 import core.enums.EntityID;
 import core.enums.PlayerState;
-import core.handlers.player.PlayerBoundsHandler;
-import core.handlers.player.PlayerCollisionHandler;
-import core.handlers.player.PlayerMovementHandler;
+import core.handlers.PlayerBoundsHandler;
+import core.handlers.PlayerCollisionHandler;
+import core.handlers.PlayerMovementHandler;
 import core.visualgronk.Texture;
 
 
