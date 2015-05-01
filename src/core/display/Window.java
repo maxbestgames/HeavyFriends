@@ -1,13 +1,15 @@
-package core;
+package core.display;
 
 import java.awt.Canvas;
 
 import javax.swing.JFrame;
 
+import core.Game;
+
 
 public class Window extends Canvas {
 	
-	public static int visibleScreenX,visibleScreenY;
+	private static int visibleScreenX,visibleScreenY;
 	
 	public Window(int width, int height, String title, Game game) {
 		JFrame frame = new JFrame(title);

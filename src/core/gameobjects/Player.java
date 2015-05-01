@@ -7,31 +7,61 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import core.Game;
+<<<<<<< HEAD
 import core.enums.ID;
 import core.visualgronk.LevelLoader;
+=======
+import core.enums.EntityID;
+import core.enums.PlayerState;
+import core.handlers.player.PlayerBoundsHandler;
+import core.handlers.player.PlayerCollisionHandler;
+import core.handlers.player.PlayerMovementHandler;
+>>>>>>> enemy-and-ai-start
 import core.visualgronk.Texture;
 
 
 public class Player extends TickingGameObject{
 	Random r = new Random();
 	
-	private int playerWidth = 32;
-	private int playerHeight = 64;
 	private float gravity = 0.9f;
 	
+<<<<<<< HEAD
+=======
+	//Texture tex;
+	
+	private PlayerState currentPlayerState;
+	
+	private PlayerBoundsHandler boundBox;
+	private PlayerMovementHandler movement;
+	private PlayerCollisionHandler col;
+	
+>>>>>>> enemy-and-ai-start
 	private boolean drawHitBoxes = true;
 	
 	Texture tex = LevelLoader.getInstance();
 	
-	public Player(int x, int y, ID id) {
+	public Player(int x, int y, EntityID id) {
 		super(x, y, id);
+<<<<<<< HEAD
 		falling = true;
+=======
+		currentPlayerState = PlayerState.Falling;
+		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
+		
+		boundBox = new PlayerBoundsHandler(this);
+		movement = new PlayerMovementHandler(this);
+		col = new PlayerCollisionHandler(this);
+		
+		width = 32;
+		height = 64;
+>>>>>>> enemy-and-ai-start
 	}
 
 	public void tick() {
 		x += velX;
 		y += velY;
 		
+<<<<<<< HEAD
 		if(falling || jumping) {
 			velY += gravity;
 		}
@@ -96,37 +126,58 @@ public class Player extends TickingGameObject{
 				}
 			}
 		}
+=======
+		//System.out.println(currentPlayerState.toString());
+		
+		if(movement.isGravityEnabled()) {
+			velY += gravity;
+		}
+		
+		velX = Game.clamp(velX, -20, 20);
+		velY = Game.clamp(velY, -20, 20);
+		
+		getColHandler().doPlayerCollision();
+		
+>>>>>>> enemy-and-ai-start
 	}
+	
+	
 	
 
 	public void render(Graphics g) {
 		
-		if(id==ID.Player){
+		if(id==EntityID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			g.setColor(Color.GREEN);
-			g.fillRect((int) x, (int) y, playerWidth, playerHeight);
+			g.fillRect((int) x, (int) y, width, height);
 		}
-		else if(id==ID.Player2){
+		else if(id==EntityID.Player2){
 			g.setColor(Color.YELLOW);
-			g.fillRect((int) x, (int) y, playerWidth, playerHeight);
+			g.fillRect((int) x, (int) y, width, height);
 		}
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.RED);
 		
+<<<<<<< HEAD
+=======
+		if(drawTextures) {
+			g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			
+		}
+		
+>>>>>>> enemy-and-ai-start
 		if (drawHitBoxes) {
-			g2d.draw(getBoundsTop());
-			g2d.draw(getBoundsBottom());
-			g2d.draw(getBoundsLeft());
-			g2d.draw(getBoundsRight());
-			g2d.draw(getBounds());
+			g2d.draw(boundBox.getBoundsTop());
+			g2d.draw(boundBox.getBoundsBottom());
+			g2d.draw(boundBox.getBoundsLeft());
+			g2d.draw(boundBox.getBoundsRight());
+			g2d.draw(boundBox.getBounds());
 		}
 	}
 
-	public Rectangle getBoundsLeft() {
-		return new Rectangle((int) x, (int) y + playerHeight/2-3, 2, 6);
-	}
 	
+<<<<<<< HEAD
 	public Rectangle getBoundsRight() {
 		return new Rectangle((int) x + playerWidth-2, (int) y+playerHeight/2-3, 2, 6);
 	}
@@ -142,5 +193,41 @@ public class Player extends TickingGameObject{
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, playerWidth, playerHeight);
 	}
+=======
+	
+	public PlayerState getState() {
+		return currentPlayerState;
+	}
+	
+	public void setState(PlayerState state) {
+		currentPlayerState = state;
+	}
+	/*
+	 * returns players state
+	 */
+
+	public PlayerBoundsHandler getBoundBox() {
+		return boundBox;
+	}
+
+	public PlayerMovementHandler getMovement() {
+		return movement;
+	}
+	
+	public PlayerCollisionHandler getColHandler() {
+		return col;
+	}
+
+	public Rectangle getBounds() {
+		return boundBox.getBounds();
+	}
+	
+	
+
+	//public boolean isProneAllowed() {
+		
+	//}
+	
+>>>>>>> enemy-and-ai-start
 
 }

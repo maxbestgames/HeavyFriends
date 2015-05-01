@@ -3,10 +3,10 @@ package core.handlers;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import core.enums.EntityID;
 import core.gameobjects.GameObject;
-import core.gameobjects.TickingGameObject;
 import core.gameobjects.Player;
-import core.enums.ID;
+import core.gameobjects.TickingGameObject;
 
 
 public class ObjectHandler {
@@ -53,7 +53,7 @@ public class ObjectHandler {
 		GameObject tempObject;
 		for (int i = 0; i<getSize(); i++) {
 			tempObject = getObject(i);
-			if (tempObject.getId() == ID.Player) {
+			if (tempObject.getId() == EntityID.Player) {
 				return (Player) tempObject;
 			}
 		}

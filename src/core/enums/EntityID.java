@@ -1,11 +1,9 @@
 package core.enums;
 
 
-public enum ID {
+public enum EntityID {
 	Player(),
 	Player2(),
-	BasicEnemy(),
 	Block(),
-	EffectTrail();
-
+	BasicEnemy();
 }

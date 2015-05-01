@@ -1,12 +1,20 @@
-package core;
+package core.input;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+<<<<<<< HEAD:src/core/KeyInput.java
 import core.handlers.WorldHandler;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
 import core.enums.ID;
+=======
+import core.enums.EntityID;
+import core.enums.PlayerState;
+import core.gameobjects.GameObject;
+import core.gameobjects.Player;
+import core.handlers.WorldHandler;
+>>>>>>> enemy-and-ai-start:src/core/input/KeyInput.java
 
 public class KeyInput extends KeyAdapter{
 	
@@ -44,7 +52,7 @@ public class KeyInput extends KeyAdapter{
 			tempPlayer = handler.getPlayers().getPlayer(i); 
 			
 			// player controls
-			if (tempPlayer.getId()==ID.Player) {
+			if (tempPlayer.getId()==EntityID.Player) {
 				// player keys
 				if (keyPressed[KeyEvent.VK_W] && !tempPlayer.isJumping()) {
 					tempPlayer.setJumping(true);
@@ -60,13 +68,25 @@ public class KeyInput extends KeyAdapter{
 					tempPlayer.setVelX( 5 );
 					keyDown[2] = true;
 				}
+<<<<<<< HEAD:src/core/KeyInput.java
 				//if (key==KeyEvent.VK_S) tempObject.setVelY( 5 );
+=======
+				
+				//prone
+				if (keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isProningAllowed() ) {
+					tempPlayer.getMovement().goProne();
+>>>>>>> enemy-and-ai-start:src/core/input/KeyInput.java
 
 			}
-			if(tempPlayer.getId()==ID.Player2){
+			if(tempPlayer.getId()==EntityID.Player2){
 				// player2 keys
+<<<<<<< HEAD:src/core/KeyInput.java
 				if (keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
 					tempPlayer.setJumping(true);
+=======
+				if (keyPressed[KeyEvent.VK_UP] && tempPlayer.getMovement().isJumpingAllowed()) {
+					tempPlayer.setState(PlayerState.Jumping);
+>>>>>>> enemy-and-ai-start:src/core/input/KeyInput.java
 					tempPlayer.setVelY( -15 );
 					keyDown[3] = true;
 				}
@@ -83,9 +103,9 @@ public class KeyInput extends KeyAdapter{
 			}
 
 			// key release code
-			if (tempPlayer.getId()==ID.Player) {
+			if (tempPlayer.getId()==EntityID.Player) {
 				// player keys
-				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.isJumping()) {
+				if (!keyPressed[KeyEvent.VK_W] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[0] = false;
 				}
@@ -98,13 +118,20 @@ public class KeyInput extends KeyAdapter{
 					//tempObject.setVelX( 0 );
 					keyDown[2] = false;
 				}
+				
+				//prone
+				if ( !keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isStandingAllowed()
+						&& !tempPlayer.getMovement().isGravityEnabled() ) {
+					System.out.println("going to standing");
+					tempPlayer.getMovement().goStanding();
+				}
 
 				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);
 
 			}
-			if (tempPlayer.getId()==ID.Player2){
+			if (tempPlayer.getId()==EntityID.Player2){
 				// player2 keys
-				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.isJumping()) {
+				if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.getMovement().isJumping()) {
 					//tempObject.setVelY( 0 );
 					keyDown[3] = false;
 				}
@@ -131,3 +158,5 @@ public class KeyInput extends KeyAdapter{
 		}
 	}
 }
+}
+

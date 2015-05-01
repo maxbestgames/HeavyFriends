@@ -1,15 +1,16 @@
 package core.gameobjects;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.File;
 import java.util.Random;
 
-import core.handlers.ObjectHandler;
-import core.visualgronk.LevelLoader;
-import core.visualgronk.Texture;
 import core.enums.BlockType;
-import core.enums.ID;
+import core.enums.EntityID;
+import core.visualgronk.Texture;
 
 
 public class Block extends GameObject{
@@ -22,12 +23,21 @@ public class Block extends GameObject{
 	private BlockType type;
 
 	
+<<<<<<< HEAD
 	public Block(int x, int y, ID id, BlockType type, String texPath) {
 		super(x, y, id,texPath);
 		this.type = type;
+=======
+	public Block(int x, int y, EntityID id, BlockType type) {
+		super(x, y, id);
+		this.type = type;
+		String blockFileTexture = "assets"+File.separator+"texture"+File.separator+"testBlock.png";
+		tex = new Texture(blockFileTexture, 32, 32);
+>>>>>>> enemy-and-ai-start
 	}
 
 	public void render(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
 		if (!drawBounds) {
 			g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 			g.fillRect((int) x, (int) y, blockSize, blockSize);
@@ -36,8 +46,7 @@ public class Block extends GameObject{
 			g.drawRect((int) x, (int) y, blockSize, blockSize);
 		}
 		if(drawTexture && type == BlockType.Dirt) {
-			g.drawImage(tex.block[0], (int) x, (int) y, null);
-			
+			g2d.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 		}
 		
 	}

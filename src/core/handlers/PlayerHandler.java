@@ -1,6 +1,6 @@
 package core.handlers;
 
-import core.enums.ID;
+import core.enums.EntityID;
 import core.gameobjects.Player;
 
 public class PlayerHandler {
@@ -15,7 +15,7 @@ public class PlayerHandler {
 		playerList.removeObject(p);
 	}
 	
-	public Player getPlayer(ID id) {
+	public Player getPlayer(EntityID id) {
 		Player tempPlayer;
 		for (int i=0; i<playerList.getSize(); i++) {
 			tempPlayer = (Player) playerList.getObject(i);

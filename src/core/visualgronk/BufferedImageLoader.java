@@ -1,6 +1,7 @@
 package core.visualgronk;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -11,16 +12,20 @@ public class BufferedImageLoader {
 	
 	public BufferedImage loadImage(String path) {
 		
-		BufferedImage level = null;
+		BufferedImage image = null;
 		
 		URL urlToImage = this.getClass().getResource(path);
+		File imageFile = new File(urlToImage.getFile());
 		
 		try{
-			level = ImageIO.read(urlToImage);
+			image = ImageIO.read(imageFile);
 		} catch (IOException e) {
+			System.out.println("Failed to get " + imageFile.getAbsolutePath());
 			e.printStackTrace();
+			System.exit(0);
 		}
-		return level;
+		
+		return image;
 	}
 
 }

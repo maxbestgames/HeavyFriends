@@ -7,11 +7,16 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
+import java.io.File;
 import java.util.Random;
 
-import core.enums.ID;
+import core.display.Camera;
+import core.display.HUD;
+import core.display.Window;
+import core.enums.EntityID;
 import core.enums.LevelID;
 import core.handlers.WorldHandler;
+import core.input.KeyInput;
 import core.levels.TestRealm;
 
 
@@ -27,7 +32,7 @@ public class Game extends Canvas implements Runnable {
 	private HUD hud;
 	//private Spawner spawner;
 	private KeyInput keyInput;
-	private static LevelID current;
+	private static LevelID currentLevel;
 	private static int fps;
 	private static int tps;
 	
@@ -50,14 +55,16 @@ public class Game extends Canvas implements Runnable {
 		cam = new Camera(0, 0);
 		
 		keyInput = new KeyInput(handler);
+	
 		this.addKeyListener(keyInput);
 		
 		//TODO make spawners work
 		
-		current = LevelID.TestRealm;
-		handler.addLevel(new TestRealm(LevelID.TestRealm, "assets/maps/testMap.png"));
+		currentLevel = LevelID.TestRealm;
+		String levelFilePath = "assets"+File.separator+"maps"+File.separator+"testMap.png";
+		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
-		
+		cam.setCamCenter(handler.getPlayers().getPlayer(EntityID.Player));
 		
 		new Window(WIDTH, HEIGHT,"Test game", this);
 		hud = new HUD(handler);
@@ -102,7 +109,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick(){
 		
 		handler.tick();
-		cam.tick(handler.getPlayers().getPlayer(ID.Player));
+		cam.tick();
 		hud.tick();
 		
 		keyInput.update();
@@ -126,6 +133,7 @@ public class Game extends Canvas implements Runnable {
 		g2d.translate(cam.getX(), cam.getY());
 		handler.render(g);
 		g2d.translate(-cam.getX(), -cam.getY());
+		
 		hud.render(g);
 
 		g.dispose();
@@ -171,7 +179,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static LevelID getCurrentLevel() {
-		return current;
+		return currentLevel;
 	}
 	
 	public static WorldHandler getWorldHandler() {

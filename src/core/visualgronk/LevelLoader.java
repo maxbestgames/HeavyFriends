@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import core.Game;
 import core.enums.BlockType;
-import core.enums.ID;
+import core.enums.EntityID;
 import core.gameobjects.Block;
 import core.gameobjects.Player;
 import core.handlers.ObjectHandler;
@@ -14,11 +14,10 @@ public class LevelLoader {
 	BufferedImageLoader loader;
 	BufferedImage img;
 	
-	static Texture tex;
+	//static Texture tex;
 	
 	public LevelLoader(ObjectHandler handler, String path) {
-		loader = new BufferedImageLoader();
-		img = null;		
+		loader = new BufferedImageLoader();	
 		img = loader.loadImage(path);
 		LoadImageLevel(handler, img);
 	}
@@ -36,16 +35,21 @@ public class LevelLoader {
 				int green = (pixel >> 8 ) & 0xff;
 				int blue = (pixel) & 0xff;
 
+<<<<<<< HEAD
 				if(red == 255 && green == 255 & blue == 255) handler.addObject(new Block(i*32, j*32, ID.Block, BlockType.Dirt, "assets/texture/blakcl.png") );
 				if(red == 0 && green == 38 & blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, ID.Player));
+=======
+				if(red == 255 && green == 255 & blue == 255) handler.addObject(new Block(i*32, j*32, EntityID.Block, BlockType.Dirt) );
+				if(red == 0 && green == 38 & blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
+>>>>>>> enemy-and-ai-start
 
 			}
 		}
 	}
 	
-	public static Texture getInstance() {
+	//public static Texture getInstance() {
 		
-		return tex;
+		//return tex;
 		
-	}
+	//}
 }
