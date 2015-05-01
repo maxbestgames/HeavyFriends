@@ -17,14 +17,14 @@ public class Window extends Canvas {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(game);
+		frame.add(game.getRenderThread());
 		frame.setVisible(true);
 		visibleScreenX = (int) frame.getContentPane().getWidth();
 		visibleScreenY = (int) frame.getContentPane().getHeight();
 		
 		frame.setAlwaysOnTop(true);
 		
-		game.start();
+		game.startThreads();
 	}
 
 	public static int getVisibleScreenX() {

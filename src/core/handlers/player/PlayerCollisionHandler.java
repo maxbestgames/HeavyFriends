@@ -29,12 +29,12 @@ public class PlayerCollisionHandler {
 					Math.abs(tempObject.getY() - player.getY()) < (Math.abs(player.getHeight()) * Math.abs(player.getVelY()) + 200) ) { // are the blocks close to the player?
 				
 				if (player.getBoundBox().getBoundsLeft().intersects(tempObject.getBounds())) {
-					player.setVelX(0.4f);
+					//player.setVelX(0.4f);
 					player.setX(tempObject.getX() + Block.getBlockSize());
 					//System.out.println("L: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}
 				if (player.getBoundBox().getBoundsRight().intersects(tempObject.getBounds())) {
-					player.setVelX(-0.4f);
+					//player.setVelX(-0.4f);
 					player.setX(tempObject.getX() - player.getWidth());
 					//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 				}

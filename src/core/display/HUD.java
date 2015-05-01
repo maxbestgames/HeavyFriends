@@ -61,8 +61,8 @@ public class HUD {
 		else g.setColor(Color.RED);
 		g.fillRect(x+2, y+2, HEALTH[playerNum] *2 , 10);
 		g.setColor(Color.WHITE);
-		g.drawString(""+Game.getFPS(), Window.getVisibleScreenX()-30, 15);
-		g.drawString("" + Game.getTPS(), Window.getVisibleScreenX()-30, 30);
+		g.drawString("FPS "+Game.getFPS(), Window.getVisibleScreenX()-100, 15);
+		g.drawString("TPS " + Game.getTPS(), Window.getVisibleScreenX()-100, 30);
 		g.drawString(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getState().toString(), Window.getVisibleScreenX()-100, 45);
 		g.drawString(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getAction().toString(), Window.getVisibleScreenX()-100, 60);
 		g.drawString("Vel Y "+ Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getVelY(), Window.getVisibleScreenX()-100, 75);

@@ -11,8 +11,6 @@ public class PlayerBoundsHandler {
 	public PlayerBoundsHandler(Player player) {
 		this.player = player;
 	}
-
-	
 	
 	public Rectangle getBoundsLeft() {
 		return new Rectangle((int) player.getX(), (int) player.getY() + player.getHeight()/2, 1, 1);
