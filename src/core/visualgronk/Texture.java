@@ -4,9 +4,8 @@ import java.awt.image.BufferedImage;
 
 public class Texture {
 	
-	SpriteSheet ss,bs,ps;
+	SpriteSheet bs;
 	private BufferedImage block_sheet = null;
-	private BufferedImage player_sheet = null;
 	
 	public BufferedImage[][] sprite;
 	
@@ -14,8 +13,10 @@ public class Texture {
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try{
+			block_sheet = null;
 			block_sheet = loader.loadImage(path);
 		}catch(Exception e) {
+			System.out.println("problem while loading texture at " + path);
 			e.printStackTrace();
 		}
 		
@@ -23,7 +24,7 @@ public class Texture {
 		
 		fixAlpha();
 		
-		getSprites(spriteWidth, spriteHeight);
+		//getSprites(spriteWidth, spriteHeight);
 	}
 	
 	public void getSprites(int width, int height) {

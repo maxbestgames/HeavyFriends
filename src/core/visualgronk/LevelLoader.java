@@ -17,8 +17,7 @@ public class LevelLoader {
 	static Texture tex;
 	
 	public LevelLoader(ObjectHandler handler, String path) {
-		loader = new BufferedImageLoader();
-		img = null;		
+		loader = new BufferedImageLoader();	
 		img = loader.loadImage(path);
 		LoadImageLevel(handler, img);
 	}

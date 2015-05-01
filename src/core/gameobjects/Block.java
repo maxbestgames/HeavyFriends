@@ -26,7 +26,7 @@ public class Block extends GameObject{
 	public Block(int x, int y, EntityID id, BlockType type) {
 		super(x, y, id);
 		this.type = type;
-		String blockFileTexture = "assets"+File.separator+"texture"+File.separator+"blakcl.png";
+		String blockFileTexture = ""+File.separator+"assets"+File.separator+"texture"+File.separator+"testBlock.png";
 		tex = new Texture(blockFileTexture, 32, 32);
 	}
 
