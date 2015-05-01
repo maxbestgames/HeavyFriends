@@ -1,4 +1,4 @@
-package core.handlers.player;
+package core.handlers;
 
 import core.enums.PlayerState;
 import core.gameobjects.Player;

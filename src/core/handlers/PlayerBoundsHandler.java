@@ -1,4 +1,4 @@
-package core.handlers.player;
+package core.handlers;
 
 import java.awt.Rectangle;
 

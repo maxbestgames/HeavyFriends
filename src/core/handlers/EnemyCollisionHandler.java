@@ -1,4 +1,4 @@
-package core.handlers.enemy;
+package core.handlers;
 
 public class EnemyCollisionHandler {
 	
