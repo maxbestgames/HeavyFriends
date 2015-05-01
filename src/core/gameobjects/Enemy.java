@@ -3,9 +3,9 @@ package core.gameobjects;
 import core.enums.EnemyType;
 import core.enums.EntityID;
 import core.gameobjects.ai.EnemyAI;
-import core.handlers.EnemyBoundsHandler;
-import core.handlers.EnemyCollisionHandler;
-import core.handlers.EnemyMovementHandler;
+import core.handlers.enemy.EnemyBoundsHandler;
+import core.handlers.enemy.EnemyCollisionHandler;
+import core.handlers.enemy.EnemyMovementHandler;
 
 public abstract class Enemy extends TickingGameObject {
 
