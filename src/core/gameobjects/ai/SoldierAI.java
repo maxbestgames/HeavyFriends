@@ -1,5 +1,5 @@
 package core.gameobjects.ai;
 
-public class SoldierAI {
+public class SoldierAI extends EnemyAI {
 
 }

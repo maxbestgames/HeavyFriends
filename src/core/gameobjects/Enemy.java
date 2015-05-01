@@ -20,4 +20,6 @@ public abstract class Enemy extends TickingGameObject {
 		super(x, y, id);
 		this.type = type;
 	}
+	
+	
 }

@@ -113,7 +113,6 @@ public class Game extends Canvas implements Runnable {
 		hud.tick();
 		
 		keyInput.update();
-		handler.getPlayers().getPlayer(EntityID.Player).doPlayerCollision();
 		
 	}
 	
