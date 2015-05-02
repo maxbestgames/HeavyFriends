@@ -19,7 +19,8 @@ public class PlayerCollisionHandler {
 	public void doPlayerCollision() {
 		boolean intersectBottom = false;
 		fallingOn = true;
-		objCount = 0;
+		int count = 0;
+		
 		
 		for(int i=0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++){
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
@@ -75,7 +76,7 @@ public class PlayerCollisionHandler {
 						player.setAction(PlayerAction.Jumping);
 					}
 				}
-				objCount++;
+				count++;
 			}
 		}
 		
@@ -88,6 +89,10 @@ public class PlayerCollisionHandler {
 		}
 		if (fallingOn && !player.getMovement().isJumping()) {
 			player.setAction(PlayerAction.Falling);
+		}
+		
+		if (count != 0) {
+			objCount = count;
 		}
 	}
 	

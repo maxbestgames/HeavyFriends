@@ -6,6 +6,6 @@ public abstract class EnemyAI {
 	
 	EnemyAIState currentState;
 	float searchEfficiency;
-	float walkSpeed;
+	
 	
 }

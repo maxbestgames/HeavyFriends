@@ -7,7 +7,8 @@ public enum EnemyAIState {
 	Suspicious(),
 	Waiting(),
 	Sleeping(),
-	Attacking(),
+	MeleeAttacking(),
+	RangedAttacking(),
 	Fleeing(),
 	Hiding(),
 	Dead();

@@ -1,19 +1,11 @@
-Game
-Window
-GameObject
- BoundaryBlock
+
  
 TickingGameObject
- Player
  Enemy
  Projectile
  
-ID
  
-Level
- Handlers (per level)
- World handler ticks scene handler
-  if() in tick to check if paused
+Level spawner
 
 HUD - Enum?
 	hide - show none?
@@ -22,7 +14,7 @@ HUD - Enum?
 
 KeyInput
 
-Spawner
+Monster Spawner
 
 Effect(s)
 
@@ -32,4 +24,28 @@ Asset
  Image
   Background
   
-Camera
+  
+Monster AI (neural nets)
+  take in various inputs about enemy and self
+  return recommended action
+  
+  LOS (0,1)
+  Dist as percent of max distance
+  Health as percent
+  Can Attack ranged (0,1)
+  player is facing enemy (0,1)
+  
+  
+  
+  train by comparing damage dealt to damage done.
+  
+  clustering?? cluster is state that the monster has to fall into.
+  
+Monster Genetics
+  weighted array of parents, sorted by damage done
+  
+  speed, health,
+  
+  number of genes is average of number that parent had + chance of gene mutation.
+  get parents genes, with chance to get a different one (low)
+  
