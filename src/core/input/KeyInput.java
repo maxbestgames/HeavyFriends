@@ -34,7 +34,7 @@ public class KeyInput extends KeyAdapter{
 			Game.stop();
 			Window.getWindows()[0].setVisible(false);
 			Window.getWindows()[0].dispose();
-			//System.exit(0);
+			System.exit(0);
 		}
 		keyPressed[e.getKeyCode()] = true;
 	}
@@ -55,17 +55,24 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 				
 				//basic movement
-				if (keyPressed[KeyEvent.VK_SPACE] && tempPlayer.getAction() == PlayerAction.Stationary ) {
+				if (keyPressed[KeyEvent.VK_SPACE] && tempPlayer.getAction() == PlayerAction.Stationary && !tempPlayer.getColHandler().getTopStop()) {
 
 					tempPlayer.setVelY( -15 );
 					keyDown[0] = true;
 				}
-				if (keyPressed[KeyEvent.VK_A]) {
-					tempPlayer.setVelX( -5 );
+				if (keyPressed[KeyEvent.VK_A] && !tempPlayer.getColHandler().getLeftStop()) {
+					if(tempPlayer.getState() == PlayerState.Standing) tempPlayer.setVelX( -5 );
+					if(tempPlayer.getState() == PlayerState.Crouching) tempPlayer.setVelX( -3 );
+					if(tempPlayer.getState() == PlayerState.Proning) tempPlayer.setVelX( -2 );
+
 					keyDown[1] = true;
+				} else {
+					tempPlayer.setVelX(0);
 				}
-				if (keyPressed[KeyEvent.VK_D]) {
-					tempPlayer.setVelX( 5 );
+				if (keyPressed[KeyEvent.VK_D] && !tempPlayer.getColHandler().getRightStop()) {
+					if(tempPlayer.getState() == PlayerState.Standing) tempPlayer.setVelX( 5 );
+					if(tempPlayer.getState() == PlayerState.Crouching) tempPlayer.setVelX( 3 );
+					if(tempPlayer.getState() == PlayerState.Proning) tempPlayer.setVelX( 2 );
 					keyDown[2] = true;
 				}
 				
@@ -116,15 +123,15 @@ public class KeyInput extends KeyAdapter{
 				}
 				
 				//prone
-				if ( !keyPressed[KeyEvent.VK_Q] && tempPlayer.getMovement().isProning() ) {
-					System.out.println("going to standing");
+				if ( !keyPressed[KeyEvent.VK_Q] && tempPlayer.getMovement().isProning() && !tempPlayer.getColHandler().getTopStop() ) {
+					//System.out.println("going to standing");
 					tempPlayer.getMovement().goStanding();
 				}
 				
 				//crouch
-				if ( !keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isCrouching() ) {
+				if ( !keyPressed[KeyEvent.VK_S] && tempPlayer.getMovement().isCrouching() && !tempPlayer.getColHandler().getTopStop()) {
 					tempPlayer.getMovement().goStanding();
-
+ 
 			}
 
 				if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);

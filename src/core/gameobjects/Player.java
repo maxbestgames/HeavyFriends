@@ -14,6 +14,7 @@ import core.enums.PlayerState;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
 import core.handlers.player.PlayerMovementHandler;
+import core.visualgronk.Animation;
 import core.visualgronk.Texture;
 
 
@@ -22,6 +23,9 @@ public class Player extends TickingGameObject{
 	
 	private float gravity = 0.9f;
 	
+	private Animation playerWalk;
+	private Animation playerCrawl;
+	
 	private PlayerState currentPlayerState;
 	private PlayerAction currentPlayerAction;
 	
@@ -29,8 +33,8 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = true;
-	private boolean drawTextures = false;
+	private boolean drawHitBoxes = false;
+	private boolean drawTextures = true;
 	
 	
 	
@@ -38,7 +42,11 @@ public class Player extends TickingGameObject{
 		super(x, y, id);
 		currentPlayerState = PlayerState.Standing;
 		currentPlayerAction = PlayerAction.Falling;
-		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
+		
+		tex = new Texture("assets/spritemaps/stickmang.png", 32, 64);
+		
+		playerWalk = new Animation(5, tex.getSprite(0, 0), tex.getSprite(1, 0), tex.getSprite(2, 0));
+		playerCrawl = new Animation(5, tex.getSprite(7,0), tex.getSprite(8,0));
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
@@ -63,13 +71,16 @@ public class Player extends TickingGameObject{
 		
 		getColHandler().doPlayerCollision();
 		
+		playerWalk.runAnimation();
+		playerCrawl.runAnimation();
+		
 	}
 	
 	public void render(Graphics g) {
 		
 		if(id==EntityID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
-			g.setColor(Color.GREEN);
+			g.setColor(Color.WHITE);
 			g.fillRect((int) x, (int) y, width, height);
 		}
 		else if(id==EntityID.Player2){
@@ -81,16 +92,37 @@ public class Player extends TickingGameObject{
 		g.setColor(Color.RED);
 		
 		if(drawTextures) {
-			g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			if (velX > 0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
+			else if (velX <0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
+			if (velX > 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
+			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
+			
+			//if (velX > 0 && currentPlayerState == PlayerState.Proning)
+			
+			
+			
+			else g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 			
 		}
 		
 		if (drawHitBoxes) {
 			g2d.draw(boundBox.getBoundsTop());
 			g2d.draw(boundBox.getBoundsBottom());
-			g2d.draw(boundBox.getBoundsLeft());
-			g2d.draw(boundBox.getBoundsRight());
+			g2d.draw(boundBox.getBoundsTopLeft());
+			g2d.draw(boundBox.getBoundsTopRight());
+			g.setColor(Color.BLUE);
+			g2d.draw(boundBox.getBoundsBotLeft());
+			g2d.draw(boundBox.getBoundsBotRight());
+			g.setColor(Color.RED);
 			g2d.draw(boundBox.getBounds());
+			g.setColor(Color.WHITE);
+			g2d.draw(boundBox.getBoundsBotStop());
+			g2d.draw(boundBox.getBoundsRightStop());
+			g2d.draw(boundBox.getBoundsLeftStop());
+			g2d.draw(boundBox.getBoundsTopStop());
+
+
+
 		}
 	}
 

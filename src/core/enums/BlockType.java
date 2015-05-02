@@ -3,5 +3,11 @@ package core.enums;
 public enum BlockType {
 
 	Dirt(),
-	Grass();
+	Grass(),
+	Cobblestone(),
+	WaterSurface(),
+	Water(),
+	Stonebrick(),
+	Claybrick();
+	
 }

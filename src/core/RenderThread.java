@@ -65,19 +65,23 @@ public class RenderThread extends Canvas implements Runnable {
 		
 		Graphics2D g2d =(Graphics2D) g;
 		
-		g.setColor(Color.BLACK);
+		g.setColor(Color.BLACK); // background colour
 		//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 		g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
 		
+		//g2d.scale(2, 2);
 		g2d.translate(cam.getX(), cam.getY());
 		Game.getWorldHandler().render(g);
 		g2d.translate(-cam.getX(), -cam.getY());
+		//g2d.scale(-2, -2);
+		
 		
 		hud.render(g);
 
 		g.dispose();
 		g2d.dispose();
-		bs.show();
+		if (running)
+			bs.show();
 	
 	}
 	
