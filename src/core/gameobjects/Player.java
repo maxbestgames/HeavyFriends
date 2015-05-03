@@ -32,8 +32,8 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = false;
-	private boolean drawTextures = true;
+	private boolean drawHitBoxes = true;
+	private boolean drawTextures = false;
 	
 	
 	
@@ -79,7 +79,7 @@ public class Player extends TickingGameObject{
 		
 		if(id==EntityID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
-			g.setColor(Color.WHITE);
+			g.setColor(Color.GREEN);
 			g.fillRect((int) x, (int) y, width, height);
 		}
 		else if(id==EntityID.Player2){

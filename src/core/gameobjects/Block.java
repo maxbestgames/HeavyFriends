@@ -19,8 +19,8 @@ public abstract class Block extends TickingGameObject {
 	
 	protected static int blockSize = 32;
 	protected Random r = new Random();
-	boolean drawBounds = false;
-	boolean drawTexture = true;
+	boolean drawBounds = true;
+	boolean drawTexture = false;
 	
 	private BlockType type;
 
@@ -44,7 +44,7 @@ public abstract class Block extends TickingGameObject {
 				//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 				//g.fillRect((int) x, (int) y, blockSize, blockSize);
 			} else {
-				g.setColor(Color.BLACK);
+				g.setColor(Color.WHITE);
 				g.drawRect((int) x, (int) y, blockSize, blockSize);
 			}
 			

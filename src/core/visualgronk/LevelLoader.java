@@ -3,6 +3,7 @@ package core.visualgronk;
 import java.awt.image.BufferedImage;
 
 import core.Game;
+import core.enums.EnemyType;
 import core.enums.EntityID;
 import core.gameobjects.Player;
 import core.gameobjects.blocks.Claybrick;
@@ -12,6 +13,7 @@ import core.gameobjects.blocks.Grass;
 import core.gameobjects.blocks.Stonebrick;
 import core.gameobjects.blocks.Water;
 import core.gameobjects.blocks.WaterSurface;
+import core.gameobjects.enemies.BasicEnemy;
 import core.handlers.ObjectHandler;
 
 public class LevelLoader {
@@ -43,8 +45,9 @@ public class LevelLoader {
 				
 				//System.out.println(Integer.toHexString(image.getRGB(i, j)));
 				
-				if(red == 0 && green == 38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
-				
+				if(red ==   0 && green ==  38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
+				if(red == 255 && green ==   0 && blue ==   0) handler.addObject(new BasicEnemy(i*32, j*32, EntityID.Enemy, EnemyType.BasicEnemy));
+
 				
 				if(red == 255 && green == 255 && blue == 255) handler.addObject(new Dirt(i*32, j*32) );
 				if(red ==   1 && green == 255 && blue == 255) handler.addObject(new WaterSurface(i*32, j*32) );
