@@ -15,6 +15,7 @@ public abstract class GameObject {
 	protected ObjectHandler handler;
 	protected Texture tex;
 	protected int width,height;
+	protected boolean collisionEnabled = true;
 	
 	public GameObject(float x, float y, EntityID id) {
 		this.x = x;
@@ -88,5 +89,13 @@ public abstract class GameObject {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public boolean isCollisionEnabled() {
+		return collisionEnabled;
+	}
+
+	public void setCollisionEnabled(boolean collisionEnabled) {
+		this.collisionEnabled = collisionEnabled;
 	}
 }

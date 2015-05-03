@@ -19,8 +19,8 @@ public abstract class Block extends TickingGameObject {
 	
 	protected static int blockSize = 32;
 	protected Random r = new Random();
-	boolean drawBounds = true;
-	boolean drawTexture = false;
+	boolean drawBounds = false;
+	boolean drawTexture = true;
 	
 	private BlockType type;
 
@@ -55,6 +55,11 @@ public abstract class Block extends TickingGameObject {
 			if(drawTexture && type == BlockType.Grass) g2d.drawImage(blockTexture, (int) x, (int) y, null);
 			if(drawTexture && type == BlockType.Stonebrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
 			if(drawTexture && type == BlockType.Claybrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Wood) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Chain) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.LavaSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTexture && type == BlockType.Lava) anim.drawAnimation(g2d, (int) x,(int) y);
+			
 		}
 	}
 
@@ -68,14 +73,6 @@ public abstract class Block extends TickingGameObject {
 
 	public static void setBlockSize(int blockSize) {
 		Block.blockSize = blockSize;
-	}
-	
-	public void setTextureArray() {
-		
-	}
-	
-	public void updateTextureArray() {
-		
 	}
 
 	public abstract void tick();

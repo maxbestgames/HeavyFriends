@@ -24,6 +24,7 @@ public class Player extends TickingGameObject{
 	
 	private Animation playerWalk;
 	private Animation playerCrawl;
+	private Animation playerProne;
 	
 	private PlayerState currentPlayerState;
 	private PlayerAction currentPlayerAction;
@@ -32,8 +33,8 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = true;
-	private boolean drawTextures = false;
+	private boolean drawHitBoxes = false;
+	private boolean drawTextures = true;
 	
 	
 	
@@ -42,10 +43,15 @@ public class Player extends TickingGameObject{
 		currentPlayerState = PlayerState.Standing;
 		currentPlayerAction = PlayerAction.Falling;
 		
-		tex = new Texture("assets/spritemaps/stickmang.png", 32, 64);
+		tex = new Texture("assets/spritemaps/test.png", 32, 64);
 		
-		playerWalk = new Animation(5, tex.getSprite(0, 0), tex.getSprite(1, 0), tex.getSprite(2, 0));
-		playerCrawl = new Animation(5, tex.getSprite(7,0), tex.getSprite(8,0));
+		playerWalk = new Animation(5, tex.getSprite(1, 0), tex.getSprite(2, 0), tex.getSprite(3, 0), tex.getSprite(4, 0));
+		playerCrawl = new Animation(7, tex.getSprite(9, 0), tex.getSprite(10, 0), tex.getSprite(11, 0), tex.getSprite(12, 0));
+		playerProne = new Animation(9,
+				tex.rotate(tex.getSprite(15, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(16, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(17, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(18, 0), (float) (Math.PI/2), 32, 64));
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
@@ -72,6 +78,7 @@ public class Player extends TickingGameObject{
 		
 		playerWalk.runAnimation();
 		playerCrawl.runAnimation();
+		playerProne.runAnimation();
 		
 	}
 	
@@ -80,7 +87,7 @@ public class Player extends TickingGameObject{
 		if(id==EntityID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			g.setColor(Color.GREEN);
-			g.fillRect((int) x, (int) y, width, height);
+			//g.fillRect((int) x, (int) y, width, height);
 		}
 		else if(id==EntityID.Player2){
 			g.setColor(Color.YELLOW);
@@ -93,10 +100,15 @@ public class Player extends TickingGameObject{
 		if(drawTextures) {
 			if (velX > 0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
 			else if (velX <0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
-			else g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			else if (velX == 0 && currentPlayerState == PlayerState.Standing)  g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 			
 			if (velX > 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
 			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
+			else if (velX == 0 && currentPlayerState == PlayerState.Crouching)  g.drawImage(tex.getSprite(8, 0), (int) x, (int) y-32, null);
+			
+			if (velX > 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
+			else if (velX < 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
+			else if (velX == 0 && currentPlayerState == PlayerState.Proning)  g.drawImage(tex.rotate(tex.getSprite(14, 0), (float) (Math.PI/2), 32, 64), (int) x-32, (int) y-32, null);
 			
 			//if (velX > 0 && currentPlayerState == PlayerState.Proning)
 			

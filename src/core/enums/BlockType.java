@@ -8,6 +8,10 @@ public enum BlockType {
 	WaterSurface(),
 	Water(),
 	Stonebrick(),
-	Claybrick();
+	Claybrick(),
+	Wood(),
+	Chain(),
+	Lava(),
+	LavaSurface();
 	
 }

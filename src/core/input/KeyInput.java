@@ -71,7 +71,7 @@ public class KeyInput extends KeyAdapter{
 				}
 				if (keyPressed[KeyEvent.VK_D] && !tempPlayer.getColHandler().getRightStop()) {
 					if(tempPlayer.getState() == PlayerState.Standing) tempPlayer.setVelX( 5 );
-					if(tempPlayer.getState() == PlayerState.Crouching) tempPlayer.setVelX( 3 );
+					if(tempPlayer.getState() == PlayerState.Crouching) tempPlayer.setVelX( 3 );                
 					if(tempPlayer.getState() == PlayerState.Proning) tempPlayer.setVelX( 2 );
 					keyDown[2] = true;
 				}

@@ -13,6 +13,8 @@ public class WaterSurface extends Block {
 		anim = new Animation(15, tex.getSprite(r.nextInt(2)+2, 0), tex.getSprite(r.nextInt(2)+2, 0),
 				tex.getSprite(r.nextInt(2)+2, 0), tex.getSprite(r.nextInt(2)+2, 0));
 		
+		collisionEnabled = false;
+		
 	}
 
 	public void tick() {

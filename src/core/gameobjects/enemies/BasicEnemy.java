@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import core.Game;
 import core.enums.EnemyType;
 import core.enums.EntityID;
-import core.enums.PlayerState;
 import core.gameobjects.Enemy;
 import core.handlers.enemy.EnemyMovementHandler;
 

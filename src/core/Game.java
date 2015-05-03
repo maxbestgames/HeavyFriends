@@ -53,7 +53,7 @@ public class Game implements Runnable {
 		//TODO make spawners work
 		
 		currentLevel = LevelID.TestRealm;
-		String levelFilePath = "assets/maps/testMap.png";
+		String levelFilePath = "assets/maps/testMap3.png";
 		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
 		
