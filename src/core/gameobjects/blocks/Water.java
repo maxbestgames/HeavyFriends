@@ -1,7 +1,8 @@
-package core.gameobjects;
+package core.gameobjects.blocks;
 
 import core.enums.BlockType;
 import core.enums.EntityID;
+import core.gameobjects.Block;
 import core.visualgronk.Animation;
 
 public class Water extends Block {

@@ -18,7 +18,7 @@ import core.visualgronk.Texture;
 public abstract class Block extends TickingGameObject {
 	
 	protected static int blockSize = 32;
-	Random r = new Random();
+	protected Random r = new Random();
 	boolean drawBounds = false;
 	boolean drawTexture = true;
 	
@@ -44,12 +44,13 @@ public abstract class Block extends TickingGameObject {
 				//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 				//g.fillRect((int) x, (int) y, blockSize, blockSize);
 			} else {
-				g.setColor(Color.WHITE);
+				g.setColor(Color.BLACK);
 				g.drawRect((int) x, (int) y, blockSize, blockSize);
 			}
+			
 			if(drawTexture && type == BlockType.Dirt) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.WaterSurface) anim.drawAnimation(g, (int) x, (int) y);
-			if(drawTexture && type == BlockType.Water) anim.drawAnimation(g, (int) x,(int) y);
+			if(drawTexture && type == BlockType.WaterSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTexture && type == BlockType.Water) anim.drawAnimation(g2d, (int) x,(int) y);
 			if(drawTexture && type == BlockType.Cobblestone) g2d.drawImage(blockTexture, (int) x, (int) y, null);
 			if(drawTexture && type == BlockType.Grass) g2d.drawImage(blockTexture, (int) x, (int) y, null);
 			if(drawTexture && type == BlockType.Stonebrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);

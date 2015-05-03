@@ -3,8 +3,6 @@ package core.visualgronk;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URL;
 
 public class Texture {
 	
@@ -37,7 +35,7 @@ public class Texture {
 	}
 	
 	public void fixAlpha() {
-		
+		//TODO
 	}
 	
 	public BufferedImage getSprite(int col, int row) {

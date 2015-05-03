@@ -1,8 +1,5 @@
 package core;
 
-import core.display.Camera;
-import core.display.HUD;
-import core.handlers.WorldHandler;
 import core.input.KeyInput;
 
 public class TickThread implements Runnable {

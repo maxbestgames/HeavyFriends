@@ -1,14 +1,12 @@
 package core.display;
 
-import core.Game;
 import core.gameobjects.GameObject;
 
 
 public class Camera {
 	
 	private float x, y;
-	private float velX, velY, maxVel, vel;
-	private int delay, ticks;
+	private float velX, velY, vel;
 	private float difX, difY;
 	
 	GameObject camCenter;
@@ -18,21 +16,11 @@ public class Camera {
 	public Camera(float x, float y) {
 		this.x = x;
 		this.y = y;
-		maxVel = 30;
-		delay = 2;
 		vel = 0.015f;
 		
 	}
 	
 	public void tick() {
-		
-		/*if ( ticks < delay) {
-			ticks++;
-		} else {
-			ticks = 0;
-			velX = Math.abs(x -player.getX() +  Window.getVisibleScreenX()/2);
-			velY = Math.abs(y -player.getY() + Window.getVisibleScreenY()/2);
-		}*/
 		
 		desiredX = -camCenter.getX() +  Window.getVisibleScreenX()/2;
 		desiredY = -camCenter.getY() +  Window.getVisibleScreenY()/2;

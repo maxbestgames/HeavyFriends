@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.io.File;
 import java.util.Random;
 
 import core.Game;
@@ -94,6 +93,8 @@ public class Player extends TickingGameObject{
 		if(drawTextures) {
 			if (velX > 0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
 			else if (velX <0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
+			else g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			
 			if (velX > 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
 			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
 			
@@ -101,7 +102,6 @@ public class Player extends TickingGameObject{
 			
 			
 			
-			else g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 			
 		}
 		

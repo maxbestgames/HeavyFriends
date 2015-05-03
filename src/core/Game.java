@@ -4,8 +4,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.Random;
 
-import core.display.Camera;
-import core.display.HUD;
 import core.display.Window;
 import core.enums.EntityID;
 import core.enums.LevelID;

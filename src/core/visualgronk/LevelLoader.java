@@ -3,17 +3,15 @@ package core.visualgronk;
 import java.awt.image.BufferedImage;
 
 import core.Game;
-import core.enums.BlockType;
 import core.enums.EntityID;
-import core.gameobjects.Block;
-import core.gameobjects.Claybrick;
-import core.gameobjects.Cobblestone;
-import core.gameobjects.Dirt;
-import core.gameobjects.Grass;
 import core.gameobjects.Player;
-import core.gameobjects.Stonebrick;
-import core.gameobjects.Water;
-import core.gameobjects.WaterSurface;
+import core.gameobjects.blocks.Claybrick;
+import core.gameobjects.blocks.Cobblestone;
+import core.gameobjects.blocks.Dirt;
+import core.gameobjects.blocks.Grass;
+import core.gameobjects.blocks.Stonebrick;
+import core.gameobjects.blocks.Water;
+import core.gameobjects.blocks.WaterSurface;
 import core.handlers.ObjectHandler;
 
 public class LevelLoader {
@@ -38,6 +36,7 @@ public class LevelLoader {
 		for(int i = 0; i<w; i++){
 			for( int j = 0; j<h; j++){
 				int pixel = image.getRGB(i, j);
+				int alpha = (pixel >> 24) & 0xff; // alpha = 0 is transparent
 				int red = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8 ) & 0xff;
 				int blue = (pixel) & 0xff;
@@ -45,6 +44,7 @@ public class LevelLoader {
 				//System.out.println(Integer.toHexString(image.getRGB(i, j)));
 				
 				if(red == 0 && green == 38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
+				
 				
 				if(red == 255 && green == 255 && blue == 255) handler.addObject(new Dirt(i*32, j*32) );
 				if(red ==   1 && green == 255 && blue == 255) handler.addObject(new WaterSurface(i*32, j*32) );

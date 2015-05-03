@@ -13,7 +13,7 @@ public class PlayerCollisionHandler {
 	private boolean leftStop = false;
 	private boolean rightStop = false;
 	private boolean topStop = false;
-	private boolean canMove = true;
+	//private boolean canMove = true;
 
 	private int objCount;
 	
