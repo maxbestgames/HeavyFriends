@@ -4,8 +4,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.Random;
 
-import core.display.Camera;
-import core.display.HUD;
 import core.display.Window;
 import core.enums.EntityID;
 import core.enums.LevelID;
@@ -55,7 +53,7 @@ public class Game implements Runnable {
 		//TODO make spawners work
 		
 		currentLevel = LevelID.TestRealm;
-		String levelFilePath = "assets/maps/testMap.png";
+		String levelFilePath = "assets/maps/testMap3.png";
 		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
 		

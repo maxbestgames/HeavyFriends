@@ -10,8 +10,8 @@ import core.handlers.enemy.EnemyMovementHandler;
 public abstract class Enemy extends TickingGameObject {
 
 	EnemyCollisionHandler col;
-	EnemyMovementHandler mov;
-	EnemyBoundsHandler bound;
+	protected EnemyMovementHandler movement;
+	EnemyBoundsHandler boundBox;
 	EnemyAI ai;
 	EnemyType type;
 	

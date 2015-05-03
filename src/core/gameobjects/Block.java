@@ -1,35 +1,38 @@
 package core.gameobjects;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.io.File;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import core.Game;
 import core.display.Window;
 import core.enums.BlockType;
 import core.enums.EntityID;
+import core.visualgronk.Animation;
 import core.visualgronk.Texture;
 
 
-public class Block extends GameObject{
+public abstract class Block extends TickingGameObject {
 	
 	protected static int blockSize = 32;
-	Random r = new Random();
-	boolean drawBounds = true;
+	protected Random r = new Random();
+	boolean drawBounds = false;
 	boolean drawTexture = true;
 	
 	private BlockType type;
 
+	protected BufferedImage blockTexture;
+	protected Animation anim;
 	
-	public Block(int x, int y, EntityID id, BlockType type) {
+	public Block(int x, int y, EntityID id, BlockType type, String texPath) {
 		super(x, y, id);
 		this.type = type;
-		String blockFileTexture = "assets/texture/testBlock.png";
-		tex = new Texture(blockFileTexture, 32, 32);
+		tex = new Texture(texPath, 32, 32);
+		blockTexture = tex.getSprite(0, 0);
+		
 	}
 
 	public void render(Graphics g) {
@@ -38,15 +41,25 @@ public class Block extends GameObject{
 		
 			Graphics2D g2d = (Graphics2D) g;
 			if (!drawBounds) {
-				g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
-				g.fillRect((int) x, (int) y, blockSize, blockSize);
+				//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
+				//g.fillRect((int) x, (int) y, blockSize, blockSize);
 			} else {
 				g.setColor(Color.WHITE);
 				g.drawRect((int) x, (int) y, blockSize, blockSize);
 			}
-			if(drawTexture && type == BlockType.Dirt) {
-				g2d.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
-			}
+			
+			if(drawTexture && type == BlockType.Dirt) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.WaterSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTexture && type == BlockType.Water) anim.drawAnimation(g2d, (int) x,(int) y);
+			if(drawTexture && type == BlockType.Cobblestone) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Grass) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Stonebrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Claybrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Wood) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.Chain) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.LavaSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTexture && type == BlockType.Lava) anim.drawAnimation(g2d, (int) x,(int) y);
+			
 		}
 	}
 
@@ -61,5 +74,9 @@ public class Block extends GameObject{
 	public static void setBlockSize(int blockSize) {
 		Block.blockSize = blockSize;
 	}
+
+	public abstract void tick();
+	
+	
 
 }

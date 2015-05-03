@@ -20,5 +20,9 @@ If this is not the case, the last tile pulled from the OPEN list, and its parent
 
 
 public class EnemyMovementHandler {
+
+	public boolean isGravityEnabled() {
+		return true;
+	}
 	
 }

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.io.File;
 import java.util.Random;
 
 import core.Game;
@@ -14,6 +13,7 @@ import core.enums.PlayerState;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
 import core.handlers.player.PlayerMovementHandler;
+import core.visualgronk.Animation;
 import core.visualgronk.Texture;
 
 
@@ -22,6 +22,10 @@ public class Player extends TickingGameObject{
 	
 	private float gravity = 0.9f;
 	
+	private Animation playerWalk;
+	private Animation playerCrawl;
+	private Animation playerProne;
+	
 	private PlayerState currentPlayerState;
 	private PlayerAction currentPlayerAction;
 	
@@ -29,8 +33,8 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = true;
-	private boolean drawTextures = false;
+	private boolean drawHitBoxes = false;
+	private boolean drawTextures = true;
 	
 	
 	
@@ -38,7 +42,16 @@ public class Player extends TickingGameObject{
 		super(x, y, id);
 		currentPlayerState = PlayerState.Standing;
 		currentPlayerAction = PlayerAction.Falling;
-		tex = new Texture("assets/spritemaps/coolguy.png", 32, 32);
+		
+		tex = new Texture("assets/spritemaps/test.png", 32, 64);
+		
+		playerWalk = new Animation(5, tex.getSprite(1, 0), tex.getSprite(2, 0), tex.getSprite(3, 0), tex.getSprite(4, 0));
+		playerCrawl = new Animation(7, tex.getSprite(9, 0), tex.getSprite(10, 0), tex.getSprite(11, 0), tex.getSprite(12, 0));
+		playerProne = new Animation(9,
+				tex.rotate(tex.getSprite(15, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(16, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(17, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(18, 0), (float) (Math.PI/2), 32, 64));
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
@@ -63,6 +76,10 @@ public class Player extends TickingGameObject{
 		
 		getColHandler().doPlayerCollision();
 		
+		playerWalk.runAnimation();
+		playerCrawl.runAnimation();
+		playerProne.runAnimation();
+		
 	}
 	
 	public void render(Graphics g) {
@@ -70,7 +87,7 @@ public class Player extends TickingGameObject{
 		if(id==EntityID.Player){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			g.setColor(Color.GREEN);
-			g.fillRect((int) x, (int) y, width, height);
+			//g.fillRect((int) x, (int) y, width, height);
 		}
 		else if(id==EntityID.Player2){
 			g.setColor(Color.YELLOW);
@@ -81,16 +98,43 @@ public class Player extends TickingGameObject{
 		g.setColor(Color.RED);
 		
 		if(drawTextures) {
-			g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			if (velX > 0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
+			else if (velX <0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
+			else if (velX == 0 && currentPlayerState == PlayerState.Standing)  g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+			
+			if (velX > 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
+			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
+			else if (velX == 0 && currentPlayerState == PlayerState.Crouching)  g.drawImage(tex.getSprite(8, 0), (int) x, (int) y-32, null);
+			
+			if (velX > 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
+			else if (velX < 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
+			else if (velX == 0 && currentPlayerState == PlayerState.Proning)  g.drawImage(tex.rotate(tex.getSprite(14, 0), (float) (Math.PI/2), 32, 64), (int) x-32, (int) y-32, null);
+			
+			//if (velX > 0 && currentPlayerState == PlayerState.Proning)
+			
+			
+			
 			
 		}
 		
 		if (drawHitBoxes) {
 			g2d.draw(boundBox.getBoundsTop());
 			g2d.draw(boundBox.getBoundsBottom());
-			g2d.draw(boundBox.getBoundsLeft());
-			g2d.draw(boundBox.getBoundsRight());
+			g2d.draw(boundBox.getBoundsTopLeft());
+			g2d.draw(boundBox.getBoundsTopRight());
+			g.setColor(Color.BLUE);
+			g2d.draw(boundBox.getBoundsBotLeft());
+			g2d.draw(boundBox.getBoundsBotRight());
+			g.setColor(Color.RED);
 			g2d.draw(boundBox.getBounds());
+			g.setColor(Color.WHITE);
+			g2d.draw(boundBox.getBoundsBotStop());
+			g2d.draw(boundBox.getBoundsRightStop());
+			g2d.draw(boundBox.getBoundsLeftStop());
+			g2d.draw(boundBox.getBoundsTopStop());
+
+
+
 		}
 	}
 
