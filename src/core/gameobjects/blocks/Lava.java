@@ -3,9 +3,10 @@ package core.gameobjects.blocks;
 import core.enums.BlockType;
 import core.enums.EntityID;
 import core.gameobjects.Block;
+import core.gameobjects.TickingBlock;
 import core.visualgronk.Animation;
 
-public class Lava extends Block {
+public class Lava extends TickingBlock {
 
 	public Lava(int x, int y) {
 		super(x, y, EntityID.Block, BlockType.Lava, "assets/texture/lava.png");

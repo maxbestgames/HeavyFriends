@@ -39,19 +39,19 @@ public class Player extends TickingGameObject{
 	
 	
 	public Player(int x, int y, EntityID id) {
-		super(x, y, id);
+          		super(x, y, id);
 		currentPlayerState = PlayerState.Standing;
 		currentPlayerAction = PlayerAction.Falling;
 		
-		tex = new Texture("assets/spritemaps/test.png", 32, 64);
+		tex = new Texture("assets/spritemaps/blackmandelux.png", 32, 64);
 		
-		playerWalk = new Animation(5, tex.getSprite(1, 0), tex.getSprite(2, 0), tex.getSprite(3, 0), tex.getSprite(4, 0));
-		playerCrawl = new Animation(7, tex.getSprite(9, 0), tex.getSprite(10, 0), tex.getSprite(11, 0), tex.getSprite(12, 0));
-		playerProne = new Animation(9,
-				tex.rotate(tex.getSprite(15, 0), (float) (Math.PI/2), 32, 64), 
-				tex.rotate(tex.getSprite(16, 0), (float) (Math.PI/2), 32, 64), 
-				tex.rotate(tex.getSprite(17, 0), (float) (Math.PI/2), 32, 64), 
-				tex.rotate(tex.getSprite(18, 0), (float) (Math.PI/2), 32, 64));
+		playerWalk = new Animation(3, tex.getSprite(4, 0), tex.getSprite(5, 0), tex.getSprite(7, 0), tex.getSprite(8, 0), tex.getSprite(9, 0), tex.getSprite(10, 0), tex.getSprite(11, 0), tex.getSprite(12, 0), tex.getSprite(13, 0), tex.getSprite(14, 0), tex.getSprite(15, 0));
+		playerCrawl = new Animation(3, tex.getSprite(17, 0), tex.getSprite(18, 0), tex.getSprite(19, 0));
+		playerProne = new Animation(8,
+				tex.rotate(tex.getSprite(25, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(26, 0), (float) (Math.PI/2), 32, 64), 
+				tex.rotate(tex.getSprite(27, 0), (float) (Math.PI/2), 32, 64));
+		
 		
 		boundBox = new PlayerBoundsHandler(this);
 		movement = new PlayerMovementHandler(this);
@@ -104,11 +104,11 @@ public class Player extends TickingGameObject{
 			
 			if (velX > 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
 			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
-			else if (velX == 0 && currentPlayerState == PlayerState.Crouching)  g.drawImage(tex.getSprite(8, 0), (int) x, (int) y-32, null);
+			else if (velX == 0 && currentPlayerState == PlayerState.Crouching)  g.drawImage(tex.getSprite(17, 0), (int) x, (int) y-32, null);
 			
 			if (velX > 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
 			else if (velX < 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
-			else if (velX == 0 && currentPlayerState == PlayerState.Proning)  g.drawImage(tex.rotate(tex.getSprite(14, 0), (float) (Math.PI/2), 32, 64), (int) x-32, (int) y-32, null);
+			else if (velX == 0 && currentPlayerState == PlayerState.Proning) g.drawImage(tex.rotate(tex.getSprite(24, 0), (float) (Math.PI/2), 32, 64), (int) x-32, (int) y-32, null);
 			
 			//if (velX > 0 && currentPlayerState == PlayerState.Proning)
 			

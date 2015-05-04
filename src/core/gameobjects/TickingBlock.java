@@ -15,7 +15,7 @@ import core.visualgronk.Animation;
 import core.visualgronk.Texture;
 
 
-public abstract class Block extends GameObject {
+public abstract class TickingBlock extends TickingGameObject {
 	
 	protected static int blockSize = 32;
 	protected Random r = new Random();
@@ -27,7 +27,7 @@ public abstract class Block extends GameObject {
 	protected BufferedImage blockTexture;
 	protected Animation anim;
 	
-	public Block(int x, int y, EntityID id, BlockType type, String texPath) {
+	public TickingBlock(int x, int y, EntityID id, BlockType type, String texPath) {
 		super(x, y, id);
 		this.type = type;
 		tex = new Texture(texPath, 32, 32);
@@ -48,13 +48,10 @@ public abstract class Block extends GameObject {
 				g.drawRect((int) x, (int) y, blockSize, blockSize);
 			}
 			
-			if(drawTexture && type == BlockType.Dirt) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Cobblestone) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Grass) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Stonebrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Claybrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Wood) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Chain) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTexture && type == BlockType.WaterSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTexture && type == BlockType.Water) anim.drawAnimation(g2d, (int) x,(int) y);
+			if(drawTexture && type == BlockType.LavaSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTexture && type == BlockType.Lava) anim.drawAnimation(g2d, (int) x,(int) y);
 			
 		}
 	}
@@ -70,4 +67,9 @@ public abstract class Block extends GameObject {
 	public static void setBlockSize(int blockSize) {
 		Block.blockSize = blockSize;
 	}
+
+	public abstract void tick();
+	
+	
+
 }

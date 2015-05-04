@@ -3,9 +3,10 @@ package core.gameobjects.blocks;
 import core.enums.BlockType;
 import core.enums.EntityID;
 import core.gameobjects.Block;
+import core.gameobjects.TickingBlock;
 import core.visualgronk.Animation;
 
-public class Water extends Block {
+public class Water extends TickingBlock {
 
 	public Water(int x, int y) {
 		super(x, y, EntityID.Block, BlockType.Water, "assets/texture/water.png");
