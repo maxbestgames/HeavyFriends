@@ -135,7 +135,7 @@ public class PlayerCollisionHandler {
 		if (count != 0) 
 			objCount = count;
 			
-		if (objCount == 0) {
+		if (count == 0) {
 			System.exit(0); 
 		}
 	}

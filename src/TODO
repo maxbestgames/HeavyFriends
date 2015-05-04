@@ -25,6 +25,8 @@ Asset
   Background
   
   
+Monster spawning favours creatures that have done more damage to the player over time
+  
 Monster AI (neural nets)
   take in various inputs about enemy and self
   return recommended action
@@ -34,8 +36,6 @@ Monster AI (neural nets)
   Health as percent
   Can Attack ranged (0,1)
   player is facing enemy (0,1)
-  
-  
   
   train by comparing damage dealt to damage done.
   

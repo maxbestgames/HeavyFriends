@@ -5,5 +5,6 @@ public enum EntityID {
 	Player(),
 	Player2(),
 	Block(),
-	Enemy();
+	Enemy(),
+	Projectile();
 }
