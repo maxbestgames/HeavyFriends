@@ -35,8 +35,6 @@ public class CollisionHandler {
 
 						if (Math.abs(tempObject2.getX() - tempObject.getX()) <  300 && Math.abs(tempObject2.getY() - tempObject.getY()) < 300 ) { // are the blocks close to the obj?
 
-
-
 							count++;
 
 							if (tempObject2.isCollisionEnabled()) { // solid objects here
@@ -68,22 +66,30 @@ public class CollisionHandler {
 
 								}
 								if (tempObject.getObjBoundBox().getBoundsTopLeft().intersects(tempObject2.getBounds())) {
-									tempObject.setVelX(tempObject.getVelX() * -1);
+									if(tempObject instanceof BouncingProjectile) {
+										tempObject.setVelX(tempObject.getVelX() * -1);
+									}
 									tempObject.setX(tempObject2.getX() + Block.getBlockSize());
 									//System.out.println("L: "+(int) tempObject2.getX() + " " + (int) tempObject2.getY() + ", " + " " + (int) tempObject2.getX() + " " + (int) tempObject2.getY());
 								}
 								if (tempObject.getObjBoundBox().getBoundsBotLeft().intersects(tempObject2.getBounds())) {
-									tempObject.setVelX(tempObject.getVelX() * -1);
+									if(tempObject instanceof BouncingProjectile) {
+										tempObject.setVelX(tempObject.getVelX() * -1);
+									}
 									tempObject.setX(tempObject2.getX() + Block.getBlockSize());
 									//System.out.println("L: "+(int) tempObject2.getX() + " " + (int) tempObject2.getY() + ", " + " " + (int) tempObject2.getX() + " " + (int) tempObject2.getY());
 								}
 								if (tempObject.getObjBoundBox().getBoundsTopRight().intersects(tempObject2.getBounds())) {
-									tempObject.setVelX(tempObject.getVelX() * -1);
+									if(tempObject instanceof BouncingProjectile) {
+										tempObject.setVelX(tempObject.getVelX() * -1);
+									}
 									tempObject.setX(tempObject2.getX() - tempObject.getWidth());
 									//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject2.getX() + " " + (int) tempObject2.getY());
 								}
 								if (tempObject.getObjBoundBox().getBoundsBotRight().intersects(tempObject2.getBounds())) {
-									tempObject.setVelX(tempObject.getVelX() * -1);
+									if(tempObject instanceof BouncingProjectile) {
+										tempObject.setVelX(tempObject.getVelX() * -1);
+									}
 									tempObject.setX(tempObject2.getX() - tempObject.getWidth());
 									//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject2.getX() + " " + (int) tempObject2.getY());
 								}
@@ -99,6 +105,8 @@ public class CollisionHandler {
 								if (tempObject.getObjBoundBox().getBoundsTopStop().intersects(tempObject2.getBounds())) {
 									tempObject.setTopStop(true);
 								}
+								
+								// TODO ledge edge detection left and right
 
 							} else { // non solid blocks here
 
@@ -108,7 +116,7 @@ public class CollisionHandler {
 				}
 			}
 		}
-		System.out.println(count);
+		//System.out.println(count);
 		count = 0;
 	}
 }

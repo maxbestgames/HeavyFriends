@@ -31,7 +31,7 @@ public class BasicEnemy extends Enemy {
 	protected int direction;
 	
 	protected float gravity;
-	protected float patrolSpeed = 4.5f;
+	protected float patrolSpeed = 1.0f;
 	
 	public BasicEnemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id, type);
@@ -40,9 +40,9 @@ public class BasicEnemy extends Enemy {
 		
 		movement = new MovementHandler(this);
 		
-		tex = new Texture("assets/spritemaps/Theman.png", 32, 64);
+		tex = new Texture("assets/spritemaps/Theman.png", 64, 64);
 		
-		walk = new Animation(3, tex.getSprite(1, 0), tex.getSprite(2, 0), tex.getSprite(3, 0) );
+		walk = new Animation(7, tex.getSprite(1, 0), tex.getSprite(2, 0), tex.getSprite(3, 0) );
 		
 		currentAction = ObjectAction.Falling;
 		currentState = ObjectState.Standing;
@@ -52,8 +52,9 @@ public class BasicEnemy extends Enemy {
 		height = 64;
 		width = 32;
 		
-		direction = r.nextInt(2);
-		if (direction == 0) direction = -1;
+		direction = r.nextInt(20);
+		if (direction > 10) direction = -1;
+		else direction = 1;
 
 	}
 
@@ -107,25 +108,20 @@ public class BasicEnemy extends Enemy {
 	protected void performAction() {
 		EnemyAIState state = decideAction();
 		
-		System.out.println("starting patrol... ");
 		if (state == EnemyAIState.Patrolling) {
 			if (direction == 1) { // patrolling right
-				System.out.println("heading right ");
 				if (!rightStop) {
 					setVelX(patrolSpeed);
 				} else {
 					direction = -1;
-					setVelX(-patrolSpeed);
-					System.out.println("hit a wall, turning around.");
+					setVelX(patrolSpeed*-1);
 				}
 			} else { // patrolling left
-				System.out.println("heading left ");
 				if (!leftStop) {
-					setVelX(-patrolSpeed);
+					setVelX(patrolSpeed*-1);
 				} else {
 					direction = 1;
 					setVelX(patrolSpeed);
-					System.out.println("hit a wall, turning around.");
 				}
 			}
 		}
