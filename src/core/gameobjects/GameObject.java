@@ -3,6 +3,7 @@ package core.gameobjects;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import core.Game;
 import core.enums.EntityID;
 import core.handlers.ObjectHandler;
 import core.visualgronk.Texture;
@@ -16,7 +17,11 @@ public abstract class GameObject {
 	protected Texture tex;
 	protected int width,height;
 	protected boolean collisionEnabled = true;
+	protected static boolean drawTextures = true;
+	protected static boolean drawBoundingBoxes = false;
+
 	
+
 	public GameObject(float x, float y, EntityID id) {
 		this.x = x;
 		this.y = y;
@@ -97,5 +102,21 @@ public abstract class GameObject {
 
 	public void setCollisionEnabled(boolean collisionEnabled) {
 		this.collisionEnabled = collisionEnabled;
+	}
+	
+	public static void setDrawTextures(boolean drawTextures) {
+		GameObject.drawTextures = drawTextures;
+	}
+
+	public static void setDrawBoundingBoxes(boolean drawBoundingBoxes) {
+		GameObject.drawBoundingBoxes = drawBoundingBoxes;
+	}
+
+	public static boolean isDrawTextures() {
+		return drawTextures;
+	}
+
+	public static boolean isDrawBoundingBoxes() {
+		return drawBoundingBoxes;
 	}
 }

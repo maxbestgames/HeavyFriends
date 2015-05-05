@@ -7,7 +7,7 @@ public class TickThread implements Runnable {
 	boolean running = true;
 	private KeyInput keyIn;
 	private Game game;
-	
+
 	public TickThread(Game game, KeyInput keyIn) {
 		this.keyIn = keyIn;
 		this.game = game;
@@ -15,7 +15,7 @@ public class TickThread implements Runnable {
 	
 	public void run() {
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
+		double amountOfTicks = 15;//per second
 		double timePerTick = 1000000000/amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();

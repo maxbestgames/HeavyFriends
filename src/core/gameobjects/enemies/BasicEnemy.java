@@ -25,8 +25,6 @@ public class BasicEnemy extends Enemy {
 	private PlayerState currentObjectState;
 	
 	private Animation walk;
-	boolean drawTextures = true;
-	protected boolean drawHitBoxes = true;
 	
 	protected int direction;
 	
@@ -72,7 +70,7 @@ public class BasicEnemy extends Enemy {
 			else if (velX == 0 && currentState == ObjectState.Standing)  g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 		}
 
-		if (drawHitBoxes) {
+		if (drawBoundingBoxes) {
 			g2d.draw(getBounds());
 		}
 	}

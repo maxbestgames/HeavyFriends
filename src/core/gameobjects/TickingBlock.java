@@ -19,8 +19,6 @@ public abstract class TickingBlock extends TickingGameObject {
 	
 	protected static int blockSize = 32;
 	protected Random r = new Random();
-	boolean drawBounds = false;
-	boolean drawTexture = true;
 	
 	private BlockType type;
 
@@ -40,7 +38,7 @@ public abstract class TickingBlock extends TickingGameObject {
 			&& (Math.abs(Math.abs(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getY())-Math.abs(getY())) < Window.getVisibleScreenY()/2 + 400)) {
 		
 			Graphics2D g2d = (Graphics2D) g;
-			if (!drawBounds) {
+			if (!drawBoundingBoxes) {
 				//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 				//g.fillRect((int) x, (int) y, blockSize, blockSize);
 			} else {
@@ -48,10 +46,10 @@ public abstract class TickingBlock extends TickingGameObject {
 				g.drawRect((int) x, (int) y, blockSize, blockSize);
 			}
 			
-			if(drawTexture && type == BlockType.WaterSurface) anim.drawAnimation(g2d, (int) x, (int) y);
-			if(drawTexture && type == BlockType.Water) anim.drawAnimation(g2d, (int) x,(int) y);
-			if(drawTexture && type == BlockType.LavaSurface) anim.drawAnimation(g2d, (int) x, (int) y);
-			if(drawTexture && type == BlockType.Lava) anim.drawAnimation(g2d, (int) x,(int) y);
+			if(drawTextures && type == BlockType.WaterSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTextures && type == BlockType.Water) anim.drawAnimation(g2d, (int) x,(int) y);
+			if(drawTextures && type == BlockType.LavaSurface) anim.drawAnimation(g2d, (int) x, (int) y);
+			if(drawTextures && type == BlockType.Lava) anim.drawAnimation(g2d, (int) x,(int) y);
 			
 		}
 	}

@@ -19,8 +19,6 @@ public abstract class Block extends GameObject {
 	
 	protected static int blockSize = 32;
 	protected Random r = new Random();
-	boolean drawBounds = false;
-	boolean drawTexture = true;
 	
 	private BlockType type;
 
@@ -40,7 +38,7 @@ public abstract class Block extends GameObject {
 			&& (Math.abs(Math.abs(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getY())-Math.abs(getY())) < Window.getVisibleScreenY()/2 + 400)) {
 		
 			Graphics2D g2d = (Graphics2D) g;
-			if (!drawBounds) {
+			if (!drawBoundingBoxes) {
 				//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 				//g.fillRect((int) x, (int) y, blockSize, blockSize);
 			} else {
@@ -48,13 +46,13 @@ public abstract class Block extends GameObject {
 				g.drawRect((int) x, (int) y, blockSize, blockSize);
 			}
 			
-			if(drawTexture && type == BlockType.Dirt) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Cobblestone) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Grass) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Stonebrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Claybrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Wood) g2d.drawImage(blockTexture, (int) x, (int) y, null);
-			if(drawTexture && type == BlockType.Chain) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Dirt) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Cobblestone) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Grass) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Stonebrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Claybrick) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Wood) g2d.drawImage(blockTexture, (int) x, (int) y, null);
+			if(drawTextures && type == BlockType.Chain) g2d.drawImage(blockTexture, (int) x, (int) y, null);
 			
 		}
 	}

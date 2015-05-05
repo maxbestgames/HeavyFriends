@@ -68,11 +68,11 @@ public class RenderThread extends Canvas implements Runnable {
 		//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
 		g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
 		
-		//g2d.scale(2, 2);
+		//g2d.scale(4, 4);
 		g2d.translate(cam.getX(), cam.getY());
 		Game.getWorldHandler().render(g);
 		g2d.translate(-cam.getX(), -cam.getY());
-		//g2d.scale(-2, -2);
+		//g2d.scale(-4, -4);
 		
 		
 		hud.render(g);

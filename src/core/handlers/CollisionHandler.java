@@ -72,7 +72,7 @@ public class CollisionHandler {
 									tempObject.setX(tempObject2.getX() + Block.getBlockSize());
 									//System.out.println("L: "+(int) tempObject2.getX() + " " + (int) tempObject2.getY() + ", " + " " + (int) tempObject2.getX() + " " + (int) tempObject2.getY());
 								}
-								if (tempObject.getObjBoundBox().getBoundsBotLeft().intersects(tempObject2.getBounds())) {
+								else if (tempObject.getObjBoundBox().getBoundsBotLeft().intersects(tempObject2.getBounds())) {
 									if(tempObject instanceof BouncingProjectile) {
 										tempObject.setVelX(tempObject.getVelX() * -1);
 									}
@@ -86,7 +86,7 @@ public class CollisionHandler {
 									tempObject.setX(tempObject2.getX() - tempObject.getWidth());
 									//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject2.getX() + " " + (int) tempObject2.getY());
 								}
-								if (tempObject.getObjBoundBox().getBoundsBotRight().intersects(tempObject2.getBounds())) {
+								else if (tempObject.getObjBoundBox().getBoundsBotRight().intersects(tempObject2.getBounds())) {
 									if(tempObject instanceof BouncingProjectile) {
 										tempObject.setVelX(tempObject.getVelX() * -1);
 									}

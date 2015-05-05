@@ -17,7 +17,7 @@ public class BoundsHandler {
 	}
 	
 	public Rectangle getBoundsTopRight() {
-		return new Rectangle((int) obj.getX() + obj.getWidth() - 2, (int) obj.getY()+obj.getHeight()/2-12, 1, 1);
+		return new Rectangle((int) obj.getX() + obj.getWidth() - 1, (int) obj.getY()+obj.getHeight()/2-12, 1, 1);
 	}
 	
 	public Rectangle getBoundsBotLeft() {
@@ -25,15 +25,15 @@ public class BoundsHandler {
 	}
 	
 	public Rectangle getBoundsBotRight() {
-		return new Rectangle((int) obj.getX() + obj.getWidth() - 2, (int) obj.getY()+obj.getHeight()/2+12, 1, 1);
+		return new Rectangle((int) obj.getX() + obj.getWidth() - 1, (int) obj.getY()+obj.getHeight()/2+12, 1, 1);
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int) obj.getX() + obj.getWidth()/2-3, (int) obj.getY(), 1, 1);
+		return new Rectangle((int) obj.getX() + obj.getWidth()/2-1, (int) obj.getY(), 2, 1);
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int) obj.getX() + obj.getWidth()/2-2, (int) obj.getY() + obj.getHeight() - 2, 4, 1);
+		return new Rectangle((int) obj.getX() + obj.getWidth()/2-2, (int) obj.getY() + obj.getHeight() - 1, 4, 1);
 	}
 	
 	public Rectangle getBounds() {
@@ -41,7 +41,7 @@ public class BoundsHandler {
 	}
 	
 	public Rectangle getBoundsBotStop() {
-		return new Rectangle((int) obj.getX() + 3, (int) obj.getY() + obj.getHeight(), obj.getWidth() - 6, 1);
+		return new Rectangle((int) obj.getX() + 3, (int) obj.getY() + obj.getHeight() + 1, obj.getWidth() - 6, 1);
 	}
 	
 	public Rectangle getBoundsRightStop() {
@@ -49,7 +49,7 @@ public class BoundsHandler {
 	}
 	
 	public Rectangle getBoundsLeftStop() {
-		return new Rectangle((int) obj.getX() - 1, (int) obj.getY() + 7, 1, obj.getHeight() - 14);
+		return new Rectangle((int) obj.getX() - 2, (int) obj.getY() + 7, 1, obj.getHeight() - 14);
 	}
 	
 	public Rectangle getBoundsTopStop() {

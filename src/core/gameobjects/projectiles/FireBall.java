@@ -18,6 +18,8 @@ public class FireBall extends BouncingProjectile {
 		
 		height = 32;
 		width = 32;
+		
+		
 
 	}
 

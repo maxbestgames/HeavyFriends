@@ -43,12 +43,31 @@ public abstract class Projectile extends TickingGameObject {
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g.setColor(Color.YELLOW);
-		g2d.draw(getBounds());
-		//g2d.fill(getBounds());
-		
-		if (anim != null) anim.drawAnimation(g, (int) x, (int) y);
-		else g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+		if (drawBoundingBoxes) {
+			g.setColor(Color.GREEN);
+			g2d.draw(getBounds());
+			g2d.fill(getBounds());
+			g.setColor(Color.BLUE);
+			g2d.draw(objBoundBox.getBoundsTop());
+			g2d.draw(objBoundBox.getBoundsBottom());
+			g2d.draw(objBoundBox.getBoundsTopLeft());
+			g2d.draw(objBoundBox.getBoundsTopRight());
+			g.setColor(Color.BLUE);
+			g2d.draw(objBoundBox.getBoundsBotLeft());
+			g2d.draw(objBoundBox.getBoundsBotRight());
+			g.setColor(Color.RED);
+			g2d.draw(objBoundBox.getBounds());
+			g.setColor(Color.WHITE);
+			g2d.draw(objBoundBox.getBoundsBotStop());
+			g2d.draw(objBoundBox.getBoundsRightStop());
+			g2d.draw(objBoundBox.getBoundsLeftStop());
+			g2d.draw(objBoundBox.getBoundsTopStop());
+
+		}
+		if (drawTextures){
+			if (anim != null) anim.drawAnimation(g, (int) x, (int) y);
+			else g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
+		}
 	}
 	
 	

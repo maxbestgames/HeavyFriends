@@ -146,4 +146,5 @@ public class Game implements Runnable {
 	public static CollisionHandler getCol() {
 		return col;
 	}
+
 }

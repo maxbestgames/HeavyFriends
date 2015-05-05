@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import core.Game;
+import core.TickThread;
 import core.enums.PlayerAction;
 import core.enums.EntityID;
 import core.enums.PlayerState;
@@ -40,6 +41,14 @@ public class KeyInput extends KeyAdapter{
 			Window.getWindows()[0].setVisible(false);
 			Window.getWindows()[0].dispose();
 			System.exit(0);
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_K){
+			GameObject.setDrawBoundingBoxes(!GameObject.isDrawBoundingBoxes());
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_L){
+			GameObject.setDrawTextures(!GameObject.isDrawTextures());
 		}
 		
 		try {
@@ -81,6 +90,7 @@ public class KeyInput extends KeyAdapter{
 					tempPlayer.setVelY( -15 );
 					keyDown[0] = true;
 				}
+									
 				if (keyPressed[KeyEvent.VK_A] && !tempPlayer.getColHandler().getLeftStop()) {
 					if(tempPlayer.getPlayerState() == PlayerState.Standing) tempPlayer.setVelX( -5 );
 					if(tempPlayer.getPlayerState() == PlayerState.Crouching) tempPlayer.setVelX( -3 );
@@ -133,6 +143,7 @@ public class KeyInput extends KeyAdapter{
 						//tempObject.setVelY( 0 );
 						keyDown[0] = false;
 					}
+
 					if (!keyPressed[KeyEvent.VK_A]) {
 						//tempObject.setVelX( 0 );
 						keyDown[1] = false;

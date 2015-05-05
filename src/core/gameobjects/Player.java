@@ -34,11 +34,6 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = false;
-	private boolean drawTextures = true;
-	
-	
-	
 	public Player(int x, int y, EntityID id) {
           		super(x, y, id);
 		currentPlayerState = PlayerState.Standing;
@@ -85,10 +80,10 @@ public class Player extends TickingGameObject{
 	
 	public void render(Graphics g) {
 		
-		if(id==EntityID.Player){
+		if(id==EntityID.Player && drawBoundingBoxes){
 			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			g.setColor(Color.GREEN);
-			//g.fillRect((int) x, (int) y, width, height);
+			g.fillRect((int) x, (int) y, width, height);
 		}
 		else if(id==EntityID.Player2){
 			g.setColor(Color.YELLOW);
@@ -118,7 +113,8 @@ public class Player extends TickingGameObject{
 			
 		}
 		
-		if (drawHitBoxes) {
+		if (drawBoundingBoxes) {
+			g.setColor(Color.BLUE);
 			g2d.draw(boundBox.getBoundsTop());
 			g2d.draw(boundBox.getBoundsBottom());
 			g2d.draw(boundBox.getBoundsTopLeft());
