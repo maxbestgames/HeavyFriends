@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.Random;
 
 import core.Game;
 import core.enums.EnemyAIState;
@@ -16,12 +17,19 @@ import core.handlers.MovementHandler;
 
 public class BasicEnemy extends Enemy {
 
-	private boolean drawHitBoxes = true;
+	protected Random r;
 	
-	float gravity;
+	protected boolean drawHitBoxes = true;
+	
+	protected int direction;
+	
+	protected float gravity;
+	protected float patrolSpeed = 4.5f;
 	
 	public BasicEnemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id, type);
+		
+		r = new Random();
 		
 		movement = new MovementHandler(this);
 		
@@ -31,6 +39,9 @@ public class BasicEnemy extends Enemy {
 		gravity = 0.9f;
 		height = 32;
 		width = 32;
+		
+		direction = r.nextInt(2);
+		if (direction == 0) direction = -1;
 
 	}
 
@@ -55,10 +66,12 @@ public class BasicEnemy extends Enemy {
 			velY += gravity;
 		}
 		
+		performAction();
 		movement.setJumpingOrFalling();
 		
 		velX = Game.clamp(velX, -20, 20);
 		velY = Game.clamp(velY, -20, 20);
+		
 	}
 
 	public Rectangle getBounds() {
@@ -73,22 +86,20 @@ public class BasicEnemy extends Enemy {
 	protected void performAction() {
 		EnemyAIState state = decideAction();
 		
-		/*
-		
 		if (state == EnemyAIState.Patrolling) {
-			if (currentDirection == 1) { // patrolling right
-				if (getCollisonHandler.canMoveRight) {
-					move right
+			if (direction == 1) { // patrolling right
+				if (!rightStop) {
+					setVelX(patrolSpeed);
 				} else {
-					current direction = -1;
-					move left
+					direction = -1;
+					setVelX(-patrolSpeed);
 				}
 			} else { // patrolling left
-				if (getCollisonHandler.canMoveLeft) {
-					move left
+				if (!leftStop) {
+					setVelX(-patrolSpeed);
 				} else {
-					current direction = 1;
-					move right
+					direction = 1;
+					setVelX(patrolSpeed);
 				}
 			}
 		}
