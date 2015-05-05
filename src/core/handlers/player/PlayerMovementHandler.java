@@ -51,84 +51,84 @@ public class PlayerMovementHandler {
 	}
 	
 	public boolean isJumping() {
-		return (player.getAction() == PlayerAction.Jumping);
+		return (player.getPlayerAction() == PlayerAction.Jumping);
 	}
 	
 	public boolean isFalling() {
-		return (player.getAction() == PlayerAction.Falling);
+		return (player.getPlayerAction() == PlayerAction.Falling);
 	}
 	
 	public boolean isStationary() {
-		return (player.getAction() == PlayerAction.Stationary);
+		return (player.getPlayerAction() == PlayerAction.Stationary);
 	}
 	
 	public boolean isStanding() {
-		return (player.getState() == PlayerState.Standing);
+		return (player.getPlayerState() == PlayerState.Standing);
 	}
 	
 	public boolean isProning() {
-		return (player.getState() == PlayerState.Proning);
+		return (player.getPlayerState() == PlayerState.Proning);
 	}
 	
 	public boolean isCrouching() {
-		return (player.getState() == PlayerState.Crouching);
+		return (player.getPlayerState() == PlayerState.Crouching);
 	}
 	
 	public boolean isProneShelling() {
-		return (player.getState() == PlayerState.ProneShelling);
+		return (player.getPlayerState() == PlayerState.ProneShelling);
 	}
 	
 	public boolean isCrouchShelling() {
-		return (player.getState() == PlayerState.CrouchShelling);
+		return (player.getPlayerState() == PlayerState.CrouchShelling);
 	}
 	
 	public boolean isStandShelling() {
-		 return (player.getState() == PlayerState.StandShelling);
+		 return (player.getPlayerState() == PlayerState.StandShelling);
 	}
 
 	public boolean isJumpingAllowed() {
 
-		if (player.getAction() == PlayerAction.Stationary) return true;
+		if (player.getPlayerAction() == PlayerAction.Stationary) return true;
 		return false;
 	}
 
 	public boolean isStandingAllowed() {
 		
-		if (player.getState() == PlayerState.Crouching) return true;
-		if (player.getState() == PlayerState.Proning) return true;
-		if (player.getState() == PlayerState.StandShelling) return true;
+		if (player.getPlayerState() == PlayerState.Crouching) return true;
+		if (player.getPlayerState() == PlayerState.Proning) return true;
+		if (player.getPlayerState() == PlayerState.StandShelling) return true;
 		return false;
 		
 	}
 	
 	public boolean isFallingAllowed() {
 		
-		if (player.getAction() == PlayerAction.Jumping) return true;
-		if (player.getAction() == PlayerAction.Stationary) return true;
+		if (player.getPlayerAction() == PlayerAction.Jumping) return true;
+		if (player.getPlayerAction() == PlayerAction.Stationary) return true;
 		return false;
 		
 	}
 	
 	public boolean isCrouchingAllowed() {
 		
-		if (player.getState() == PlayerState.Standing) return true;
-		if (player.getState() == PlayerState.CrouchShelling) return true;
+		if (player.getPlayerState() == PlayerState.Standing) return true;
+		if (player.getPlayerState() == PlayerState.CrouchShelling) return true;
 		return false;
 
 	}
 	
 	public boolean isProningAllowed() {
 		
-		if (player.getState() == PlayerState.Standing) return true;
-		if (player.getState() == PlayerState.ProneShelling) return true;
+		if (player.getPlayerState() == PlayerState.Standing) return true;
+		if (player.getPlayerState() == PlayerState.ProneShelling) return true;
 		return false;
 
 	}
 	
 	public boolean isGravityEnabled() {
 
-		if (player.getAction() == PlayerAction.Jumping) return true;
-		if (player.getAction() == PlayerAction.Falling) return true;
+		if (player.getPlayerAction() == PlayerAction.Jumping) return true;
+		if (player.getPlayerAction() == PlayerAction.Falling) return true;
 		return false;
 	}
 	

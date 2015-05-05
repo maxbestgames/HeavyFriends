@@ -50,13 +50,13 @@ public class TickThread implements Runnable {
 	}
 
 	private void tick(){
-
+		
 		Game.getWorldHandler().tick();
+		
 		game.getRenderThread().getCamera().tick();
 		game.getRenderThread().getHud().tick();
-
 		keyIn.update();
-
+		Game.getCol().doCollision();
 	}
 	
 	public void setRunningFalse() {

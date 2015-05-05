@@ -34,7 +34,7 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = false;
+	private boolean drawHitBoxes = true;
 	private boolean drawTextures = true;
 	
 	
@@ -141,7 +141,7 @@ public class Player extends TickingGameObject{
 
 	
 	
-	public PlayerState getState() {
+	public PlayerState getPlayerState() {
 		return currentPlayerState;
 	}
 	
@@ -149,7 +149,7 @@ public class Player extends TickingGameObject{
 		currentPlayerState = state;
 	}
 	
-	public PlayerAction getAction() {
+	public PlayerAction getPlayerAction() {
 		return currentPlayerAction;
 	}
 	

@@ -7,6 +7,9 @@ import java.util.Random;
 import core.display.Window;
 import core.enums.EntityID;
 import core.enums.LevelID;
+import core.handlers.BoundsHandler;
+import core.handlers.CollisionHandler;
+import core.handlers.MovementHandler;
 import core.handlers.WorldHandler;
 import core.input.KeyInput;
 import core.levels.TestRealm;
@@ -19,6 +22,9 @@ public class Game implements Runnable {
 	private Thread render, tick;
 	private boolean running = false;
 	private static WorldHandler handler;
+	private static CollisionHandler col;
+	//private static MovementHandler mov;
+	
 	private Random r;
 	//private Spawner spawner;
 	private static KeyInput keyInput;
@@ -36,9 +42,6 @@ public class Game implements Runnable {
 		HEIGHT = gd.getDisplayMode().getHeight();
 		
 		NUM_PLAYERS = 0;
-		
-		
-		
 		new Game();
 	}
 	
@@ -47,6 +50,8 @@ public class Game implements Runnable {
 		r = new Random();
 		
 		handler = new WorldHandler();
+		
+		col = new CollisionHandler();
 		
 		keyInput = new KeyInput(handler);
 		
@@ -137,4 +142,8 @@ public class Game implements Runnable {
 	}
 
 	public void run() {}
+
+	public static CollisionHandler getCol() {
+		return col;
+	}
 }

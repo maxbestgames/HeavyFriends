@@ -64,7 +64,7 @@ public class KeyInput extends KeyAdapter{
 			tempPlayer = handler.getPlayers().getPlayer(i); 
 
 			if (keyPressed[KeyEvent.VK_R]) {
-				//Game.getWorldHandler().getCurrentLevelObjectHandler().addObject(new Arrow((int) tempPlayer.getX()+32,(int) tempPlayer.getY(),0.0f,0f,0f));
+				Game.getWorldHandler().getCurrentLevelObjectHandler().addObject(new Arrow((int) tempPlayer.getX()+32,(int) tempPlayer.getY(),0f,5f,-1.5f));
 			}
 			
 			// player controls
@@ -72,24 +72,24 @@ public class KeyInput extends KeyAdapter{
 				// player keys
 
 				//basic movement
-				if (keyPressed[KeyEvent.VK_SPACE] && tempPlayer.getAction() == PlayerAction.Stationary && !tempPlayer.getColHandler().getTopStop()) {
+				if (keyPressed[KeyEvent.VK_SPACE] && tempPlayer.getPlayerAction() == PlayerAction.Stationary && !tempPlayer.getColHandler().getTopStop()) {
 
 					tempPlayer.setVelY( -15 );
 					keyDown[0] = true;
 				}
 				if (keyPressed[KeyEvent.VK_A] && !tempPlayer.getColHandler().getLeftStop()) {
-					if(tempPlayer.getState() == PlayerState.Standing) tempPlayer.setVelX( -5 );
-					if(tempPlayer.getState() == PlayerState.Crouching) tempPlayer.setVelX( -3 );
-					if(tempPlayer.getState() == PlayerState.Proning) tempPlayer.setVelX( -2 );
+					if(tempPlayer.getPlayerState() == PlayerState.Standing) tempPlayer.setVelX( -5 );
+					if(tempPlayer.getPlayerState() == PlayerState.Crouching) tempPlayer.setVelX( -3 );
+					if(tempPlayer.getPlayerState() == PlayerState.Proning) tempPlayer.setVelX( -2 );
 
 					keyDown[1] = true;
 				} else {
 					tempPlayer.setVelX(0);
 				}
 				if (keyPressed[KeyEvent.VK_D] && !tempPlayer.getColHandler().getRightStop()) {
-					if(tempPlayer.getState() == PlayerState.Standing) tempPlayer.setVelX( 5 );
-					if(tempPlayer.getState() == PlayerState.Crouching) tempPlayer.setVelX( 3 );                
-					if(tempPlayer.getState() == PlayerState.Proning) tempPlayer.setVelX( 2 );
+					if(tempPlayer.getPlayerState() == PlayerState.Standing) tempPlayer.setVelX( 5 );
+					if(tempPlayer.getPlayerState() == PlayerState.Crouching) tempPlayer.setVelX( 3 );                
+					if(tempPlayer.getPlayerState() == PlayerState.Proning) tempPlayer.setVelX( 2 );
 					keyDown[2] = true;
 				}
 

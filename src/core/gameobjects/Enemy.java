@@ -1,20 +1,16 @@
 package core.gameobjects;
 
+import core.enums.EnemyAIState;
 import core.enums.EnemyType;
 import core.enums.EntityID;
-import core.gameobjects.ai.EnemyAI;
-import core.handlers.enemy.EnemyBoundsHandler;
-import core.handlers.enemy.EnemyCollisionHandler;
-import core.handlers.enemy.EnemyMovementHandler;
+import core.handlers.MovementHandler;
 
 public abstract class Enemy extends TickingGameObject {
-
-	EnemyCollisionHandler col;
-	protected EnemyMovementHandler movement;
-	EnemyBoundsHandler boundBox;
-	EnemyAI ai;
-	EnemyType type;
 	
+	protected EnemyType type;
+	protected EnemyAIState currentAiState;
+	
+	protected MovementHandler movement;
 	
 	public Enemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id);

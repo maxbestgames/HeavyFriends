@@ -19,8 +19,8 @@ public abstract class Projectile extends TickingGameObject{
 		this.velX = velX;
 		this.velY = velY;
 		
-		height = 5;
-		width = 15;
+		height = 32;
+		width = 32;
 	}
 
 	public void tick() {
@@ -44,6 +44,8 @@ public abstract class Projectile extends TickingGameObject{
 		g2d.fill(getBounds());
 		
 	}
+	
+	
 
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, width, height);

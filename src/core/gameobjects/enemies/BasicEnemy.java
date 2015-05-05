@@ -6,13 +6,16 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import core.Game;
+import core.enums.EnemyAIState;
 import core.enums.EnemyType;
 import core.enums.EntityID;
 import core.gameobjects.Enemy;
-import core.handlers.enemy.EnemyMovementHandler;
+import core.handlers.MovementHandler;
 
 public class BasicEnemy extends Enemy {
 
+	
+	
 	private boolean drawHitBoxes = true;
 	
 	float gravity;
@@ -20,7 +23,8 @@ public class BasicEnemy extends Enemy {
 	public BasicEnemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id, type);
 		
-		movement = new EnemyMovementHandler();	
+		movement = new MovementHandler(this);
+		
 		gravity = 0.9f;
 		height = 32;
 		width = 32;
@@ -53,6 +57,8 @@ public class BasicEnemy extends Enemy {
 			velY += gravity;
 		}
 		
+		movement.setJumpingOrFalling();
+		
 		velX = Game.clamp(velX, -20, 20);
 		velY = Game.clamp(velY, -20, 20);
 	}
@@ -69,6 +75,7 @@ public class BasicEnemy extends Enemy {
 	private void performAction() {
 		EnemyAIState state = decideAction();
 		
+		/*
 		
 		if (state == EnemyAIState.Patrolling) {
 			if (currentDirection == 1) { // patrolling right
@@ -87,6 +94,7 @@ public class BasicEnemy extends Enemy {
 				}
 			}
 		}
+		/*
 		
 		if (state == EnemyAIState.Searching) {
 			
@@ -138,7 +146,7 @@ public class BasicEnemy extends Enemy {
 			hold position, show dead texture
 			
 		}
-		
+		*/
 		
 		
 		
