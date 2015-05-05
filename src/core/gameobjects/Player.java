@@ -34,7 +34,7 @@ public class Player extends TickingGameObject{
 	private PlayerMovementHandler movement;
 	private PlayerCollisionHandler col;
 	
-	private boolean drawHitBoxes = true;
+	private boolean drawHitBoxes = false;
 	private boolean drawTextures = true;
 	
 	
