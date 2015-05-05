@@ -16,8 +16,6 @@ import core.handlers.MovementHandler;
 
 public class BasicEnemy extends Enemy {
 
-	
-	
 	private boolean drawHitBoxes = true;
 	
 	float gravity;
@@ -36,11 +34,8 @@ public class BasicEnemy extends Enemy {
 
 	}
 
-
-
 	public void render(Graphics g) {
 
-		//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 		g.setColor(Color.RED);
 		g.fillRect((int) x, (int) y, width, height);
 
@@ -55,8 +50,6 @@ public class BasicEnemy extends Enemy {
 	public void tick() {
 		x += velX;
 		y += velY;
-		
-		//System.out.println(currentPlayerState.toString());
 		
 		if(movement.isGravityEnabled()) {
 			velY += gravity;
@@ -73,11 +66,11 @@ public class BasicEnemy extends Enemy {
 	}
 
 	
-	private EnemyAIState decideAction() {
+	protected EnemyAIState decideAction() {
 		return EnemyAIState.Patrolling;
 	}
 	
-	private void performAction() {
+	protected void performAction() {
 		EnemyAIState state = decideAction();
 		
 		/*
@@ -152,10 +145,6 @@ public class BasicEnemy extends Enemy {
 			
 		}
 		*/
-		
-		
-		
-		
 		
 		
 	}
