@@ -49,7 +49,9 @@ public class MovementHandler {
 	}
 
 	public boolean isGravityEnabled() {
-		return true;
+		if (obj.getAction() == ObjectAction.Jumping) return true;
+		if (obj.getAction() == ObjectAction.Falling) return true;
+		return false;
 	}
 	
 	public void calculateDoMovment() {

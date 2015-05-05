@@ -3,6 +3,7 @@ package core.input;
 import java.awt.Window;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import core.Game;
 import core.enums.PlayerAction;
@@ -10,7 +11,7 @@ import core.enums.EntityID;
 import core.enums.PlayerState;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
-import core.gameobjects.enemies.Arrow;
+import core.gameobjects.projectiles.FireBall;
 import core.handlers.WorldHandler;
 
 public class KeyInput extends KeyAdapter{
@@ -18,10 +19,13 @@ public class KeyInput extends KeyAdapter{
 	private WorldHandler handler;
 	private boolean[] keyPressed;
 	private boolean[] keyDown;
+	
+	private Random r;
 
 
 	public KeyInput(WorldHandler handler){
 		this.handler = handler;
+		r = new Random();
 
 		keyPressed = new boolean[200];
 		keyDown = new boolean[6];
@@ -64,7 +68,7 @@ public class KeyInput extends KeyAdapter{
 			tempPlayer = handler.getPlayers().getPlayer(i); 
 
 			if (keyPressed[KeyEvent.VK_R]) {
-				Game.getWorldHandler().getCurrentLevelObjectHandler().addObject(new Arrow((int) tempPlayer.getX()+32,(int) tempPlayer.getY(),0f,5f,-1.5f));
+				Game.getWorldHandler().getCurrentLevelObjectHandler().addObject(new FireBall((int) tempPlayer.getX()+32,(int) tempPlayer.getY(),0f, r.nextFloat()*15,-1.5f));
 			}
 			
 			// player controls

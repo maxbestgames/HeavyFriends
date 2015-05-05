@@ -5,12 +5,14 @@ import core.enums.ObjectAction;
 import core.enums.ObjectState;
 import core.enums.PlayerAction;
 import core.handlers.BoundsHandler;
+import core.handlers.MovementHandler;
 
 public abstract class TickingGameObject extends GameObject{
 
-	boolean rightStop, leftStop, botStop, topStop;
-	ObjectAction currentAction;
-	ObjectState currentState;
+	protected boolean rightStop, leftStop, botStop, topStop;
+	protected ObjectAction currentAction;
+	protected ObjectState currentState;
+	protected MovementHandler mov;
 	
 	protected BoundsHandler objBoundBox;
 	
@@ -36,6 +38,10 @@ public abstract class TickingGameObject extends GameObject{
 
 	public void setBotStop(boolean botStop) {
 		this.botStop = botStop;
+	}
+	
+	public boolean getBotStop() {
+		return botStop;
 	}
 
 	public void setTopStop(boolean topStop) {

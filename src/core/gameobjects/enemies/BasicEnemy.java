@@ -9,6 +9,8 @@ import core.Game;
 import core.enums.EnemyAIState;
 import core.enums.EnemyType;
 import core.enums.EntityID;
+import core.enums.ObjectAction;
+import core.enums.ObjectState;
 import core.gameobjects.Enemy;
 import core.handlers.MovementHandler;
 
@@ -24,6 +26,9 @@ public class BasicEnemy extends Enemy {
 		super(x, y, id, type);
 		
 		movement = new MovementHandler(this);
+		
+		currentAction = ObjectAction.Falling;
+		currentState = ObjectState.Standing;
 		
 		gravity = 0.9f;
 		height = 32;
