@@ -107,20 +107,25 @@ public class BasicEnemy extends Enemy {
 	protected void performAction() {
 		EnemyAIState state = decideAction();
 		
+		System.out.println("starting patrol... ");
 		if (state == EnemyAIState.Patrolling) {
 			if (direction == 1) { // patrolling right
+				System.out.println("heading right ");
 				if (!rightStop) {
 					setVelX(patrolSpeed);
 				} else {
 					direction = -1;
 					setVelX(-patrolSpeed);
+					System.out.println("hit a wall, turning around.");
 				}
 			} else { // patrolling left
+				System.out.println("heading left ");
 				if (!leftStop) {
 					setVelX(-patrolSpeed);
 				} else {
 					direction = 1;
 					setVelX(patrolSpeed);
+					System.out.println("hit a wall, turning around.");
 				}
 			}
 		}
