@@ -10,6 +10,7 @@ import core.Game;
 import core.enums.EntityID;
 import core.enums.PlayerAction;
 import core.enums.PlayerState;
+import core.handlers.BoundsHandler;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
 import core.handlers.player.PlayerMovementHandler;
@@ -156,7 +157,7 @@ public class Player extends TickingGameObject{
 		currentPlayerAction = action;
 	}
 	
-	public PlayerBoundsHandler getBoundBox() {
+	public PlayerBoundsHandler getPlayerBoundBox() {
 		return boundBox;
 	}
 
@@ -171,7 +172,4 @@ public class Player extends TickingGameObject{
 	public Rectangle getBounds() {
 		return boundBox.getBounds();
 	}
-
-	
-	
 }

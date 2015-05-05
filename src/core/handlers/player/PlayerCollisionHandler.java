@@ -40,51 +40,51 @@ public class PlayerCollisionHandler {
 
 				if (tempObject.isCollisionEnabled()) { // solid objects here
 
-					if(player.getBoundBox().getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
+					if(player.getPlayerBoundBox().getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
 						player.setVelY(0);
 						player.setY(tempObject.getY() - player.getHeight());
 						player.setAction(PlayerAction.Stationary);
 						intersectBottom = true;
 						//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if(player.getBoundBox().getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
+					if(player.getPlayerBoundBox().getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
 						player.setVelY(0);
 						player.setY(tempObject.getY() + Block.getBlockSize() + 2);
 						//System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getBoundBox().getBoundsTopLeft().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsTopLeft().intersects(tempObject.getBounds())) {
 						//player.setVelX(0.4f);
 						player.setX(tempObject.getX() + Block.getBlockSize());
 						//System.out.println("L: "+(int) tempObject.getX() + " " + (int) tempObject.getY() + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getBoundBox().getBoundsBotLeft().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsBotLeft().intersects(tempObject.getBounds())) {
 						//player.setVelX(0.4f);
 						player.setX(tempObject.getX() + Block.getBlockSize());
 						//System.out.println("L: "+(int) tempObject.getX() + " " + (int) tempObject.getY() + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getBoundBox().getBoundsTopRight().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsTopRight().intersects(tempObject.getBounds())) {
 						//player.setVelX(-0.4f);
 						player.setX(tempObject.getX() - player.getWidth());
 						//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getBoundBox().getBoundsBotRight().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsBotRight().intersects(tempObject.getBounds())) {
 						//player.setVelX(-0.4f);
 						player.setX(tempObject.getX() - player.getWidth());
 						//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getBoundBox().getBoundsBotStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsBotStop().intersects(tempObject.getBounds())) {
 						fallingOn = false;
 					}
 
-					if (player.getBoundBox().getBoundsLeftStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsLeftStop().intersects(tempObject.getBounds())) {
 						leftStop = true;
 					} 
 
-					if (player.getBoundBox().getBoundsRightStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsRightStop().intersects(tempObject.getBounds())) {
 						rightStop = true;
 					}
 
-					if (player.getBoundBox().getBoundsTopStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsTopStop().intersects(tempObject.getBounds())) {
 						topStop = true;
 					}
 
@@ -94,23 +94,23 @@ public class PlayerCollisionHandler {
 
 						Player player2 = (Player) tempObject;
 
-						if ( player.getBoundBox().getBoundsTopLeft().intersects( player2.getBoundBox().getBoundsTopRight() ) ) { // player 2 is on the left of player 1
+						if ( player.getPlayerBoundBox().getBoundsTopLeft().intersects( player2.getPlayerBoundBox().getBoundsTopRight() ) ) { // player 2 is on the left of player 1
 							player.setX( (float) (player2.getX() + player2.getBounds().getWidth() + 2) );
 						}
-						else if ( player.getBoundBox().getBoundsTopRight().intersects( player2.getBoundBox().getBoundsTopLeft() ) ) { // player 2 is on the right of player 1
+						else if ( player.getPlayerBoundBox().getBoundsTopRight().intersects( player2.getPlayerBoundBox().getBoundsTopLeft() ) ) { // player 2 is on the right of player 1
 							player.setX( (float) (player2.getX() - player2.getBounds().getWidth() - 2) );
 						}
-						if ( player.getBoundBox().getBoundsBotLeft().intersects( player2.getBoundBox().getBoundsBotRight() ) ) { // player 2 is on the left of player 1
+						if ( player.getPlayerBoundBox().getBoundsBotLeft().intersects( player2.getPlayerBoundBox().getBoundsBotRight() ) ) { // player 2 is on the left of player 1
 							player.setX( (float) (player2.getX() + player2.getBounds().getWidth() + 2) );
 						}
-						else if ( player.getBoundBox().getBoundsBotRight().intersects( player2.getBoundBox().getBoundsBotLeft() ) ) { // player 2 is on the right of player 1
+						else if ( player.getPlayerBoundBox().getBoundsBotRight().intersects( player2.getPlayerBoundBox().getBoundsBotLeft() ) ) { // player 2 is on the right of player 1
 							player.setX( (float) (player2.getX() - player2.getBounds().getWidth() - 2) );
 						}
-						if ( player.getBoundBox().getBoundsBottom().intersects( player2.getBounds() ) ) { // player 2 is under player 1
+						if ( player.getPlayerBoundBox().getBoundsBottom().intersects( player2.getBounds() ) ) { // player 2 is under player 1
 							player.setY( (float) (player2.getY() - player2.getBounds().getHeight() - 2) );
 							player.setAction(PlayerAction.Stationary);
 						}
-						if ( player.getBoundBox().getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
+						if ( player.getPlayerBoundBox().getBoundsTop().intersects( player2.getBounds() ) ) { // player 2 is on top of player 1
 							player.setAction(PlayerAction.Jumping);
 						}
 					}
