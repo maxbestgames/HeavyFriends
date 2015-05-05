@@ -37,11 +37,23 @@ public class KeyInput extends KeyAdapter{
 			Window.getWindows()[0].dispose();
 			System.exit(0);
 		}
-		keyPressed[e.getKeyCode()] = true;
+		
+		try {
+			keyPressed[e.getKeyCode()] = true;
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			System.out.println("Tried to store a keypress that is out of range");
+			ex.printStackTrace();
+		}
 	}
 
 	public void keyReleased(KeyEvent e){
-		keyPressed[e.getKeyCode()] = false;	
+		
+		try {
+			keyPressed[e.getKeyCode()] = false;
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			System.out.println("Tried to store a keypress that is out of range");
+			ex.printStackTrace();
+		}
 	}
 
 	public void update() {

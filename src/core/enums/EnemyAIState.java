@@ -4,6 +4,7 @@ public enum EnemyAIState {
 
 	Searching(),
 	Patrolling(),
+	Persuing(),
 	Suspicious(),
 	Waiting(),
 	Sleeping(),
