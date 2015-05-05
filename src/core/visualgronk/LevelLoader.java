@@ -51,6 +51,8 @@ public class LevelLoader {
 				
 				if(red ==   0 && green ==  38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
 				if(red == 255 && green ==   0 && blue ==   0) handler.addObject(new BasicEnemy(i*32, j*32, EntityID.Enemy, EnemyType.BasicEnemy));
+				if(red == 255 && green ==   1 && blue ==   0) handler.addObject(new BasicEnemy(i*32, j*32, EntityID.Enemy, EnemyType.Tornado));
+
 
 				
 				if(red == 177 && green == 130 && blue ==   4) handler.addObject(new Dirt(i*32, j*32) );

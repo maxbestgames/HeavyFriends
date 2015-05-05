@@ -87,6 +87,7 @@ public class CollisionHandler {
 
 							if (tempObject.getObjBoundBox().getBoundsRightStop().intersects(tempObject2.getBounds())) {
 								tempObject.setRightStop(true);
+
 							}
 
 							if (tempObject.getObjBoundBox().getBoundsTopStop().intersects(tempObject2.getBounds())) {
