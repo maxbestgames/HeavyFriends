@@ -52,7 +52,7 @@ public class KeyInput extends KeyAdapter{
 			tempPlayer = handler.getPlayers().getPlayer(i); 
 
 			if (keyPressed[KeyEvent.VK_R]) {
-				Game.getWorldHandler().getCurrentLevelObjectHandler().addObject(new Arrow((int) tempPlayer.getX()+32,(int) tempPlayer.getY(),0.0f,0.0001f,-0.0001f));
+				Game.getWorldHandler().getCurrentLevelObjectHandler().addObject(new Arrow((int) tempPlayer.getX()+32,(int) tempPlayer.getY(),0.0f,0f,0f));
 			}
 			
 			// player controls
