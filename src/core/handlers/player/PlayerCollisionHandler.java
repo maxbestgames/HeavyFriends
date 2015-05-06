@@ -5,6 +5,7 @@ import core.enums.PlayerAction;
 import core.gameobjects.Block;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
+import core.gameobjects.TickingGameObject;
 
 public class PlayerCollisionHandler {
 
@@ -23,6 +24,8 @@ public class PlayerCollisionHandler {
 	}
 	
 	public void doPlayerCollision() {
+		long time = System.currentTimeMillis();
+		
 		boolean intersectBottom = false;
 		rightStop = false;
 		topStop = false;
@@ -32,59 +35,62 @@ public class PlayerCollisionHandler {
 		int count = 0;
 
 		for(int i=0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++){
+			
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
+
 
 
 			if (Math.abs(tempObject.getX() - player.getX()) < (Math.abs(player.getWidth()) * Math.abs(player.getVelX()) + 300) && 
 					Math.abs(tempObject.getY() - player.getY()) < (Math.abs(player.getHeight()) * Math.abs(player.getVelY()) + 300) ) { // are the blocks close to the player?
 
-				if (tempObject.isCollisionEnabled()) { // solid objects here
+				if (tempObject.isCollisionEnabled() && !(tempObject instanceof TickingGameObject)) { // solid objects here
 
-					if(player.getPlayerBoundBox().getBoundsBottom().intersects(tempObject.getBounds())) { //falling down
+					if(player.getPlayerBoundBox().getBoundsBottom().intersects(tempObject.getBounds()) ) { //falling down
 						player.setVelY(0);
 						player.setY(tempObject.getY() - player.getHeight());
 						player.setAction(PlayerAction.Stationary);
 						intersectBottom = true;
 						//System.out.println("B: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if(player.getPlayerBoundBox().getBoundsTop().intersects(tempObject.getBounds())) { // hitting head
+					if(player.getPlayerBoundBox().getBoundsTop().intersects(tempObject.getBounds()) ) { // hitting head
 						player.setVelY(0);
 						player.setY(tempObject.getY() + Block.getBlockSize() + 2);
 						//System.out.println("T: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getPlayerBoundBox().getBoundsTopLeft().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsTopLeft().intersects(tempObject.getBounds()) ) {
 						//player.setVelX(0.4f);
 						player.setX(tempObject.getX() + Block.getBlockSize());
 						//System.out.println("L: "+(int) tempObject.getX() + " " + (int) tempObject.getY() + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getPlayerBoundBox().getBoundsBotLeft().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsBotLeft().intersects(tempObject.getBounds()) ) {
 						//player.setVelX(0.4f);
 						player.setX(tempObject.getX() + Block.getBlockSize());
 						//System.out.println("L: "+(int) tempObject.getX() + " " + (int) tempObject.getY() + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getPlayerBoundBox().getBoundsTopRight().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsTopRight().intersects(tempObject.getBounds()) ) {
 						//player.setVelX(-0.4f);
 						player.setX(tempObject.getX() - player.getWidth());
 						//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getPlayerBoundBox().getBoundsBotRight().intersects(tempObject.getBounds())) {
+
+					if (player.getPlayerBoundBox().getBoundsBotRight().intersects(tempObject.getBounds()) ) {
 						//player.setVelX(-0.4f);
 						player.setX(tempObject.getX() - player.getWidth());
 						//System.out.println("R: "+(int) x + " " + (int) y + ", " + " " + (int) tempObject.getX() + " " + (int) tempObject.getY());
 					}
-					if (player.getPlayerBoundBox().getBoundsBotStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsBotStop().intersects(tempObject.getBounds()) ) {
 						fallingOn = false;
 					}
 
-					if (player.getPlayerBoundBox().getBoundsLeftStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsLeftStop().intersects(tempObject.getBounds()) ) {
 						leftStop = true;
 					} 
 
-					if (player.getPlayerBoundBox().getBoundsRightStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsRightStop().intersects(tempObject.getBounds()) ) {
 						rightStop = true;
 					}
 
-					if (player.getPlayerBoundBox().getBoundsTopStop().intersects(tempObject.getBounds())) {
+					if (player.getPlayerBoundBox().getBoundsTopStop().intersects(tempObject.getBounds()) ) {
 						topStop = true;
 					}
 
@@ -134,7 +140,9 @@ public class PlayerCollisionHandler {
 		
 		if (count != 0) 
 			objCount = count;
-			
+		
+		//System.out.println("Player Tick: " + (System.currentTimeMillis() - time) + "ms");
+		
 		if (count == 0) {
 			System.exit(0); 
 		}

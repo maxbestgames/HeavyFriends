@@ -15,7 +15,7 @@ public class TickThread implements Runnable {
 	
 	public void run() {
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 15;//per second
+		double amountOfTicks = 60;//per second
 		double timePerTick = 1000000000/amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
