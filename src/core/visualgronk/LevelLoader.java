@@ -18,6 +18,7 @@ import core.gameobjects.blocks.Water;
 import core.gameobjects.blocks.WaterSurface;
 import core.gameobjects.blocks.Wood;
 import core.gameobjects.enemies.BasicEnemy;
+import core.gameobjects.enemies.Tornado;
 import core.handlers.ObjectHandler;
 
 public class LevelLoader {
@@ -51,7 +52,8 @@ public class LevelLoader {
 				
 				if(red ==   0 && green ==  38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
 				if(red == 255 && green ==   0 && blue ==   0) handler.addObject(new BasicEnemy(i*32, j*32, EntityID.Enemy, EnemyType.BasicEnemy));
-				if(red == 255 && green ==   1 && blue ==   0) handler.addObject(new BasicEnemy(i*32, j*32, EntityID.Enemy, EnemyType.Tornado));
+				if(red == 255 && green ==   1 && blue ==   0) handler.addObject(new Tornado(i*32, j*32, EntityID.Enemy, EnemyType.Tornado));
+
 
 
 				
