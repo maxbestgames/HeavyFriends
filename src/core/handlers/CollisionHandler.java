@@ -1,10 +1,13 @@
 package core.handlers;
 
 import core.Game;
+import core.enums.EntityID;
 import core.enums.ObjectAction;
 import core.gameobjects.Block;
 import core.gameobjects.BouncingProjectile;
+import core.gameobjects.Enemy;
 import core.gameobjects.GameObject;
+import core.gameobjects.Player;
 import core.gameobjects.TickingBlock;
 import core.gameobjects.TickingGameObject;
 
@@ -17,7 +20,7 @@ public class CollisionHandler {
 		count = 0;
 		long time = System.currentTimeMillis();
 
-		for(int i = 0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++){
+		for(int i = 0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++) {
 
 			if (Game.getWorldHandler().getCurrentLevelObjectHandler().getObject(i) instanceof TickingGameObject 
 					&& !(Game.getWorldHandler().getCurrentLevelObjectHandler().getObject(i) instanceof TickingBlock)) {
@@ -27,19 +30,24 @@ public class CollisionHandler {
 				tempObject.setLeftStop(false);
 				tempObject.setRightStop(false);
 				tempObject.setTopStop(false);
+				GameObject tempObject2;
 
-				for (int j = 0; j < Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); j++) {
+				for (int j = 0; j <= Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); j++) {
 
 					if (i != j) {
-
-						GameObject tempObject2 = Game.getWorldHandler().getCurrentLevelObjectHandler().getObject(j);
+						
+						if (j < Game.getWorldHandler().getCurrentLevelObjectHandler().getSize())
+							tempObject2 = Game.getWorldHandler().getCurrentLevelObjectHandler().getObject(j);
+						else
+							tempObject2 = Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player);
 
 						if (Math.abs(tempObject2.getX() - tempObject.getX()) < 1.5 * tempObject.getWidth() 
 								&& Math.abs(tempObject2.getY() - tempObject.getY()) < 1.5 * tempObject.getHeight() ) { // are the blocks close to the obj?
 
 							count++;
 
-							if (tempObject2.isCollisionEnabled() && !(tempObject2 instanceof TickingGameObject)) { // solid objects here
+							if (tempObject2.isCollisionEnabled() && (!(tempObject2 instanceof TickingGameObject) 
+									|| tempObject2 instanceof Player || tempObject2 instanceof Enemy)) { // solid objects here
 
 								if(tempObject.getObjBoundBox().getBoundsBottom().intersects(tempObject2.getBounds()) ) {//falling down
 

@@ -71,7 +71,10 @@ public class BasicEnemy extends Enemy {
 		}
 
 		if (drawBoundingBoxes) {
+			g.setColor(Color.WHITE);
 			g2d.draw(getBounds());
+			g2d.draw(getObjBoundBox().getBoundsLedgeLeft());
+			g2d.draw(getObjBoundBox().getBoundsLedgeRight());
 		}
 	}
 

@@ -56,5 +56,13 @@ public class BoundsHandler {
 		return new Rectangle((int) obj.getX() + 3, (int) obj.getY() -  2, obj.getWidth() - 6, 1);
 	}
 	
+	public Rectangle getBoundsLedgeLeft() {
+		return new Rectangle((int) (obj.getX() - obj.getWidth()/2), (int) obj.getY() + obj.getHeight() + 10, 4, 4);
+	}
+	
+	public Rectangle getBoundsLedgeRight() {
+		return new Rectangle((int) obj.getX() + obj.getWidth() + obj.getWidth()/2 -4, (int) obj.getY() + obj.getHeight() + 10, 4, 4);
+	}
+	
 	//TODO ledge edge left and right detection boxes
 }
