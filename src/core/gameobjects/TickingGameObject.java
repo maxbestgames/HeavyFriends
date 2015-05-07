@@ -3,13 +3,13 @@ package core.gameobjects;
 import core.enums.EntityID;
 import core.enums.ObjectAction;
 import core.enums.ObjectState;
-import core.enums.PlayerAction;
 import core.handlers.BoundsHandler;
 import core.handlers.MovementHandler;
 
 public abstract class TickingGameObject extends GameObject{
 
 	protected boolean rightStop, leftStop, botStop, topStop;
+	protected boolean ledgeEndLeft, ledgeEndRight;
 	protected ObjectAction currentAction;
 	protected ObjectState currentState;
 	protected MovementHandler mov;
@@ -62,5 +62,25 @@ public abstract class TickingGameObject extends GameObject{
 	
 	public void setState(ObjectState currentState) {
 		this.currentState = currentState;
+	}
+
+
+	public boolean isLedgeEndLeft() {
+		return ledgeEndLeft;
+	}
+
+
+	public void setLedgeEndLeft(boolean ledgeEndLeft) {
+		this.ledgeEndLeft = ledgeEndLeft;
+	}
+
+
+	public boolean isLedgeEndRight() {
+		return ledgeEndRight;
+	}
+
+
+	public void setLedgeEndRight(boolean ledgeEndRight) {
+		this.ledgeEndRight = ledgeEndRight;
 	}
 }

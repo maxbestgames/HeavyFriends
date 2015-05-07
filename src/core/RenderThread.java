@@ -9,6 +9,7 @@ import java.awt.image.BufferStrategy;
 import core.display.Camera;
 import core.display.HUD;
 import core.input.KeyInput;
+import core.input.MouseInput;
 
 public class RenderThread extends Canvas implements Runnable {
 	
@@ -16,14 +17,19 @@ public class RenderThread extends Canvas implements Runnable {
 	private Camera cam;
 	private HUD hud;
 	private KeyInput keyIn;
+	private MouseInput mouseIn;
 	
-	public RenderThread(Game game, KeyInput keyIn) {
+	public RenderThread(Game game, KeyInput keyIn, MouseInput mouseIn) {
 
 		hud = new HUD(Game.getWorldHandler());
 		this.keyIn = keyIn;
+		this.mouseIn = mouseIn;
 		
 		cam = new Camera(0, 0);
-		this.addKeyListener(keyIn);
+		this.addKeyListener(this.keyIn);
+		this.addMouseListener(this.mouseIn);
+		this.addMouseMotionListener(this.mouseIn);
+		this.addMouseWheelListener(this.mouseIn);
 		
 	}
 	
@@ -76,6 +82,8 @@ public class RenderThread extends Canvas implements Runnable {
 		
 		
 		hud.render(g);
+		
+		//g2d.draw(Game.getMouseBounds());
 
 		g.dispose();
 		g2d.dispose();
@@ -95,4 +103,5 @@ public class RenderThread extends Canvas implements Runnable {
 	public Camera getCamera() {
 		return cam;
 	}
+
 }

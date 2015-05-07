@@ -2,7 +2,6 @@ package core.gameobjects.blocks;
 
 import core.enums.BlockType;
 import core.enums.EntityID;
-import core.gameobjects.Block;
 import core.gameobjects.TickingBlock;
 import core.visualgronk.Animation;
 

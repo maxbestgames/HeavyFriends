@@ -6,11 +6,10 @@ public class TickThread implements Runnable {
 	
 	boolean running = true;
 	private KeyInput keyIn;
-	private Game game;
+	//private Game game;
 
-	public TickThread(Game game, KeyInput keyIn) {
+	public TickThread(KeyInput keyIn) {
 		this.keyIn = keyIn;
-		this.game = game;
 	}
 	
 	public void run() {
@@ -53,8 +52,8 @@ public class TickThread implements Runnable {
 		
 		Game.getWorldHandler().tick();
 		Game.getCol().doCollision();
-		game.getRenderThread().getCamera().tick();
-		game.getRenderThread().getHud().tick();
+		Game.getRenderThread().getCamera().tick();
+		Game.getRenderThread().getHud().tick();
 		keyIn.update();
 		
 	}

@@ -70,7 +70,7 @@ public class HUD {
 		g.drawString("X " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getX(), Window.getVisibleScreenX()-100, 105);
 		g.drawString("Y " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getY(), Window.getVisibleScreenX()-100, 120);
 		g.drawString("E: " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getColHandler().getNumCloseObjects()+" of "
-				+ "" +Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(), Window.getVisibleScreenX()-100, 135);
-		
+				+ "" +Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(), Window.getVisibleScreenX()-100, 135);		
+		g.drawString("" + Game.getMouseBounds().getMinX() + ", " + Game.getMouseBounds().getMinY(), Window.getVisibleScreenX()-100, 150);
 	}
 }

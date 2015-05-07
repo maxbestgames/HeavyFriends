@@ -12,7 +12,6 @@ import core.enums.EnemyType;
 import core.enums.EntityID;
 import core.enums.ObjectAction;
 import core.enums.ObjectState;
-import core.enums.PlayerState;
 import core.gameobjects.Enemy;
 import core.handlers.MovementHandler;
 import core.visualgronk.Animation;
@@ -22,7 +21,7 @@ public class BasicEnemy extends Enemy {
 
 	protected Random r;
 
-	private PlayerState currentObjectState;
+	//private ObjectState currentObjectState;
 	
 	private Animation walk;
 	
@@ -30,6 +29,7 @@ public class BasicEnemy extends Enemy {
 	
 	protected float gravity;
 	protected float patrolSpeed = 1.0f;
+	protected float max_speed = 6.0f;
 	
 	public BasicEnemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id, type);
@@ -83,14 +83,13 @@ public class BasicEnemy extends Enemy {
 		y += velY;
 		
 		walk.runAnimation();
-
-		
 		
 		if(movement.isGravityEnabled()) {
 			velY += gravity;
 		}
 		
 		performAction();
+		
 		movement.setJumpingOrFalling();
 		
 		velX = Game.clamp(velX, -20, 20);
@@ -112,19 +111,25 @@ public class BasicEnemy extends Enemy {
 		
 		if (state == EnemyAIState.Patrolling) {
 			if (direction == 1) { // patrolling right
-				if (!rightStop) {
+				if (!rightStop && !ledgeEndRight) {
 					setVelX(patrolSpeed);
 				} else {
 					direction = -1;
 					setVelX(patrolSpeed*-1);
 				}
 			} else { // patrolling left
-				if (!leftStop) {
+				if (!leftStop && !ledgeEndLeft) {
 					setVelX(patrolSpeed*-1);
 				} else {
 					direction = 1;
 					setVelX(patrolSpeed);
 				}
+			}
+		}
+
+		if (state == EnemyAIState.Waiting) {
+			if (getAction() == ObjectAction.Stationary) {
+				setVelX(0);
 			}
 		}
 		/*
@@ -148,9 +153,7 @@ public class BasicEnemy extends Enemy {
 			move carefully, looking intently. higher chance of player detection
 		}
 		
-		if (state == EnemyAIState.Waiting) {
-			hold position
-		}
+		
 		
 		if (state == EnemyAIState.Sleeping) {
 			prone, hold position

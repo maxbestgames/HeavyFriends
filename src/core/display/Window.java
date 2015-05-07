@@ -1,23 +1,25 @@
 package core.display;
 
-import java.awt.Canvas;
+import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
 import core.Game;
 
 
-public class Window extends Canvas {
+public class Window {
 	
 	private static int visibleScreenX,visibleScreenY;
+	private static JFrame frame;
 	
 	public Window(int width, int height, String title, Game game) {
-		JFrame frame = new JFrame(title);
+		frame = new JFrame(title);
 		frame.setBounds(50, 50, width-100, height-100);
+		frame.setUndecorated(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(game.getRenderThread());
+		frame.add(Game.getRenderThread());
 		frame.setVisible(true);
 		visibleScreenX = (int) frame.getContentPane().getWidth();
 		visibleScreenY = (int) frame.getContentPane().getHeight();
@@ -41,5 +43,9 @@ public class Window extends Canvas {
 
 	public static void setVisibleScreenY(int visibleScreenY) {
 		Window.visibleScreenY = visibleScreenY;
+	}
+	
+	public static Rectangle getFrameBounds() {
+		return frame.getBounds();
 	}
 }

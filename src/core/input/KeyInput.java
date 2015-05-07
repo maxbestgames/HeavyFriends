@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import core.Game;
-import core.TickThread;
 import core.enums.PlayerAction;
 import core.enums.EntityID;
 import core.enums.PlayerState;

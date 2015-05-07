@@ -23,6 +23,7 @@ public abstract class EnemyAI {
 	int[] ancestorDamage = new int[NUM_ANCESTORS];
 	int damageDone;
 	
+	@SuppressWarnings("unchecked")
 	protected LinkedList<GenePool>[] ancestors = new LinkedList[NUM_ANCESTORS];
 	protected LinkedList<GenePool> genetics = new LinkedList<>();
 	

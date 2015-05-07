@@ -3,7 +3,6 @@ package core.gameobjects;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import core.Game;
 import core.enums.EntityID;
 import core.handlers.ObjectHandler;
 import core.visualgronk.Texture;

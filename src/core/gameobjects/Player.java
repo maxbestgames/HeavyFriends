@@ -10,7 +10,6 @@ import core.Game;
 import core.enums.EntityID;
 import core.enums.PlayerAction;
 import core.enums.PlayerState;
-import core.handlers.BoundsHandler;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
 import core.handlers.player.PlayerMovementHandler;

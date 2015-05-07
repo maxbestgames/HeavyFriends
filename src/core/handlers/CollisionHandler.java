@@ -14,11 +14,12 @@ import core.gameobjects.TickingGameObject;
 public class CollisionHandler {
 
 	TickingGameObject tempObject;
-	long count = 0;
+	long count;
+	long time;
 
 	public void doCollision() {
 		count = 0;
-		long time = System.currentTimeMillis();
+		time = System.currentTimeMillis();
 
 		for(int i = 0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++) {
 
@@ -30,6 +31,8 @@ public class CollisionHandler {
 				tempObject.setLeftStop(false);
 				tempObject.setRightStop(false);
 				tempObject.setTopStop(false);
+				tempObject.setLedgeEndLeft(true);
+				tempObject.setLedgeEndRight(true);
 				GameObject tempObject2;
 
 				for (int j = 0; j <= Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); j++) {
@@ -118,8 +121,15 @@ public class CollisionHandler {
 									tempObject.setTopStop(true);
 								}
 								
+								if (tempObject.getObjBoundBox().getBoundsLedgeLeft().intersects(tempObject2.getBounds())) {
+									tempObject.setLedgeEndLeft(false);
+								}
 								
-								// TODO ledge edge detection left and right
+								if (tempObject.getObjBoundBox().getBoundsLedgeRight().intersects(tempObject2.getBounds())) {
+									tempObject.setLedgeEndRight(false);
+								}
+								
+								
 
 							} else { // non solid blocks here
 

@@ -10,7 +10,6 @@ import core.enums.EntityID;
 import core.gameobjects.TickingGameObject;
 import core.handlers.MovementHandler;
 import core.visualgronk.Animation;
-import core.visualgronk.Texture;
 
 public abstract class Projectile extends TickingGameObject {
 

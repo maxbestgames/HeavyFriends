@@ -2,16 +2,17 @@ package core;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.util.Random;
 
 import core.display.Window;
 import core.enums.EntityID;
 import core.enums.LevelID;
-import core.handlers.BoundsHandler;
 import core.handlers.CollisionHandler;
-import core.handlers.MovementHandler;
 import core.handlers.WorldHandler;
 import core.input.KeyInput;
+import core.input.MouseInput;
 import core.levels.TestRealm;
 
 
@@ -20,7 +21,7 @@ public class Game implements Runnable {
 	public static int WIDTH, HEIGHT;
 	private static int NUM_PLAYERS;
 	private Thread render, tick;
-	private boolean running = false;
+	//private boolean running = false;
 	private static WorldHandler handler;
 	private static CollisionHandler col;
 	//private static MovementHandler mov;
@@ -28,6 +29,7 @@ public class Game implements Runnable {
 	private Random r;
 	//private Spawner spawner;
 	private static KeyInput keyInput;
+	private static MouseInput mouseInput;
 	private static LevelID currentLevel;
 	private static int fps;
 	private static int tps;
@@ -54,6 +56,8 @@ public class Game implements Runnable {
 		col = new CollisionHandler();
 		
 		keyInput = new KeyInput(handler);
+		mouseInput = new MouseInput();
+		
 		
 		//TODO make spawners work
 		
@@ -62,8 +66,8 @@ public class Game implements Runnable {
 		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
 		NUM_PLAYERS++;
 		
-		rt = new RenderThread(this, keyInput);
-		tt = new TickThread(this, keyInput);
+		rt = new RenderThread(this, keyInput, mouseInput);
+		tt = new TickThread(keyInput);
 		
 		getRenderThread().getCamera().setCamCenter(handler.getPlayers().getPlayer(EntityID.Player));
 		
@@ -83,6 +87,11 @@ public class Game implements Runnable {
 		else return var;
 	}
 	
+	public static Rectangle getMouseBounds() {
+		return new Rectangle((int) (MouseInfo.getPointerInfo().getLocation().getX() - Window.getFrameBounds().getX() - 1), 
+				(int) (MouseInfo.getPointerInfo().getLocation().getY() - Window.getFrameBounds().getY() - 2 ), 4, 4 );
+	}
+	
 	public static int getNumPlayers() {
 		return NUM_PLAYERS;
 	}
@@ -95,13 +104,13 @@ public class Game implements Runnable {
 	public synchronized void startTick(){
 		render =  new Thread(rt);
 		render.start();
-		running = true;
+		//running = true;
 	}
 	
 	public synchronized void startRender(){
 		tick =  new Thread(tt);
 		tick.start();
-		running = true;
+		//running = true;
 	}
 	
 	public static void stop(){
@@ -133,7 +142,7 @@ public class Game implements Runnable {
 		tps = tickTPS;
 	}
 	
-	public RenderThread getRenderThread() {
+	public static RenderThread getRenderThread() {
 		return rt;
 	}
 	
