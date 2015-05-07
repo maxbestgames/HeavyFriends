@@ -47,7 +47,8 @@ public class CollisionHandler {
 							count++;
 
 							if (tempObject2.isCollisionEnabled() && (!(tempObject2 instanceof TickingGameObject) 
-									|| tempObject2 instanceof Player || tempObject2 instanceof Enemy)) { // solid objects here
+									|| tempObject2 instanceof Player || tempObject2 instanceof Enemy) 
+									|| tempObject2 instanceof Block) { // solid objects here
 
 								if(tempObject.getObjBoundBox().getBoundsBottom().intersects(tempObject2.getBounds()) ) {//falling down
 
@@ -117,11 +118,19 @@ public class CollisionHandler {
 									tempObject.setTopStop(true);
 								}
 								
+								
 								// TODO ledge edge detection left and right
 
 							} else { // non solid blocks here
 
 							}
+						}
+						
+						if (!tempObject.getBotStop()) {
+							if (tempObject.getVelY() > 0)
+								tempObject.setAction(ObjectAction.Falling);
+							else
+								tempObject.setAction(ObjectAction.Jumping);
 						}
 					}
 				}

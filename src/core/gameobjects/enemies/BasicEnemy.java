@@ -85,6 +85,7 @@ public class BasicEnemy extends Enemy {
 		walk.runAnimation();
 
 		
+		
 		if(movement.isGravityEnabled()) {
 			velY += gravity;
 		}
