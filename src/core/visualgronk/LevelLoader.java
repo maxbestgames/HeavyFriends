@@ -43,6 +43,7 @@ public class LevelLoader {
 		for(int i = 0; i<w; i++){
 			for( int j = 0; j<h; j++){
 				int pixel = image.getRGB(i, j);
+				@SuppressWarnings("unused")
 				int alpha = (pixel >> 24) & 0xff; // alpha = 0 is transparent
 				int red = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8 ) & 0xff;

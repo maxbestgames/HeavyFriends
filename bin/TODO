@@ -1,9 +1,5 @@
 
- 
-TickingGameObject
- Enemy
- Projectile
- 
+
  
 Level spawner
 
@@ -11,8 +7,6 @@ HUD - Enum?
 	hide - show none?
 	show
  (Thing we actually draw)
-
-KeyInput
 
 Monster Spawner
 
@@ -23,7 +17,6 @@ Asset
  Sprite
  Image
   Background
-  
   
 Monster spawning favours creatures that have done more damage to the player over time
   
@@ -48,4 +41,12 @@ Monster Genetics
   
   number of genes is average of number that parent had + chance of gene mutation.
   get parents genes, with chance to get a different one (low)
+  
+  
+Pathfinding A*
+ enemies know how far they can jump (calculated)
+ create nodes, traverse generated tree to get to target
+ 
+ target x, y co-ords not blocks or player
+ 
   

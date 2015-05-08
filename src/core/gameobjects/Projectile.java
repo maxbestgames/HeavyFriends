@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 
 import core.Game;
 import core.enums.EntityID;
+import core.enums.RenderPriority;
 import core.gameobjects.TickingGameObject;
 import core.handlers.MovementHandler;
 import core.visualgronk.Animation;
@@ -22,6 +23,7 @@ public abstract class Projectile extends TickingGameObject {
 		this.velX = velX;
 		this.velY = velY;
 		mov = new MovementHandler(this);
+		rendPriority = RenderPriority.Projectiles;
 	}
 
 	public void tick() {

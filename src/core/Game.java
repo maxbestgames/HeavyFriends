@@ -27,6 +27,7 @@ public class Game implements Runnable {
 	private static CollisionHandler col;
 	//private static MovementHandler mov;
 	
+	@SuppressWarnings("unused")
 	private Random r;
 	//private Spawner spawner;
 	private static KeyInput keyInput;
@@ -70,7 +71,8 @@ public class Game implements Runnable {
 		rt = new RenderThread(this, keyInput, mouseInput);
 		tt = new TickThread(keyInput);
 		
-		getRenderThread().getCamera().setCamCenter(handler.getPlayers().getPlayer(EntityID.Player));
+		//getRenderThread().getCamera();
+		Camera.setCamCenter(handler.getPlayers().getPlayer(EntityID.Player));
 		
 		new Window(WIDTH, HEIGHT,"Heavy Friends", this);
 		

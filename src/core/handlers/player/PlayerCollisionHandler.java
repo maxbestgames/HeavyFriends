@@ -24,6 +24,7 @@ public class PlayerCollisionHandler {
 	}
 	
 	public void doPlayerCollision() {
+		@SuppressWarnings("unused")
 		long time = System.currentTimeMillis();
 		
 		boolean intersectBottom = false;

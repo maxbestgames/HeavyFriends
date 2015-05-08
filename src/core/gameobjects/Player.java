@@ -10,6 +10,7 @@ import core.Game;
 import core.enums.EntityID;
 import core.enums.PlayerAction;
 import core.enums.PlayerState;
+import core.enums.RenderPriority;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
 import core.handlers.player.PlayerMovementHandler;
@@ -37,6 +38,8 @@ public class Player extends TickingGameObject{
           		super(x, y, id);
 		currentPlayerState = PlayerState.Standing;
 		currentPlayerAction = PlayerAction.Falling;
+		
+		rendPriority = RenderPriority.Player;
 		
 		tex = new Texture("assets/spritemaps/blackmandelux.png", 32, 64);
 		
@@ -79,16 +82,6 @@ public class Player extends TickingGameObject{
 	
 	public void render(Graphics g) {
 		
-		if(id==EntityID.Player && drawBoundingBoxes){
-			//Color c=new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
-			g.setColor(Color.GREEN);
-			g.fillRect((int) x, (int) y, width, height);
-		}
-		else if(id==EntityID.Player2){
-			g.setColor(Color.YELLOW);
-			g.fillRect((int) x, (int) y, width, height);
-		}
-		
 		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.RED);
 		
@@ -108,11 +101,11 @@ public class Player extends TickingGameObject{
 			//if (velX > 0 && currentPlayerState == PlayerState.Proning)
 			
 			
-			
-			
 		}
 		
 		if (drawBoundingBoxes) {
+			g.setColor(Color.GREEN);
+			g.fillRect((int) x, (int) y, width, height);
 			g.setColor(Color.BLUE);
 			g2d.draw(boundBox.getBoundsTop());
 			g2d.draw(boundBox.getBoundsBottom());
@@ -128,8 +121,6 @@ public class Player extends TickingGameObject{
 			g2d.draw(boundBox.getBoundsRightStop());
 			g2d.draw(boundBox.getBoundsLeftStop());
 			g2d.draw(boundBox.getBoundsTopStop());
-
-
 
 		}
 	}

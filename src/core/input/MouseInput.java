@@ -19,7 +19,7 @@ public class MouseInput extends MouseAdapter {
 	}
 	
 	public void mousePressed(MouseEvent e) {
-		if( keyIn.isPressed(KeyEvent.VK_F3) && keyIn.isPressed(KeyEvent.VK_C) && e.getButton() == e.BUTTON1) {
+		if( keyIn.isPressed(KeyEvent.VK_F3) && keyIn.isPressed(KeyEvent.VK_C) && e.getButton() == MouseEvent.BUTTON1) {
 			GameObject tempObject;
 			for(int i = 0; i <= Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++ ) {
 				if (i < Game.getWorldHandler().getCurrentLevelObjectHandler().getSize()) {

@@ -70,7 +70,7 @@ public class KeyInput extends KeyAdapter{
 
 	public void update() {
 		Player tempPlayer;
-		GameObject tempObject;
+		//GameObject tempObject;
 
 		for (int i = 0; i < handler.getNumPlayers(); i++) {
 			tempPlayer = handler.getPlayers().getPlayer(i); 
@@ -116,24 +116,6 @@ public class KeyInput extends KeyAdapter{
 					tempPlayer.getMovement().goCrouching();
 
 				}
-				if(tempPlayer.getId()==EntityID.Player2){
-					// player2 keys
-					if (keyPressed[KeyEvent.VK_UP] && tempPlayer.getMovement().isJumpingAllowed()) {
-						tempPlayer.setAction(PlayerAction.Jumping);
-						tempPlayer.setVelY( -15 );
-						keyDown[3] = true;
-					}
-
-					if(keyPressed[KeyEvent.VK_LEFT]) {
-						tempPlayer.setVelX( -5 );
-						keyDown[4] = true;
-					}
-					if(keyPressed[KeyEvent.VK_RIGHT]) {
-						tempPlayer.setVelX( 5 );
-						keyDown[5] = true;
-					}
-					//if(key==KeyEvent.VK_DOWN) tempObject.setVelY( 5 );
-				}
 
 				// key release code
 				if (tempPlayer.getId()==EntityID.Player) {
@@ -168,29 +150,6 @@ public class KeyInput extends KeyAdapter{
 					if(!keyDown[1] && !keyDown[2]) tempPlayer.setVelX(0);
 
 				}
-				if (tempPlayer.getId()==EntityID.Player2){
-					// player2 keys
-					if(!keyPressed[KeyEvent.VK_UP] && !tempPlayer.getMovement().isJumping()) {
-						//tempObject.setVelY( 0 );
-						keyDown[3] = false;
-					}
-
-					if(!keyPressed[KeyEvent.VK_LEFT]) {
-						//tempObject.setVelX( 0 );
-						keyDown[4] = false;
-					}
-					if(!keyPressed[KeyEvent.VK_RIGHT]) {
-						//tempObject.setVelX( 0 );
-						keyDown[5] = false;
-					}
-
-					if(!keyDown[4] && !keyDown[5]) tempPlayer.setVelX(0);
-
-				}
-
-
-
-
 			}
 		}
 	}

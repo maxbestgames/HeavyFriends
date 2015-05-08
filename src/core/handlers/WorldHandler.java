@@ -3,6 +3,7 @@ package core.handlers;
 import java.awt.Graphics;
 
 import core.Game;
+import core.RenderThread;
 import core.enums.LevelID;
 import core.gameobjects.Player;
 import core.levels.LevelSpawner;
@@ -65,7 +66,8 @@ public class WorldHandler {
 	public void render(Graphics g) {
 		levels.getLevel( Game.getCurrentLevel() ).getObjHandler().render(g);
 		for (int i = 0; i < players.getSize(); i++) {
-			players.getPlayer(i).render(g);
+			//players.getPlayer(i).render(g);
+			RenderThread.getRenderQueue().add(players.getPlayer(i) );
 		}
 	}
 	

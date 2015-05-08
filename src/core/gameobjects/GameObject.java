@@ -4,13 +4,15 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import core.enums.EntityID;
+import core.enums.RenderPriority;
 import core.handlers.ObjectHandler;
 import core.visualgronk.Texture;
 
 
-public abstract class GameObject {
+public abstract class GameObject implements Comparable<GameObject> {
 	protected float x,y; //pos on screen
 	protected EntityID id;
+	protected RenderPriority rendPriority;
 	protected float velX,velY;
 	protected ObjectHandler handler;
 	protected Texture tex;
@@ -117,5 +119,13 @@ public abstract class GameObject {
 
 	public static boolean isDrawBoundingBoxes() {
 		return drawBoundingBoxes;
+	}
+	
+	public RenderPriority getRenderPriority() {
+		return rendPriority;
+	}
+	
+	public int compareTo(GameObject o) {
+		return rendPriority.compareTo(o.getRenderPriority());
 	}
 }

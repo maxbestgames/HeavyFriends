@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.PriorityQueue;
 
 import core.display.Camera;
 import core.display.HUD;
@@ -21,11 +22,15 @@ public class RenderThread extends Canvas implements Runnable {
 	private KeyInput keyIn;
 	private MouseInput mouseIn;
 	
+	private static PriorityQueue<GameObject> renderPrique;
+	
 	public RenderThread(Game game, KeyInput keyIn, MouseInput mouseIn) {
 
 		hud = new HUD(Game.getWorldHandler());
 		this.keyIn = keyIn;
 		this.mouseIn = mouseIn;
+		
+		renderPrique = new PriorityQueue<GameObject>();
 		
 		cam = new Camera(0, 0);
 		this.addKeyListener(this.keyIn);
@@ -77,13 +82,19 @@ public class RenderThread extends Canvas implements Runnable {
 		g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
 		
 		//g2d.scale(4, 4);
-		g2d.translate(cam.getX(), cam.getY());
+		g2d.translate(Camera.getX(), Camera.getY());
 		
 		Game.getWorldHandler().render(g);
+		
+		while (!renderPrique.isEmpty()) {
+			GameObject tempObject = renderPrique.poll();
+			tempObject.render(g2d);
+		}
+		
 		if(GameObject.isDrawBoundingBoxes())
 			g2d.draw(Game.getMouseBounds());
 		
-		g2d.translate(-cam.getX(), -cam.getY());
+		g2d.translate(-Camera.getX(), -Camera.getY());
 		//g2d.scale(-4, -4);
 		
 		
@@ -108,6 +119,10 @@ public class RenderThread extends Canvas implements Runnable {
 	
 	public Camera getCamera() {
 		return cam;
+	}
+	
+	public static PriorityQueue<GameObject> getRenderQueue() {
+		return renderPrique;
 	}
 
 }

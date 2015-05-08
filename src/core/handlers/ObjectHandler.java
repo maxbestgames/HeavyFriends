@@ -3,6 +3,7 @@ package core.handlers;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import core.RenderThread;
 import core.enums.EntityID;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
@@ -26,7 +27,8 @@ public class ObjectHandler {
 	public void render(Graphics g) {
 		for(int i = 0; i<object.size(); i++){
 			GameObject tempObject =(GameObject) object.get(i);
-			tempObject.render(g);
+			//tempObject.render(g);
+			RenderThread.getRenderQueue().add(tempObject);
 		}
 	}
 	

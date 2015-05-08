@@ -12,6 +12,7 @@ import core.display.Camera;
 import core.display.Window;
 import core.enums.BlockType;
 import core.enums.EntityID;
+import core.enums.RenderPriority;
 import core.visualgronk.Animation;
 import core.visualgronk.Texture;
 
@@ -31,6 +32,7 @@ public abstract class Block extends GameObject {
 		this.type = type;
 		tex = new Texture(texPath, 32, 32);
 		blockTexture = tex.getSprite(0, 0);
+		rendPriority = RenderPriority.LevelBlocks;
 		
 	}
 

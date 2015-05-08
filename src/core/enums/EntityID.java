@@ -3,8 +3,9 @@ package core.enums;
 
 public enum EntityID {
 	Player(),
-	Player2(),
+	//Player2(),
 	Block(),
 	Enemy(),
+	ArtAsset(),
 	Projectile();
 }
