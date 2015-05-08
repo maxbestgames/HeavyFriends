@@ -12,7 +12,6 @@ import core.enums.EnemyType;
 import core.enums.EntityID;
 import core.enums.ObjectAction;
 import core.enums.ObjectState;
-import core.enums.PlayerState;
 import core.gameobjects.Enemy;
 import core.handlers.MovementHandler;
 import core.visualgronk.Animation;

@@ -198,6 +198,11 @@ public class KeyInput extends KeyAdapter{
 	/*for (int j = 0; j < handler.getLevel( Game.getCurrentLevel() ).getNumObjects(); j++) {
 	tempObject = handler.getLevel( Game.getCurrentLevel() ).getObjects().getObject(j);
 	}*/
+	
+	
+	public boolean isPressed(int key) {
+		return keyPressed[key];
+	}
 
 }
 

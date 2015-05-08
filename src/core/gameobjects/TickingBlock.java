@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import core.Game;
+import core.display.Camera;
 import core.display.Window;
 import core.enums.BlockType;
 import core.enums.EntityID;
@@ -34,8 +35,8 @@ public abstract class TickingBlock extends TickingGameObject {
 	}
 
 	public void render(Graphics g) {
-		if ((Math.abs(Math.abs(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getX())-Math.abs(getX())) < Window.getVisibleScreenX()/2 + 400)
-			&& (Math.abs(Math.abs(Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getY())-Math.abs(getY())) < Window.getVisibleScreenY()/2 + 400)) {
+		if ((Math.abs( Math.abs(Camera.getCamCenter().getX() ) - Math.abs(getX() )) < Window.getVisibleScreenX()/2 + 400)
+			&& (Math.abs( Math.abs(Camera.getCamCenter().getY() ) - Math.abs(getY())) < Window.getVisibleScreenY()/2 + 400)) {
 		
 			Graphics2D g2d = (Graphics2D) g;
 			if (!drawBoundingBoxes) {

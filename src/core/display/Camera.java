@@ -5,17 +5,18 @@ import core.gameobjects.GameObject;
 
 public class Camera {
 	
-	private float x, y;
+	private static float x;
+	private static float y;
 	private float velX, velY, vel;
 	private float difX, difY;
 	
-	GameObject camCenter;
-	
+	static GameObject camCenter;
+
 	private float desiredX, desiredY;
 	
 	public Camera(float x, float y) {
-		this.x = x;
-		this.y = y;
+		Camera.x = x;
+		Camera.y = y;
 		vel = 0.015f;
 		
 	}
@@ -61,23 +62,27 @@ public class Camera {
 	}
 	
 	public void setX(float x) {
-		this.x = x;
+		Camera.x = x;
 	}
 	
 	public void setY(float y) {
-		this.y = y;
+		Camera.y = y;
 	}
 	
-	public float getX() {
+	public static float getX() {
 		return x;
 	}
 	
-	public float getY() {
+	public static float getY() {
 		return y;
 	}
 	
-	public void setCamCenter(GameObject object) {
+	public static void setCamCenter(GameObject object) {
 		camCenter = object;
+	}
+	
+	public static GameObject getCamCenter() {
+		return camCenter;
 	}
 	
 }

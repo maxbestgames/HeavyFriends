@@ -6,6 +6,7 @@ import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.util.Random;
 
+import core.display.Camera;
 import core.display.Window;
 import core.enums.EntityID;
 import core.enums.LevelID;
@@ -56,7 +57,7 @@ public class Game implements Runnable {
 		col = new CollisionHandler();
 		
 		keyInput = new KeyInput(handler);
-		mouseInput = new MouseInput();
+		mouseInput = new MouseInput(keyInput);
 		
 		
 		//TODO make spawners work
@@ -88,8 +89,8 @@ public class Game implements Runnable {
 	}
 	
 	public static Rectangle getMouseBounds() {
-		return new Rectangle((int) (MouseInfo.getPointerInfo().getLocation().getX() - Window.getFrameBounds().getX() - 1), 
-				(int) (MouseInfo.getPointerInfo().getLocation().getY() - Window.getFrameBounds().getY() - 2 ), 4, 4 );
+		return new Rectangle((int) (MouseInfo.getPointerInfo().getLocation().getX() - Window.getFrameBounds().getX() - Camera.getX() - 1), 
+				(int) (MouseInfo.getPointerInfo().getLocation().getY() - Window.getFrameBounds().getY() - Camera.getY() - 2 ), 4, 4 );
 	}
 	
 	public static int getNumPlayers() {
@@ -154,6 +155,10 @@ public class Game implements Runnable {
 
 	public static CollisionHandler getCol() {
 		return col;
+	}
+
+	public static KeyInput getKeyInput() {
+		return keyInput;
 	}
 
 }

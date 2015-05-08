@@ -8,11 +8,13 @@ import java.awt.image.BufferStrategy;
 
 import core.display.Camera;
 import core.display.HUD;
+import core.gameobjects.GameObject;
 import core.input.KeyInput;
 import core.input.MouseInput;
 
 public class RenderThread extends Canvas implements Runnable {
 	
+	private static final long serialVersionUID = 2897736761695538217L;
 	boolean running = true;
 	private Camera cam;
 	private HUD hud;
@@ -76,14 +78,18 @@ public class RenderThread extends Canvas implements Runnable {
 		
 		//g2d.scale(4, 4);
 		g2d.translate(cam.getX(), cam.getY());
+		
 		Game.getWorldHandler().render(g);
+		if(GameObject.isDrawBoundingBoxes())
+			g2d.draw(Game.getMouseBounds());
+		
 		g2d.translate(-cam.getX(), -cam.getY());
 		//g2d.scale(-4, -4);
 		
 		
 		hud.render(g);
 		
-		//g2d.draw(Game.getMouseBounds());
+		
 
 		g.dispose();
 		g2d.dispose();
