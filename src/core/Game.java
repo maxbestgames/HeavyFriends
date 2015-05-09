@@ -14,7 +14,7 @@ import core.handlers.CollisionHandler;
 import core.handlers.WorldHandler;
 import core.input.KeyInput;
 import core.input.MouseInput;
-import core.levels.TestRealm;
+import core.levels.testRealm.TestRealm;
 
 
 public class Game implements Runnable {
@@ -63,10 +63,16 @@ public class Game implements Runnable {
 		
 		//TODO make spawners work
 		
+		
+		
 		currentLevel = LevelID.TestRealm;
 		String levelFilePath = "assets/maps/testMap3.png";
-		handler.addLevel(new TestRealm(LevelID.TestRealm, levelFilePath));
+		TestRealm tr = new TestRealm(LevelID.TestRealm, levelFilePath);
+		handler.addLevel(tr);
 		NUM_PLAYERS++;
+		handler.getCurrentLevelObjectHandler().addObject(tr.getBL1());
+		
+		
 		
 		rt = new RenderThread(this, keyInput, mouseInput);
 		tt = new TickThread(keyInput);

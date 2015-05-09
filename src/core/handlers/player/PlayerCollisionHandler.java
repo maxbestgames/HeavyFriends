@@ -6,6 +6,8 @@ import core.gameobjects.Block;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
 import core.gameobjects.TickingGameObject;
+import core.gameobjects.art.backgrounds.LevelBackground;
+import core.gameobjects.art.backgrounds.LevelForeground;
 
 public class PlayerCollisionHandler {
 
@@ -44,7 +46,8 @@ public class PlayerCollisionHandler {
 			if (Math.abs(tempObject.getX() - player.getX()) < (Math.abs(player.getWidth()) * Math.abs(player.getVelX()) + 300) && 
 					Math.abs(tempObject.getY() - player.getY()) < (Math.abs(player.getHeight()) * Math.abs(player.getVelY()) + 300) ) { // are the blocks close to the player?
 
-				if (tempObject.isCollisionEnabled() && !(tempObject instanceof TickingGameObject)) { // solid objects here
+				if (tempObject.isCollisionEnabled() && !(tempObject instanceof TickingGameObject) 
+						&& !(tempObject instanceof LevelBackground) && !(tempObject instanceof LevelForeground) ) { // solid objects here
 
 					if(player.getPlayerBoundBox().getBoundsBottom().intersects(tempObject.getBounds()) ) { //falling down
 						player.setVelY(0);

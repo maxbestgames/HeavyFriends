@@ -15,7 +15,7 @@ public class Window {
 	public Window(int width, int height, String title, Game game) {
 		frame = new JFrame(title);
 		frame.setBounds(50, 50, width-100, height-100);
-		frame.setUndecorated(true);
+		//frame.setUndecorated(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);

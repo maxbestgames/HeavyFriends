@@ -21,8 +21,6 @@ public abstract class GameObject implements Comparable<GameObject> {
 	protected static boolean drawTextures = true;
 	protected static boolean drawBoundingBoxes = false;
 
-	
-
 	public GameObject(float x, float y, EntityID id) {
 		this.x = x;
 		this.y = y;
