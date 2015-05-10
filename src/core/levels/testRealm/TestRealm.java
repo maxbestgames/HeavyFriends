@@ -1,9 +1,9 @@
 package core.levels.testRealm;
 
 import core.enums.LevelID;
-import core.levels.LevelSpawner;
+import core.levels.LevelBuilder;
 
-public class TestRealm extends LevelSpawner {
+public class TestRealm extends LevelBuilder {
 	
 	public TestRealm(LevelID lId, String filename) {
 		super(lId, filename);

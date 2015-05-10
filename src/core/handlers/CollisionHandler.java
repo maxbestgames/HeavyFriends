@@ -10,6 +10,8 @@ import core.gameobjects.GameObject;
 import core.gameobjects.Player;
 import core.gameobjects.TickingBlock;
 import core.gameobjects.TickingGameObject;
+import core.gameobjects.art.backgrounds.LevelBackground;
+import core.gameobjects.art.backgrounds.LevelForeground;
 
 public class CollisionHandler {
 
@@ -49,7 +51,9 @@ public class CollisionHandler {
 
 							count++;
 
-							if (tempObject2.isCollisionEnabled() && (!(tempObject2 instanceof TickingGameObject) 
+							if (tempObject2.isCollisionEnabled() && !(tempObject2 instanceof LevelBackground) 
+									&& !(tempObject2 instanceof LevelForeground) 
+									&& ( !(tempObject2 instanceof TickingGameObject) 
 									|| tempObject2 instanceof Player || tempObject2 instanceof Enemy) 
 									|| tempObject2 instanceof Block) { // solid objects here
 

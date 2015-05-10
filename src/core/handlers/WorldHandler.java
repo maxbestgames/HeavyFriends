@@ -6,7 +6,7 @@ import core.Game;
 import core.RenderThread;
 import core.enums.LevelID;
 import core.gameobjects.Player;
-import core.levels.LevelSpawner;
+import core.levels.LevelBuilder;
 
 public class WorldHandler {
 	
@@ -21,11 +21,11 @@ public class WorldHandler {
 		players.removePlayer(p);
 	}
 	
-	public void addLevel(LevelSpawner level) {
+	public void addLevel(LevelBuilder level) {
 		levels.addObject(level);
 	}
 	
-	public void removeLevel(LevelSpawner level) {
+	public void removeLevel(LevelBuilder level) {
 		levels.removeObject(level);
 	}
 
@@ -37,8 +37,8 @@ public class WorldHandler {
 		return levels;
 	}
 	
-	public LevelSpawner getLevel(LevelID lId) {
-		LevelSpawner tempLevel;
+	public LevelBuilder getLevel(LevelID lId) {
+		LevelBuilder tempLevel;
 		for (int i=0; i < levels.getNumLevels(); i++) {
 			tempLevel = levels.getLevel(i);
 			if (tempLevel.getId() == lId) {

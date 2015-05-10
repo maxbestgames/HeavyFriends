@@ -3,7 +3,7 @@ package core.enums;
 public enum RenderPriority {
 	
 	//BackgroundColour(),
-	Background(),
+	//Background(),
 	BackgroundLayer1(),
 	BackgroundLayer2(),
 	BackgroundLayer3(),
@@ -11,7 +11,7 @@ public enum RenderPriority {
 	BackgroundLayer5(),
 	BackgroundLayer6(),
 	BackgroundEffects(),
-	Foreground(),
+	//Foreground(),
 	ForegroundLayer1(),
 	ForegroundLayer2(),
 	ForegroundLayer3(),

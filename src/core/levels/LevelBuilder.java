@@ -12,7 +12,7 @@ import core.gameobjects.art.backgrounds.LevelBackgroundLayer6;
 import core.handlers.ObjectHandler;
 import core.visualgronk.LevelLoader;
 
-public abstract class LevelSpawner {
+public abstract class LevelBuilder {
 
 	protected LevelID lId;
 	protected ObjectHandler handler;
@@ -28,7 +28,7 @@ public abstract class LevelSpawner {
 	protected LevelBackgroundLayer6 bL6;
 	
 	
-	public LevelSpawner(LevelID lId, String filename) {
+	public LevelBuilder(LevelID lId, String filename) {
 		this.lId = lId;
 		this.filename = filename;
 		handler = new ObjectHandler();

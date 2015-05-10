@@ -3,17 +3,17 @@ package core.handlers;
 import java.util.LinkedList;
 
 import core.enums.LevelID;
-import core.levels.LevelSpawner;
+import core.levels.LevelBuilder;
 
 public class LevelHandler {
 	
-	LinkedList<LevelSpawner> levelList = new LinkedList<LevelSpawner>();
+	LinkedList<LevelBuilder> levelList = new LinkedList<LevelBuilder>();
 	
-	public void addObject(LevelSpawner l){
+	public void addObject(LevelBuilder l){
 		levelList.add(l);
 	}
 	
-	public void removeObject(LevelSpawner l){
+	public void removeObject(LevelBuilder l){
 		levelList.remove(l);
 	}
 	
@@ -21,14 +21,14 @@ public class LevelHandler {
 		return levelList.size();
 	}
 	
-	public LevelSpawner getLevel(int index) {
+	public LevelBuilder getLevel(int index) {
 		return levelList.get(index);
 	}
 	
-	public LevelSpawner getLevel(LevelID lId) {
-		LevelSpawner tempLevel;
+	public LevelBuilder getLevel(LevelID lId) {
+		LevelBuilder tempLevel;
 		for(int i = 0; i<levelList.size(); i++){
-			tempLevel = (LevelSpawner) levelList.get(i);
+			tempLevel = (LevelBuilder) levelList.get(i);
 			if (tempLevel.getId() == lId) {
 				return tempLevel;
 			}

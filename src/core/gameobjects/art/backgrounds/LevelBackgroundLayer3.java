@@ -14,7 +14,7 @@ public abstract class LevelBackgroundLayer3 extends LevelBackground {
 	
 	public void render(Graphics g) {
 		if (tex != null) {
-			g.drawImage(tex.getSprite(0, 0), (int) Camera.getX()/50, (int) Camera.getY()/50, null);
+			g.drawImage(tex.getSprite(0, 0), (int) (-Camera.getX() - Camera.getX()/8), (int) -Camera.getY(), null);
 		}
 	}
 

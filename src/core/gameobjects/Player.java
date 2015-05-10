@@ -8,9 +8,12 @@ import java.util.Random;
 
 import core.Game;
 import core.enums.EntityID;
+import core.enums.ObjectAction;
+import core.enums.ObjectState;
 import core.enums.PlayerAction;
 import core.enums.PlayerState;
 import core.enums.RenderPriority;
+import core.handlers.BoundsHandler;
 import core.handlers.player.PlayerBoundsHandler;
 import core.handlers.player.PlayerCollisionHandler;
 import core.handlers.player.PlayerMovementHandler;
@@ -158,4 +161,25 @@ public class Player extends TickingGameObject{
 	public Rectangle getBounds() {
 		return boundBox.getBounds();
 	}
+	
+	
+	/** Use setAction(PlayerAction) instead.*/
+	@Deprecated
+	public void setAction(ObjectAction action) {}
+	
+	/** Use setState(PlayerState) instead.*/
+	@Deprecated
+	public void setState(ObjectState state) {}
+	
+	/** Use getPlayerState() instead.*/
+	@Deprecated
+	public ObjectState getState() { return null; }
+	
+	/** Use getPlayerAction() instead.*/
+	@Deprecated
+	public ObjectAction getAction() { return null; }
+	
+	/** Use getPlayerBoundBox() instead.*/
+	@Deprecated
+	public BoundsHandler getObjBoundBox() { return objBoundBox; }
 }

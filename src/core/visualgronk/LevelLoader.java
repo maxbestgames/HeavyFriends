@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import core.Game;
 import core.enums.EnemyType;
 import core.enums.EntityID;
-import core.gameobjects.Player;
+import core.enums.PlayerAction;
 import core.gameobjects.blocks.Chain;
 import core.gameobjects.blocks.Claybrick;
 import core.gameobjects.blocks.Cobblestone;
@@ -49,15 +49,20 @@ public class LevelLoader {
 				int green = (pixel >> 8 ) & 0xff;
 				int blue = (pixel) & 0xff;
 				
-				//System.out.println(Integer.toHexString(image.getRGB(i, j)));
 				
-				if(red ==   0 && green ==  38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
+				if(red ==   0 && green ==  38 && blue == 255) {
+					Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).setX(i*32);
+					Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).setY(j*32);
+					Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).setAction(PlayerAction.Falling);
+				}
+				
+				//if(red ==   0 && green ==  38 && blue == 255) Game.getWorldHandler().addPlayer(new Player(i*32, j*32, EntityID.Player));
 				if(red == 255 && green ==   0 && blue ==   0) handler.addObject(new BasicEnemy(i*32, j*32, EntityID.Enemy, EnemyType.BasicEnemy));
 				if(red == 255 && green ==   1 && blue ==   0) handler.addObject(new Tornado(i*32, j*32, EntityID.Enemy, EnemyType.Tornado));
 
 
 
-				
+				//if(red ==   0 && green ==   0 && blue ==   0) handler.addObject(new Background(i*32, j*32));
 				if(red == 177 && green == 130 && blue ==   4) handler.addObject(new Dirt(i*32, j*32) );
 				if(red == 135 && green == 197 && blue == 255) handler.addObject(new WaterSurface(i*32, j*32) );
 				if(red ==   0 && green == 132 && blue == 255) handler.addObject(new Water(i*32, j*32) );

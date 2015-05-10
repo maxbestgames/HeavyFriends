@@ -2,6 +2,7 @@ package core.enums;
 
 public enum BlockType {
 
+	Background(),
 	Dirt(),
 	Grass(),
 	Cobblestone(),

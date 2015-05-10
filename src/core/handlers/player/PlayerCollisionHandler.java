@@ -41,8 +41,6 @@ public class PlayerCollisionHandler {
 			
 			GameObject tempObject = Game.getWorldHandler().getLevel( Game.getCurrentLevel() ).getObjHandler().getObject(i);
 
-
-
 			if (Math.abs(tempObject.getX() - player.getX()) < (Math.abs(player.getWidth()) * Math.abs(player.getVelX()) + 300) && 
 					Math.abs(tempObject.getY() - player.getY()) < (Math.abs(player.getHeight()) * Math.abs(player.getVelY()) + 300) ) { // are the blocks close to the player?
 

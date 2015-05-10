@@ -1,7 +1,7 @@
 
 
  
-Level spawner
+Level manager
 
 HUD - Enum?
 	hide - show none?
@@ -14,9 +14,6 @@ Effect(s)
 
 Asset
  Sound
- Sprite
- Image
-  Background
   
 Monster spawning favours creatures that have done more damage to the player over time
   

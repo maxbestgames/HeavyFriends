@@ -10,6 +10,7 @@ import core.display.Camera;
 import core.display.Window;
 import core.enums.EntityID;
 import core.enums.LevelID;
+import core.gameobjects.Player;
 import core.handlers.CollisionHandler;
 import core.handlers.WorldHandler;
 import core.input.KeyInput;
@@ -63,14 +64,16 @@ public class Game implements Runnable {
 		
 		//TODO make spawners work
 		
+		handler.addPlayer(new Player(0, 0, EntityID.Player));
+		NUM_PLAYERS++;
 		
 		
 		currentLevel = LevelID.TestRealm;
 		String levelFilePath = "assets/maps/testMap3.png";
 		TestRealm tr = new TestRealm(LevelID.TestRealm, levelFilePath);
 		handler.addLevel(tr);
-		NUM_PLAYERS++;
-		handler.getCurrentLevelObjectHandler().addObject(tr.getBL1());
+		handler.getLevel(LevelID.TestRealm).getObjHandler().addObject(tr.getBL1());
+		//handler.getLevel(LevelID.TestRealm).getObjHandler().addObject(tr.getBL2());
 		
 		
 		

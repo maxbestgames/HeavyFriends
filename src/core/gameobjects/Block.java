@@ -30,8 +30,13 @@ public abstract class Block extends GameObject {
 	public Block(int x, int y, EntityID id, BlockType type, String texPath) {
 		super(x, y, id);
 		this.type = type;
-		tex = new Texture(texPath, 32, 32);
-		blockTexture = tex.getSprite(0, 0);
+		if(texPath != null) {
+			tex = new Texture(texPath, 32, 32);
+			blockTexture = tex.getSprite(0, 0);
+		} else {
+			blockTexture = null;
+		}
+		
 		rendPriority = RenderPriority.LevelBlocks;
 		
 	}
@@ -41,10 +46,7 @@ public abstract class Block extends GameObject {
 			&& ( Math.abs( Math.abs( Camera.getCamCenter().getY() )-Math.abs( getY() ) ) < Window.getVisibleScreenY()/2 + 400)) {
 		
 			Graphics2D g2d = (Graphics2D) g;
-			if (!drawBoundingBoxes) {
-				//g.setColor(new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255)));
-				//g.fillRect((int) x, (int) y, blockSize, blockSize);
-			} else {
+			if (drawBoundingBoxes) {
 				if (!Game.getMouseBounds().intersects(getBounds())) {
 					g.setColor(Color.WHITE);
 					g.drawRect((int) x, (int) y, blockSize, blockSize);
