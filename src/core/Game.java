@@ -21,7 +21,6 @@ import core.levels.testRealm.TestRealm;
 public class Game implements Runnable {
 	
 	public static int WIDTH, HEIGHT;
-	private static int NUM_PLAYERS;
 	private Thread render, tick;
 	//private boolean running = false;
 	private static WorldHandler handler;
@@ -40,13 +39,13 @@ public class Game implements Runnable {
 	private static RenderThread rt;
 	private static TickThread tt;
 	
+	
 	public static void main(String[] args) {
 		
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		WIDTH = gd.getDisplayMode().getWidth();
 		HEIGHT = gd.getDisplayMode().getHeight();
 		
-		NUM_PLAYERS = 0;
 		new Game();
 	}
 	
@@ -61,11 +60,11 @@ public class Game implements Runnable {
 		keyInput = new KeyInput(handler);
 		mouseInput = new MouseInput(keyInput);
 		
+		handler.addPlayer(new Player(0, 0, EntityID.Player));
 		
 		//TODO make spawners work
 		
-		handler.addPlayer(new Player(0, 0, EntityID.Player));
-		NUM_PLAYERS++;
+		
 		
 		
 		currentLevel = LevelID.TestRealm;
@@ -102,10 +101,6 @@ public class Game implements Runnable {
 	public static Rectangle getMouseBounds() {
 		return new Rectangle((int) (MouseInfo.getPointerInfo().getLocation().getX() - Window.getFrameBounds().getX() - Camera.getX() - 1), 
 				(int) (MouseInfo.getPointerInfo().getLocation().getY() - Window.getFrameBounds().getY() - Camera.getY() - 2 ), 4, 4 );
-	}
-	
-	public static int getNumPlayers() {
-		return NUM_PLAYERS;
 	}
 	
 	public void startThreads() {

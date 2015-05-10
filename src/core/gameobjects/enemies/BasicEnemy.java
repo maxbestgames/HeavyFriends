@@ -27,9 +27,9 @@ public class BasicEnemy extends Enemy {
 	
 	protected int direction;
 	
-	protected float gravity;
-	protected float patrolSpeed = 1.0f;
-	protected float max_speed = 6.0f;
+	
+	
+	
 	
 	public BasicEnemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id, type);
@@ -37,6 +37,10 @@ public class BasicEnemy extends Enemy {
 		r = new Random();
 		
 		movement = new MovementHandler(this);
+		movement.setPatrolSpeed(1.0f);
+		movement.setGravity(0.9f);
+		movement.setMaxSpeed(6.0f);
+		movement.setJumpVel(-10f);
 		
 		tex = new Texture("assets/spritemaps/Theman.png", 64, 64);
 		
@@ -45,8 +49,6 @@ public class BasicEnemy extends Enemy {
 		currentAction = ObjectAction.Falling;
 		currentState = ObjectState.Standing;
 		
-		
-		gravity = 0.9f;
 		height = 64;
 		width = 32;
 		
@@ -85,7 +87,7 @@ public class BasicEnemy extends Enemy {
 		walk.runAnimation();
 		
 		if(movement.isGravityEnabled()) {
-			velY += gravity;
+			velY += movement.getGravity();
 		}
 		
 		performAction();
@@ -108,6 +110,7 @@ public class BasicEnemy extends Enemy {
 	
 	protected void performAction() {
 		EnemyAIState state = decideAction();
+		float patrolSpeed = movement.getPatrolSpeed();
 		
 		if (state == EnemyAIState.Patrolling) {
 			if (direction == 1) { // patrolling right

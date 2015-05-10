@@ -46,6 +46,7 @@ public class Window {
 	}
 	
 	public static Rectangle getFrameBounds() {
-		return frame.getBounds();
+		return new Rectangle((int)frame.getContentPane().getLocationOnScreen().getX(), 
+				(int) frame.getContentPane().getLocationOnScreen().getY(), visibleScreenX, visibleScreenY);
 	}
 }

@@ -19,4 +19,8 @@ public abstract class Enemy extends TickingGameObject {
 		
 		rendPriority = RenderPriority.Enemies;
 	}
+	
+	public MovementHandler getMovementHandler() {
+		return movement;
+	}
 }

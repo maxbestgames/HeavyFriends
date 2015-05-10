@@ -47,7 +47,7 @@ public class Tornado extends Enemy {
 
 		gravity = 0.9f;
 		height = 64;
-		width = 32;
+		width = 64;
 
 		direction = r.nextInt(20);
 		if (direction > 10) direction = -1;
