@@ -1,20 +1,18 @@
 package core;
 
-import core.input.KeyInput;
+import java.io.IOException;
 
-public class TickThread implements Runnable {
+public class MoodLightingTickThread implements Runnable {
 	
 	boolean running = true;
-	private KeyInput keyIn;
-	//private Game game;
-
-	public TickThread(KeyInput keyIn) {
-		this.keyIn = keyIn;
+	
+	public MoodLightingTickThread() {
+		
 	}
 	
 	public void run() {
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;//per second
+		double amountOfTicks = 20.0;//per second
 		double timePerTick = 1000000000/amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
@@ -22,24 +20,31 @@ public class TickThread implements Runnable {
 
 		while(running){
 			long now = System.nanoTime();
-			//System.out.println((double) ((now-lastTime)/timePerTick));
 			delta += ((now-lastTime)/timePerTick);
-			//System.out.println(delta);
 			lastTime = now;
 			
-			if (delta > 5) {
-				System.out.println("Dropping main ticks");
-				delta = 1.5;
+			if (delta >= 2) { // half a tick behind
+				System.out.println("FFT ticks skipped");
+				delta = 1.1;
 			}
 			while(delta>=1){
-				tick();
+				
+				//System.out.println("bin 0: " +Game.getCaptureThread().getOut().size());
+				//System.out.println("bin 1: "+Game.getCaptureThread().getOut2().size());
+				
+				SoundCaptureThread.flipBin(); //starts at 0
+				
+				Game.getFFTT().startGeneration();
+				
+				//  ->Clear bin after analysis
+				
 				ticks++;
 				delta--;
 			}
 			
 			if(System.currentTimeMillis()-timer>1000){
 				timer+=1000;
-				Game.setTPS(ticks);
+				//Game.setTPS(ticks);
 				ticks = 0;
 			}
 		}
@@ -53,16 +58,6 @@ public class TickThread implements Runnable {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void tick(){
-		
-		Game.getWorldHandler().tick();
-		Game.getCol().doCollision();
-		Game.getRenderThread().getCamera().tick();
-		Game.getRenderThread().getHud().tick();
-		keyIn.update();
-		
 	}
 	
 	public void setRunningFalse() {

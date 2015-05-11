@@ -18,10 +18,12 @@ import core.input.MouseInput;
 import core.levels.testRealm.TestRealm;
 
 
-public class Game implements Runnable {
+public class Game {
 	
 	public static int WIDTH, HEIGHT;
-	private Thread render, tick;
+	private Thread render, tick, lightTick;
+	private static Thread fft;
+	private static Thread soundCap;
 	//private boolean running = false;
 	private static WorldHandler handler;
 	private static CollisionHandler col;
@@ -38,6 +40,9 @@ public class Game implements Runnable {
 	
 	private static RenderThread rt;
 	private static TickThread tt;
+	private static SoundCaptureThread sct;
+	private static MoodLightingTickThread lt;
+	private static FastFourierTransformThread fftt;
 	
 	
 	public static void main(String[] args) {
@@ -46,10 +51,18 @@ public class Game implements Runnable {
 		WIDTH = gd.getDisplayMode().getWidth();
 		HEIGHT = gd.getDisplayMode().getHeight();
 		
+		
+		//new TestMic();
+	
+		
 		new Game();
 	}
 	
 	public Game() {
+		
+		sct = new SoundCaptureThread();
+		lt = new MoodLightingTickThread();
+		fftt = new FastFourierTransformThread();
 		
 		r = new Random();
 		
@@ -106,23 +119,49 @@ public class Game implements Runnable {
 	public void startThreads() {
 		startRender();
 		startTick();
+		startSC();
+		startLT();
+		startFFTT();
 	}
 	
 	public synchronized void startTick(){
 		render =  new Thread(rt);
+		render.setName("Render");
 		render.start();
 		//running = true;
 	}
 	
 	public synchronized void startRender(){
 		tick =  new Thread(tt);
+		tick.setName("Tick");
 		tick.start();
 		//running = true;
+	}
+	
+	public synchronized void startLT(){
+		lightTick = new Thread(lt);
+		lightTick.setName("MoodLightingTicker");
+		lightTick.start();
+	}
+	
+	public synchronized void startFFTT(){
+		fft = new Thread(fftt);
+		fft.setName("FFFFFFTTTTTTTTTTTTTT");
+		fft.start();
+	}
+	
+	public synchronized void startSC(){
+		soundCap = new Thread(sct);
+		soundCap.setName("I'm Listening...");
+		soundCap.start();
 	}
 	
 	public static void stop(){
 		rt.setRunningFalse();
 		tt.setRunningFalse();
+		sct.setRunningFalse();
+		fftt.setRunningFalse();
+		lt.setRunningFalse();
 	}
 
 	public static LevelID getCurrentLevel() {
@@ -156,8 +195,18 @@ public class Game implements Runnable {
 	public TickThread getTickThread() {
 		return tt;
 	}
-
-	public void run() {}
+	
+	public static SoundCaptureThread getCaptureThread() {
+		return sct;
+	}
+	
+	public static FastFourierTransformThread getFFTT() {
+		return fftt;
+	}
+	
+	public static Thread getFFT() {
+		return fft;
+	}
 
 	public static CollisionHandler getCol() {
 		return col;

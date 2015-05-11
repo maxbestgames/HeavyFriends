@@ -1,13 +1,12 @@
 package core.input;
 
-import java.awt.Window;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import core.Game;
-import core.enums.PlayerAction;
 import core.enums.EntityID;
+import core.enums.PlayerAction;
 import core.enums.PlayerState;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
@@ -37,8 +36,8 @@ public class KeyInput extends KeyAdapter{
 	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
 			Game.stop();
-			Window.getWindows()[0].setVisible(false);
-			Window.getWindows()[0].dispose();
+			//Window.getWindows()[0].setVisible(false);
+			//Window.getWindows()[0].dispose();
 			System.exit(0);
 		}
 		

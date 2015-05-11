@@ -9,6 +9,8 @@ import core.Game;
 import core.display.Camera;
 import core.enums.EntityID;
 import core.gameobjects.GameObject;
+import core.gameobjects.art.backgrounds.LevelBackground;
+import core.gameobjects.art.backgrounds.LevelForeground;
 
 public class MouseInput extends MouseAdapter {
 	
@@ -28,7 +30,8 @@ public class MouseInput extends MouseAdapter {
 					tempObject = Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player);
 				}
 				
-				if (Game.getMouseBounds().intersects(tempObject.getBounds())) {
+				if ( !(tempObject instanceof LevelBackground) && !(tempObject instanceof LevelForeground) 
+						&& Game.getMouseBounds().intersects(tempObject.getBounds())) {
 					Camera.setCamCenter(tempObject);
 				}
 			}
