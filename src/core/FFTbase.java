@@ -100,7 +100,7 @@ public class FFTbase {
 		// Here I have to mix xReal and xImag to have an array (yes, it should
 		// be possible to do this stuff in the earlier parts of the code, but
 		// it's here to readibility).
-		double[] newArray = new double[xReal.length * 2];
+		/*double[] newArray = new double[xReal.length * 2];
 		double radice = 1 / Math.sqrt(n);
 		for (int i = 0; i < newArray.length; i += 2) {
 			int i2 = i / 2;
@@ -108,7 +108,15 @@ public class FFTbase {
 			// to normalize the output while I'm copying the elements.
 			newArray[i] = xReal[i2] * radice;
 			newArray[i + 1] = xImag[i2] * radice;
+		}*/
+		
+		double[] newArray = new double[xReal.length/2];
+		double radice = 1 / Math.sqrt(n);
+		for (int i = 0; i < newArray.length; i++) {
+			newArray[i] = Math.sqrt( Math.pow(xReal[i],2) + Math.pow(xImag[i],2) )* radice;
 		}
+		
+		
 		return newArray;
 	}
 

@@ -75,16 +75,21 @@ public class HUD {
 	}
 	
 	public void drawFreq(Graphics g) {
-		int prevPointY, currentY = 100;
+		int prevPointY, currentY = 50;
 		double[] pointData = Game.getFFTT().getDataBin();
-		for (int i=0; i < pointData.length; i++) {
+		//System.out.println(pointData[300]*2);
+		g.setColor(new Color( Game.clamp((int) (2*pointData[50]),0,255), 0, 0 ));
+		for (int i=1; i < pointData.length; i+=20) {
 			prevPointY = currentY;
-			currentY = (int) pointData[i] + 100;
-			if (currentY < 100) {
+			currentY = (int) pointData[i] + 50;
+			if (currentY < 0) {
 				//System.out.println(currentY);
-				currentY = 100;
+				currentY = 50;
 			}
-			g.drawLine(Window.getVisibleScreenX()/2 + (i-1)/200, 200 - prevPointY, Window.getVisibleScreenX()/2 +(i/200), 200 - currentY);
+			g.drawLine(10+(i-20)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
+					Window.getVisibleScreenY() - prevPointY);
+			g.drawLine(10+(i-1)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
+					Window.getVisibleScreenY() - currentY);
 		}
 		
 	}

@@ -12,7 +12,7 @@ public class FastFourierTransformThread implements Runnable {
 	double[] dataBin;
 
 	public FastFourierTransformThread() {
-		dataBin = new double[32768/2];
+		dataBin = new double[16384/4];
 	}
 
 	public void run() {
@@ -60,6 +60,7 @@ public class FastFourierTransformThread implements Runnable {
 					if(i < pcmAsFloats.length) {
 						floatTo2[i] = Math.abs(pcmAsFloats[i]);
 					} else {
+						//floatTo2[i] = 0;
 						floatTo2[i] = Math.abs(pcmAsFloats[i-pcmAsFloats.length]);
 					}
 					imaginaryZeros[i] = 0;
@@ -97,6 +98,7 @@ public class FastFourierTransformThread implements Runnable {
 					if(i < pcmAsFloats.length) {
 						floatTo2[i] = Math.abs(pcmAsFloats[i]);
 					} else {
+						//floatTo2[i] = 0;
 						floatTo2[i] = Math.abs(pcmAsFloats[i-pcmAsFloats.length]);
 					}
 					imaginaryZeros[i] = 0;
@@ -113,7 +115,10 @@ public class FastFourierTransformThread implements Runnable {
 			
 			//normalise data and put in dataBin
 			for (int i = 1; i < dataBin.length; i++) { // drop any extra data
-				dataBin[i-1] = Math.log(fftOutput[i])*5;
+				if (i < fftOutput.length/2)
+					dataBin[i-1] = Math.log(fftOutput[i])*15;
+				else
+					dataBin[i-1] = 0;
 			}
 		}
 	}
