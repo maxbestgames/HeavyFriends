@@ -12,7 +12,7 @@ public class MoodLightingTickThread implements Runnable {
 	
 	public void run() {
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 20.0;//per second
+		double amountOfTicks = 60.0;//per second
 		double timePerTick = 1000000000/amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();

@@ -8,9 +8,11 @@ public class FastFourierTransformThread implements Runnable {
 	boolean generateFFT = false;
 
 	double[] fftOutput;
+	
+	double[] dataBin;
 
 	public FastFourierTransformThread() {
-
+		dataBin = new double[32768/2];
 	}
 
 	public void run() {
@@ -20,7 +22,7 @@ public class FastFourierTransformThread implements Runnable {
 				generateFFT();
 			} else {
 				try {
-					Thread.sleep(10);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {}
 			}
 		}
@@ -38,63 +40,80 @@ public class FastFourierTransformThread implements Runnable {
 			if (SoundCaptureThread.getBin() == 0) { // do bin 1
 				pcmAsFloats = floatMe(shortMe(Game.getCaptureThread().getOut2AsByteArray()));
 				
-				int arraySize = 0;
+				//System.out.println(pcmAsFloats.length);
+				
+				long arraySize = 0;
 				if (pcmAsFloats.length != 0) {
+					int counter = 0;
 					while (arraySize < pcmAsFloats.length) {
-						int counter = 0;
 						arraySize = (int) Math.pow(2, counter);
 						counter++;
 					}
 				}
 				
-				double[] floatTo2 = new double[arraySize];
+				//System.out.println(arraySize);
+				
+				double[] floatTo2 = new double[(int) arraySize];
 				double[] imaginaryZeros = new double[floatTo2.length];
 				
 				for (int i = 0; i < arraySize; i++) {
 					if(i < pcmAsFloats.length) {
-						floatTo2[i] = pcmAsFloats[i];
+						floatTo2[i] = Math.abs(pcmAsFloats[i]);
 					} else {
-						floatTo2[i] = pcmAsFloats[pcmAsFloats.length-i-1];
+						floatTo2[i] = Math.abs(pcmAsFloats[i-pcmAsFloats.length]);
 					}
 					imaginaryZeros[i] = 0;
 				}
-				fftOutput = FFTbase.fft(floatTo2, imaginaryZeros, true);
+				if (arraySize != 0) {
+					fftOutput = FFTbase.fft(floatTo2, imaginaryZeros, true);
 
-				System.out.println("bin 1 length " + fftOutput.length);
-				
+					System.out.println("bin 1 length " + fftOutput.length);
+					Game.getCaptureThread().resetOut2();
+				}
 				
 				//TODO
 				//Game.getCaptureThread().out2.reset();
 
 			} else { // do bin 0
 				pcmAsFloats = floatMe(shortMe(Game.getCaptureThread().getOutAsByteArray()));
+				
+				//System.out.println(pcmAsFloats.length);
 
-				double[] floatTo2 = new double[32 - Integer.numberOfLeadingZeros(pcmAsFloats.length - 1)];
-				double[] imaginaryZeros = new double[floatTo2.length];
-
-				int arraySize = 0;
+				long arraySize = 0;
 				if (pcmAsFloats.length != 0) {
+					int counter = 0;
 					while (arraySize < pcmAsFloats.length) {
-						int counter = 0;
 						arraySize = (int) Math.pow(2, counter);
 						counter++;
 					}
 				}
-
-				for (int i = 0; i < arraySize; i++) {
+				
+				//System.out.println(arraySize);
+				
+				double[] floatTo2 = new double[(int) arraySize];
+				double[] imaginaryZeros = new double[floatTo2.length];
+				
+				for (int i = 1; i < arraySize; i++) {
 					if(i < pcmAsFloats.length) {
-						floatTo2[i] = pcmAsFloats[i];
+						floatTo2[i] = Math.abs(pcmAsFloats[i]);
 					} else {
-						floatTo2[i] = pcmAsFloats[pcmAsFloats.length-i-1];
+						floatTo2[i] = Math.abs(pcmAsFloats[i-pcmAsFloats.length]);
 					}
 					imaginaryZeros[i] = 0;
 				}
-				fftOutput = FFTbase.fft(floatTo2, imaginaryZeros, true);
+				if (arraySize != 0) {
+					fftOutput = FFTbase.fft(floatTo2, imaginaryZeros, true);
 
-				System.out.println("bin 0 length " + fftOutput.length);
-
+					System.out.println("bin 0 length " + fftOutput.length);
+					Game.getCaptureThread().resetOut();
+				}
 				//TODO
 				//Game.getCaptureThread().out.reset();
+			}
+			
+			//normalise data and put in dataBin
+			for (int i = 1; i < dataBin.length; i++) { // drop any extra data
+				dataBin[i-1] = Math.log(fftOutput[i])*5;
 			}
 		}
 	}
@@ -133,5 +152,9 @@ public class FastFourierTransformThread implements Runnable {
 
 	public void startGeneration() {
 		generateFFT = true;
+	}
+
+	public double[] getDataBin() {
+		return dataBin;
 	}
 }

@@ -45,8 +45,8 @@ public class HUD {
 		}
 		
 		drawPlayerHUD(g, 0, 15, 15); //player hud
-		if (handler.getNumPlayers()>1) //player2 hud
-			drawPlayerHUD(g, 1, (Window.getVisibleScreenX()-204-15), 15);
+		
+		drawFreq(g);
 		
 	}
 	
@@ -72,5 +72,20 @@ public class HUD {
 		g.drawString("E: " + Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getColHandler().getNumCloseObjects()+" of "
 				+ "" +Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(), Window.getVisibleScreenX()-100, 135);		
 		g.drawString("" + Game.getMouseBounds().getMinX() + ", " + Game.getMouseBounds().getMinY(), Window.getVisibleScreenX()-100, 150);
+	}
+	
+	public void drawFreq(Graphics g) {
+		int prevPointY, currentY = 100;
+		double[] pointData = Game.getFFTT().getDataBin();
+		for (int i=0; i < pointData.length; i++) {
+			prevPointY = currentY;
+			currentY = (int) pointData[i] + 100;
+			if (currentY < 100) {
+				//System.out.println(currentY);
+				currentY = 100;
+			}
+			g.drawLine(Window.getVisibleScreenX()/2 + (i-1)/200, 200 - prevPointY, Window.getVisibleScreenX()/2 +(i/200), 200 - currentY);
+		}
+		
 	}
 }

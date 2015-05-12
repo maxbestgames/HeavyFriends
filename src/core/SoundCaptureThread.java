@@ -78,7 +78,7 @@ public class SoundCaptureThread implements Runnable {
 		out = new ByteArrayOutputStream();
 		out2 = new ByteArrayOutputStream();
 		frameSizeInBytes = format.getFrameSize();
-		bufferLengthInFrames = line.getBufferSize() / 8 ;
+		bufferLengthInFrames = line.getBufferSize() / 16;
 		bufferLengthInBytes = bufferLengthInFrames * frameSizeInBytes;
 		data = new byte[bufferLengthInBytes];
 		
