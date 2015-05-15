@@ -44,6 +44,7 @@ public class Tornado extends Enemy {
 		currentAction = ObjectAction.Falling;
 		currentState = ObjectState.Standing;
 
+		health = 20;
 
 		gravity = 0.9f;
 		height = 64;

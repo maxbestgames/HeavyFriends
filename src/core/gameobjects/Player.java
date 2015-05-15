@@ -25,6 +25,7 @@ public class Player extends TickingGameObject{
 	Random r = new Random();
 	
 	private float gravity = 0.9f;
+	public int playerHealth;
 	
 	private Animation playerWalk;
 	private Animation playerCrawl;
@@ -41,6 +42,10 @@ public class Player extends TickingGameObject{
           		super(x, y, id);
 		currentPlayerState = PlayerState.Standing;
 		currentPlayerAction = PlayerAction.Falling;
+		
+		
+		
+		playerHealth = 120;
 		
 		rendPriority = RenderPriority.Player;
 		
@@ -89,16 +94,16 @@ public class Player extends TickingGameObject{
 		g.setColor(Color.RED);
 		
 		if(drawTextures) {
-			if (velX > 0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
-			else if (velX <0 && currentPlayerState == PlayerState.Standing) playerWalk.drawAnimation(g, (int) x, (int) y);
+			if (velX > 0 && currentPlayerState == PlayerState.Standing) g.drawImage(playerWalk.getAnimation(), (int) x, (int) y, null);
+			else if (velX <0 && currentPlayerState == PlayerState.Standing) g.drawImage(Texture.flipVert(playerWalk.getAnimation()), (int) x, (int) y, null);
 			else if (velX == 0 && currentPlayerState == PlayerState.Standing)  g.drawImage(tex.getSprite(0, 0), (int) x, (int) y, null);
 			
-			if (velX > 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
-			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  playerCrawl.drawAnimation(g, (int) x, (int) y-32);
+			if (velX > 0 && currentPlayerState == PlayerState.Crouching) g.drawImage(playerCrawl.getAnimation(), (int) x, (int) y-32, null);
+			else if (velX < 0 && currentPlayerState == PlayerState.Crouching)  g.drawImage(Texture.flipVert(playerCrawl.getAnimation()), (int) x, (int) y-32, null);
 			else if (velX == 0 && currentPlayerState == PlayerState.Crouching)  g.drawImage(tex.getSprite(17, 0), (int) x, (int) y-32, null);
 			
-			if (velX > 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
-			else if (velX < 0 && currentPlayerState == PlayerState.Proning)  playerProne.drawAnimation(g, (int) x-32, (int) y-32);
+			if (velX > 0 && currentPlayerState == PlayerState.Proning) g.drawImage(playerProne.getAnimation(),(int) x-32, (int) y-32, null);
+			else if (velX < 0 && currentPlayerState == PlayerState.Proning)  g.drawImage(Texture.flipVert(playerProne.getAnimation()),(int) x-32, (int) y-32, null);
 			else if (velX == 0 && currentPlayerState == PlayerState.Proning) g.drawImage(tex.rotate(tex.getSprite(24, 0), (float) (Math.PI/2), 32, 64), (int) x-32, (int) y-32, null);
 			
 			//if (velX > 0 && currentPlayerState == PlayerState.Proning)
@@ -182,4 +187,12 @@ public class Player extends TickingGameObject{
 	/** Use getPlayerBoundBox() instead.*/
 	@Deprecated
 	public BoundsHandler getObjBoundBox() { return objBoundBox; }
+
+	public int getPlayerHealth() {
+		return playerHealth;
+	}
+
+	public void setPlayerHealth(int playerHealth) {
+		this.playerHealth = playerHealth;
+	}
 }

@@ -3,6 +3,7 @@ package core.handlers;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import core.Game;
 import core.RenderThread;
 import core.enums.EntityID;
 import core.gameobjects.GameObject;
@@ -12,12 +13,14 @@ import core.gameobjects.TickingGameObject;
 
 public class ObjectHandler {
 
-	LinkedList<Object> object = new LinkedList<Object>();;
+	LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
 	public void tick(){
 		for(int i = 0; i<object.size(); i++){
 			
-			if (object.get(i) instanceof TickingGameObject) {
+			if (object.get(i).isMarkedForRemoval()) {
+				removeObject(i);
+			} else if (object.get(i) instanceof TickingGameObject) {
 				TickingGameObject tempObject = (TickingGameObject) object.get(i);
 				tempObject.tick();
 			}
@@ -26,9 +29,15 @@ public class ObjectHandler {
 	
 	public void render(Graphics g) {
 		for(int i = 0; i<object.size(); i++){
-			GameObject tempObject =(GameObject) object.get(i);
-			//tempObject.render(g);
-			RenderThread.getRenderQueue().add(tempObject);
+			try {
+				GameObject tempObject = (GameObject) object.get(i);
+				//tempObject.render(g);
+				RenderThread.getRenderQueue().add(tempObject);
+			} catch (NullPointerException ex) {
+				// object was probably deleted exactly as render pass started
+			}
+			
+			
 		}
 	}
 	
@@ -45,10 +54,16 @@ public class ObjectHandler {
 	}
 	
 	public void removeObject(GameObject object){
+		System.out.println("Removing " + object.getId().toString()+": " + object.getClass().getName());
 		this.object.remove(object);
 	}
 	
+	public void removeObject(int i) {
+		this.object.remove(i);
+	}
+	
 	/**
+	 * Player is held in World Handler now.
 	 * @deprecated
 	 */
 	public Player getPlayer() {	

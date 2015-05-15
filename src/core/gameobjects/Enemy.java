@@ -8,6 +8,10 @@ import core.handlers.MovementHandler;
 
 public abstract class Enemy extends TickingGameObject {
 	
+	// trying to make a new type of enemy but it wont appear in the game?
+	// make sure you set the initial health or it will be removed on its first tick!
+	
+	protected int health;
 	protected EnemyType type;
 	protected EnemyAIState currentAiState;
 	
@@ -22,5 +26,13 @@ public abstract class Enemy extends TickingGameObject {
 	
 	public MovementHandler getMovementHandler() {
 		return movement;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 }

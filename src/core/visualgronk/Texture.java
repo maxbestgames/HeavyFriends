@@ -1,8 +1,12 @@
 package core.visualgronk;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 
 public class Texture {
 	
@@ -24,6 +28,10 @@ public class Texture {
 		getSprites(spriteWidth, spriteHeight);
 	}
 	
+	public Texture(BufferedImage bf) {
+		block_sheet = bf;
+	}
+	
 	public void getSprites(int width, int height) {
 		sprite = new BufferedImage[(int) (bs.getWidth()/width)][(int) (bs.getHeight()/height)];
 		
@@ -42,8 +50,8 @@ public class Texture {
 		return sprite[col][row];
 	}
 	
-	public BufferedImage flipHoriz(BufferedImage image) {
-	    BufferedImage tempImage = image;
+	public static BufferedImage flipHoriz(BufferedImage image) {
+	    BufferedImage tempImage = deepCopy(image);
 		
 		for (int i=0;i<image.getWidth();i++)
 	        for (int j=0;j<image.getHeight()/2;j++)
@@ -55,8 +63,8 @@ public class Texture {
 		return tempImage;
 	}
 	
-	public BufferedImage flipVert(BufferedImage image) {
-		BufferedImage tempImage = image;
+	public static BufferedImage flipVert(BufferedImage image) {
+		BufferedImage tempImage = deepCopy(image);
 		
 		for (int i=0;i<image.getWidth()/2;i++)
 	        for (int j=0;j<image.getHeight();j++)
@@ -73,6 +81,14 @@ public class Texture {
 	    transform.rotate(angle, rotX, rotY);
 	    AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 	    return op.filter(img, null);
+	}
+	
+	protected static BufferedImage deepCopy(BufferedImage bi) {
+		BufferedImage b = new BufferedImage(bi.getWidth(), bi.getHeight(), bi.getType());
+		Graphics g = b.getGraphics();
+		g.drawImage(bi, 0, 0, null);
+		g.dispose();
+		return b;
 	}
 	
 	

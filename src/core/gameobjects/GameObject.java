@@ -2,6 +2,7 @@ package core.gameobjects;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import core.enums.EntityID;
 import core.enums.RenderPriority;
@@ -10,12 +11,16 @@ import core.visualgronk.Texture;
 
 
 public abstract class GameObject implements Comparable<GameObject> {
+	protected boolean toDestroy = false;
+	
+	protected boolean direction = true;
 	protected float x,y; //pos on screen
 	protected EntityID id;
 	protected RenderPriority rendPriority;
 	protected float velX,velY;
 	protected ObjectHandler handler;
 	protected Texture tex;
+	protected BufferedImage currentTexture;
 	protected int width,height;
 	protected boolean collisionEnabled = true;
 	protected static boolean drawTextures = true;
@@ -125,5 +130,29 @@ public abstract class GameObject implements Comparable<GameObject> {
 	
 	public int compareTo(GameObject o) {
 		return rendPriority.compareTo(o.getRenderPriority());
+	}
+	
+	public void markForRemoval() {
+		toDestroy = true;
+	}
+	
+	public boolean isMarkedForRemoval() {
+		return toDestroy;
+	}
+	
+	public boolean isFacingRight() {
+		return direction;
+	}
+	
+	public boolean isFacingLeft() {
+		return !direction;
+	}
+	
+	public void setFacingRight() {
+		direction = true;
+	}
+	
+	public void setFacingLeft() {
+		direction = false;
 	}
 }

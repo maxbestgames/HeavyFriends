@@ -28,7 +28,7 @@ public class TickThread implements Runnable {
 			lastTime = now;
 			
 			if (delta > 5) {
-				System.out.println("Dropping main ticks");
+				System.err.println("Dropping main ticks");
 				delta = 1.5;
 			}
 			while(delta>=1){

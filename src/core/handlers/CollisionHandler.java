@@ -8,10 +8,12 @@ import core.gameobjects.BouncingProjectile;
 import core.gameobjects.Enemy;
 import core.gameobjects.GameObject;
 import core.gameobjects.Player;
+import core.gameobjects.Projectile;
 import core.gameobjects.TickingBlock;
 import core.gameobjects.TickingGameObject;
 import core.gameobjects.art.backgrounds.LevelBackground;
 import core.gameobjects.art.backgrounds.LevelForeground;
+import core.gameobjects.projectiles.FireBall;
 
 public class CollisionHandler {
 
@@ -24,7 +26,7 @@ public class CollisionHandler {
 		time = System.currentTimeMillis();
 
 		for(int i = 0; i< Game.getWorldHandler().getCurrentLevelObjectHandler().getSize(); i++) {
-
+			
 			if (Game.getWorldHandler().getCurrentLevelObjectHandler().getObject(i) instanceof TickingGameObject 
 					&& !(Game.getWorldHandler().getCurrentLevelObjectHandler().getObject(i) instanceof TickingBlock)) {
 
@@ -49,13 +51,28 @@ public class CollisionHandler {
 						if (Math.abs(tempObject2.getX() - tempObject.getX()) < 1.5 * tempObject.getWidth() 
 								&& Math.abs(tempObject2.getY() - tempObject.getY()) < 1.5 * tempObject.getHeight() ) { // are the blocks close to the obj?
 
-							count++;
+							count++; // track object count for HUD display
+							
+							//Damage
+							if(tempObject instanceof FireBall && (tempObject2 instanceof Enemy || tempObject2 instanceof Player) 
+								&& tempObject.getBounds().intersects(tempObject2.getBounds())) {
+								if (tempObject2 instanceof Player) {
+									Player p = (Player) tempObject2;
+									p.setPlayerHealth(p.getPlayerHealth() - 1);
+								} else if (tempObject2 instanceof Enemy) {
+									Enemy e = (Enemy) tempObject2;
+									e.setHealth(e.getHealth() - 1);
+								}
+								tempObject.markForRemoval();
+							}
+							
+							if(tempObject instanceof Enemy && ((Enemy) tempObject).getHealth() <= 0) {
+								tempObject.markForRemoval();
+							}
 
 							if (tempObject2.isCollisionEnabled() && !(tempObject2 instanceof LevelBackground) 
-									&& !(tempObject2 instanceof LevelForeground) 
-									&& ( !(tempObject2 instanceof TickingGameObject) 
-									|| tempObject2 instanceof Player || tempObject2 instanceof Enemy) 
-									|| tempObject2 instanceof Block) { // solid objects here
+									&& !(tempObject2 instanceof LevelForeground) && !(tempObject2 instanceof TickingGameObject) 
+									|| tempObject2 instanceof Enemy || tempObject2 instanceof Block) { // solid objects here
 
 								if(tempObject.getObjBoundBox().getBoundsBottom().intersects(tempObject2.getBounds()) ) {//falling down
 
@@ -132,6 +149,9 @@ public class CollisionHandler {
 								if (tempObject.getObjBoundBox().getBoundsLedgeRight().intersects(tempObject2.getBounds())) {
 									tempObject.setLedgeEndRight(false);
 								}
+								
+								
+								
 								
 								
 

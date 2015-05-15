@@ -43,10 +43,13 @@ public class PlayerCollisionHandler {
 
 			if (Math.abs(tempObject.getX() - player.getX()) < (Math.abs(player.getWidth()) * Math.abs(player.getVelX()) + 300) && 
 					Math.abs(tempObject.getY() - player.getY()) < (Math.abs(player.getHeight()) * Math.abs(player.getVelY()) + 300) ) { // are the blocks close to the player?
+				
+				if(tempObject.isCollisionEnabled() && player.getPlayerBoundBox().getBounds().intersects(tempObject.getBounds()) && tempObject instanceof TickingGameObject ){
+					player.setPlayerHealth(player.getPlayerHealth() - 1 );
+				}
 
 				if (tempObject.isCollisionEnabled() && !(tempObject instanceof TickingGameObject) 
 						&& !(tempObject instanceof LevelBackground) && !(tempObject instanceof LevelForeground) ) { // solid objects here
-
 					if(player.getPlayerBoundBox().getBoundsBottom().intersects(tempObject.getBounds()) ) { //falling down
 						player.setVelY(0);
 						player.setY(tempObject.getY() - player.getHeight());

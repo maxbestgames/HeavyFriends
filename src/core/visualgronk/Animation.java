@@ -47,8 +47,20 @@ public class Animation {
 		
 	}
 	
+	/**
+	 * Use getAnimation() instead and draw using the caller class.
+	 * 
+	 * @param g Graphics object used to draw the object
+	 * @param x position on the x axis
+	 * @param y position on the y axis
+	 */
+	@Deprecated
 	public void drawAnimation(Graphics g, int x, int y) {
 		g.drawImage(currentImg, x, y, null);
+	}
+	
+	public BufferedImage getAnimation() {
+		return currentImg;
 	}
 	
 	public void drawAnimation(Graphics g, int x, int y, int scaleX, int scaleY) {

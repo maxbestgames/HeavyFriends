@@ -11,38 +11,22 @@ import core.handlers.WorldHandler;
 
 public class HUD {
 	
-	public static int[] HEALTH;
 	private final int MAX_PLAYERS = 2;
 	Random r = new Random();
 	WorldHandler handler;
 	
 	public HUD(WorldHandler handler) {
 		this.handler = handler;
-		
-		HEALTH = new int[MAX_PLAYERS];
-		
+				
 		for (int i = 0; i<MAX_PLAYERS; i++) {
-			HEALTH[i] = 100;
 		}
 	}
 	
 	public void tick() {
 		
-		for (int i=0; i < handler.getNumPlayers() && i < MAX_PLAYERS; i++) {
-
-			Game.clamp(HEALTH[i], 0, 100);
-			
-		}
 	}
 	
 	public void render(Graphics g) {
-		
-		for (int i=0; i < handler.getNumPlayers() && i< MAX_PLAYERS; i++) {
-			if (HEALTH[i] == 0) {
-				g.setColor(Color.BLACK);
-				g.fillRect(0,0, Game.WIDTH, Game.HEIGHT);
-			}
-		}
 		
 		drawPlayerHUD(g, 0, 15, 15); //player hud
 		
@@ -55,11 +39,11 @@ public class HUD {
 		g.fillRect(x, y, 204, 13);
 		g.setColor(Color.WHITE);
 		g.drawRect(x, y, 204, 13);
-		if (HEALTH[playerNum] >50) g.setColor(Color.GREEN);
-		else if (HEALTH[playerNum] >30) g.setColor(Color.YELLOW);
-		else if (HEALTH[playerNum] > 15) g.setColor(Color.ORANGE);
+		if (Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getPlayerHealth() >50) g.setColor(Color.GREEN);
+		else if (Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getPlayerHealth() >30) g.setColor(Color.YELLOW);
+		else if (Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getPlayerHealth() > 15) g.setColor(Color.ORANGE);
 		else g.setColor(Color.RED);
-		g.fillRect(x+2, y+2, HEALTH[playerNum] *2 , 10);
+		g.fillRect(x+2, y+2, Game.getWorldHandler().getPlayers().getPlayer(EntityID.Player).getPlayerHealth() *2 , 10);
 		g.setColor(Color.WHITE);
 		g.drawString("FPS "+Game.getFPS(), Window.getVisibleScreenX()-100, 15);
 		g.drawString("TPS " + Game.getTPS(), Window.getVisibleScreenX()-100, 30);
@@ -86,9 +70,9 @@ public class HUD {
 				//System.out.println(currentY);
 				currentY = 50;
 			}
-			g.drawLine(10+(i-2)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
-					Window.getVisibleScreenY() - prevPointY);
-			g.drawLine(10+(i-1)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
+			//g.drawLine(10+(i-2)/30, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
+					//Window.getVisibleScreenY() - prevPointY);
+			g.drawLine(10+(i-1)/5, Window.getVisibleScreenY()  - prevPointY, 10+(i/5), 
 					Window.getVisibleScreenY() - currentY);
 		}
 		

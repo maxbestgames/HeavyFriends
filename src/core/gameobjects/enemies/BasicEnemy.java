@@ -27,10 +27,6 @@ public class BasicEnemy extends Enemy {
 	
 	protected int direction;
 	
-	
-	
-	
-	
 	public BasicEnemy(int x, int y, EntityID id, EnemyType type) {
 		super(x, y, id, type);
 		
@@ -45,6 +41,8 @@ public class BasicEnemy extends Enemy {
 		tex = new Texture("assets/spritemaps/Theman.png", 64, 64);
 		
 		walk = new Animation(7, tex.getSprite(1, 0), tex.getSprite(2, 0), tex.getSprite(3, 0) );
+		
+		health = 10;
 		
 		currentAction = ObjectAction.Falling;
 		currentState = ObjectState.Standing;
@@ -81,6 +79,10 @@ public class BasicEnemy extends Enemy {
 	}
 
 	public void tick() {
+		if (health <= 0) {
+			markForRemoval();
+		}
+		
 		x += velX;
 		y += velY;
 		

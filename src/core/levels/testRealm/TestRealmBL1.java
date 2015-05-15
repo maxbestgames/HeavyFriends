@@ -8,6 +8,8 @@ import core.visualgronk.Texture;
 public class TestRealmBL1 extends LevelBackgroundLayer1 {
 	
 	public TestRealmBL1() {
+		//tex = new Texture();
+		
 		tex = new Texture("assets/backgrounds/testBackground.png", 2000, 500);
 	}
 
