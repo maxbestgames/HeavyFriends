@@ -79,14 +79,14 @@ public class HUD {
 		double[] pointData = Game.getFFTT().getDataBin();
 		//System.out.println(pointData[300]*2);
 		g.setColor(new Color( Game.clamp((int) (2*pointData[50]),0,255), 0, 0 ));
-		for (int i=1; i < pointData.length; i+=20) {
+		for (int i=1; i < pointData.length; i+=2) {
 			prevPointY = currentY;
 			currentY = (int) pointData[i] + 50;
 			if (currentY < 0) {
 				//System.out.println(currentY);
 				currentY = 50;
 			}
-			g.drawLine(10+(i-20)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
+			g.drawLine(10+(i-2)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
 					Window.getVisibleScreenY() - prevPointY);
 			g.drawLine(10+(i-1)/3, Window.getVisibleScreenY()  - prevPointY, 10+(i/3), 
 					Window.getVisibleScreenY() - currentY);

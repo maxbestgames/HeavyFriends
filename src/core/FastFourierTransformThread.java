@@ -68,7 +68,7 @@ public class FastFourierTransformThread implements Runnable {
 				if (arraySize != 0) {
 					fftOutput = FFTbase.fft(floatTo2, imaginaryZeros, true);
 
-					System.out.println("bin 1 length " + fftOutput.length);
+					//System.out.println("bin 1 length " + fftOutput.length);
 					Game.getCaptureThread().resetOut2();
 				}
 				
@@ -106,7 +106,7 @@ public class FastFourierTransformThread implements Runnable {
 				if (arraySize != 0) {
 					fftOutput = FFTbase.fft(floatTo2, imaginaryZeros, true);
 
-					System.out.println("bin 0 length " + fftOutput.length);
+					//System.out.println("bin 0 length " + fftOutput.length);
 					Game.getCaptureThread().resetOut();
 				}
 				//TODO
