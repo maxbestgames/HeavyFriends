@@ -90,8 +90,12 @@ public class SoundCaptureThread implements Runnable {
 
 		// we reached the end of the stream.
 		// stop and close the line.
+		try {
 		line.stop();
 		line.close();
+		} catch(NullPointerException e) {
+			return;
+		}
 		line = null;
 
 		// stop and close the output stream
@@ -113,7 +117,7 @@ public class SoundCaptureThread implements Runnable {
 
 	public void run() {
 
-		while (running) {
+		while (running && line != null) {
 
 			if (bin == 0) {
 				if ((numBytesRead = line.read(data, 0, bufferLengthInBytes)) == -1)
