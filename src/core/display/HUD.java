@@ -62,7 +62,7 @@ public class HUD {
 		int prevPointY, currentY = 50;
 		double[] pointData = Game.getFFTT().getDataBin();
 		//System.out.println(pointData[300]*2);
-		g.setColor(new Color( Game.clamp((int) (2*pointData[50]),0,255), 0, 0 ));
+		g.setColor(new Color( Game.clamp((int) (2.5*pointData[50]),0,255), 0, 0 ));
 		for (int i=1; i < pointData.length; i+=2) {
 			prevPointY = currentY;
 			currentY = (int) pointData[i] + 50;

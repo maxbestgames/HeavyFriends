@@ -116,7 +116,7 @@ public class FastFourierTransformThread implements Runnable {
 			//normalise data and put in dataBin
 			for (int i = 1; i < dataBin.length; i++) { // drop any extra data
 				if (i < fftOutput.length/2)
-					dataBin[i] = Math.log(fftOutput[fftOutput.length-i])*15;
+					dataBin[i-1] = Math.log(fftOutput[fftOutput.length-i])*15;
 				else
 					dataBin[i-1] = 0;
 			}
