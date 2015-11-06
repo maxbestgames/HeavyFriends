@@ -91,8 +91,8 @@ public class SoundCaptureThread implements Runnable {
 		// we reached the end of the stream.
 		// stop and close the line.
 		try {
-		line.stop();
-		line.close();
+			line.stop();
+			line.close();
 		} catch(NullPointerException e) {
 			return;
 		}
